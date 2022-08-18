@@ -1,0 +1,73 @@
+.textbook .levels {
+  width: 100%;
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.textbook .level {
+  position: relative;
+  width: 200px;
+  padding: 12px 10px;
+  display: flex;
+  /* border: 1px solid #e8e6e3; */
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  flex-grow: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  color: #D6D3D3;
+  background-color: #F3F2F1;
+  transition: 0.3s;
+}
+
+.textbook .level-name {
+  font-size: 20px;
+  font-weight: 700;
+  z-index: 10;
+}
+
+.textbook .level-shortname {
+  font-size: 26px;
+  font-weight: 700;
+  z-index: 10;
+}
+
+.textbook .arrow {
+  position: absolute;
+  right: 0;
+  width: 70px;
+  height: 100%;
+  border: 35px solid transparent;
+  border-left: 20px solid #F3F2F1;
+  background-color: #e8e6e3;
+}
+
+.textbook .level:hover {
+  border-color: #dcd9d6;
+  color: #292623;
+}
+
+.textbook .level:hover:nth-child(1) .arrow,
+.textbook .level:hover:nth-child(2) .arrow {
+  background-color: #FE595D;
+}
+
+.textbook .level:hover:nth-child(3) .arrow,
+.textbook .level:hover:nth-child(4) .arrow {
+  background-color: #F8B81F;
+}
+
+.textbook .level:hover:nth-child(5) .arrow,
+.textbook .level:hover:nth-child(6) .arrow {
+  background-color: #1AB69D;
+}
+
+@media (max-width: 1100px) {
+
+  .textbook .levels {
+    flex-wrap: wrap;
+  }
+}
+
