@@ -1,0 +1,31 @@
+.textbook .pagination {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+
+.textbook .pagination-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.textbook .pagination .round-btn {
+  background-color: #F3F2F1;
+}
+
+.textbook .pagination .round-btn:hover {
+  background-color: #e8e6e3;
+}
+
+.textbook .a-level-group .pagination .round-btn.active {
+  background-color: #FE595D;
+}
+
+.textbook .b-level-group .pagination .round-btn.active {
+  background-color: #F8B81F;
+}
+
+.textbook .c-level-group .pagination .round-btn.active {
+  background-color: #1AB69D;
+}

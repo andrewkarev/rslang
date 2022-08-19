@@ -36,5 +36,6 @@ h2	{
 
 .book-page-wrapper {
   display: flex;
+  margin-bottom: 40px;
 }
 

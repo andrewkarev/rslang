@@ -41,10 +41,10 @@
 }
 
 .textbook .round-btn {
-  width: 30px;
-  height: 30px;
-  padding: 5px;
-  border-radius: 15px;
+  width: 34px;
+  height: 34px;
+  padding: 7px;
+  border-radius: 17px;
   overflow: hidden;
   cursor: pointer;
 }

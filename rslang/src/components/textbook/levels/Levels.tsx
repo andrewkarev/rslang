@@ -13,7 +13,7 @@ const Levels = () => {
 
   const levelsElements = levelsData.map((level) => {
     return (
-      <div className="level">
+      <div className="level" key={ level.name }>
         <div className="level-name">{ level.name }</div>
         <div className="level-shortname">{ level.shortName }</div>
         <div className="arrow"></div>

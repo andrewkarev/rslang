@@ -4,6 +4,7 @@ import Levels from './levels/Levels';
 import './textbook.css';
 import TextbookCards from './textbook-cards/TextbookCards';
 import SelectedCard from './selected-card/SelectedCard';
+import Pagination from './pagination/Pagination';
 
 const Textbook = () => {
   return (
@@ -19,7 +20,7 @@ const Textbook = () => {
               <TextbookCards />
               <SelectedCard />
             </div>
-            {/* <Pagination /> */}
+            <Pagination />
           </div>
         </div>
       </div>
