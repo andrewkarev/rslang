@@ -3,6 +3,7 @@ import Header from '../header/Header';
 import Levels from './levels/Levels';
 import './textbook.css';
 import TextbookCards from './textbook-cards/TextbookCards';
+import SelectedCard from './selected-card/SelectedCard';
 
 const Textbook = () => {
   return (
@@ -14,9 +15,9 @@ const Textbook = () => {
           <Levels />
           <div className="book-wrapper a-level-group">
             <h2 className="title">Слова</h2>
-            <div className="words-container">
+            <div className="book-page-wrapper">
               <TextbookCards />
-              {/* <CurrentWord /> */}
+              <SelectedCard />
             </div>
             {/* <Pagination /> */}
           </div>

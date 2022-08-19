@@ -7,7 +7,7 @@
 
 .textbook .card {
   display: flex;
-  width: 170px;
+  width: 190px;
   height: 100px;
   padding: 15px 10px;
   flex-direction: column;
