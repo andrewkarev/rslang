@@ -3,7 +3,7 @@ import './pagination.css';
 
 const Pagination = () => {
   const MAX_PAGE = 30;
-  const currentPage = 10;
+  const currentPage = 1;
   const pagesData = new Array(7).fill(0).map((page, index) => {
     return (
     index === 0 ? index + 1 : 

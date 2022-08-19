@@ -5,6 +5,7 @@ import './textbook.css';
 import TextbookCards from './textbook-cards/TextbookCards';
 import SelectedCard from './selected-card/SelectedCard';
 import Pagination from './pagination/Pagination';
+import Games from './games/Games';
 
 const Textbook = () => {
   return (
@@ -22,6 +23,7 @@ const Textbook = () => {
             </div>
             <Pagination />
           </div>
+          <Games />
         </div>
       </div>
     </>

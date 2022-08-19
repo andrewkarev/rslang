@@ -1,0 +1,41 @@
+.textbook .games {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.textbook .games .description {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.textbook .games-wrapper {
+  display: flex;
+  gap: 40px;
+}
+
+
+.textbook .games .game {
+  width: 320px;
+  padding: 25px 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: #F3F2F1;  
+  overflow: hidden;
+}
+
+.textbook .games .game-name {
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.textbook .games .game-description {
+  margin-bottom: 25px;
+}
+
+.textbook .games .game-img {
+  width: 170%;
+  align-self: center;
+}

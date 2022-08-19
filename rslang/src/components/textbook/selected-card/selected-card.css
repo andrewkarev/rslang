@@ -1,8 +1,6 @@
 .textbook .selected-card {
   min-width: 400px;
   border-radius: 10px;
-  border-top-left-radius: 200px;
-  border-top-right-radius: 200px;
   align-self: flex-start;
   overflow: hidden;
   background-color: #F3F2F1;
@@ -69,6 +67,14 @@
 
 .textbook .a-level-group .selected-card .hard-word-btn {
   background-color: #FE595D;
+}
+
+.textbook .b-level-group .selected-card .hard-word-btn {
+  background-color: #F8B81F;
+}
+
+.textbook .c-level-group .selected-card .hard-word-btn {
+  background-color: #1AB69D;
 }
 
 .textbook .selected-card .meaning-sentence,
