@@ -1,6 +1,6 @@
 import React from 'react';
 import './selected-card.css';
-import imag from './../../../assets/icons/audio.png';
+import audio from './../../../assets/icons/audio.png';
 
 const SelectedCard = () => {
   return (
@@ -16,7 +16,7 @@ const SelectedCard = () => {
         <div className="reading">
           <p className="transcription">[kənvíːnjənt]</p>
           <button className="btn round-btn" id="word-audio-btn">
-            <img src={ imag } alt="word audio btn" />
+            <img src={ audio } alt="word audio btn" />
           </button>
         </div>
         <button className="btn hard-word-btn">Добавить в сложные</button>

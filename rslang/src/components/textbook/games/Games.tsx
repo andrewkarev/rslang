@@ -1,5 +1,7 @@
 import React from 'react';
 import './games.css';
+import sprintImage from './../../../assets/images/sprint.png';
+import audioCallImage from './../../../assets/images/audio-call.png';
 
 const Games = () => {
   
@@ -11,16 +13,16 @@ const Games = () => {
         <div className="game">
           <h3 className="game-name">Спринт</h3>
           <div className="game-description">На время определи, верно ли утвеждение или нет</div>
-          <img className="game-img" src="https://res.cloudinary.com/travel-app/image/upload/v1617587319/rslang/111.png" alt="" />
+          <img className="game-img" src={ sprintImage } alt="" />
         </div>
         <div className="game">
           <h3 className="game-name">Аудио-вызов</h3>
           <div className="game-description">Определи на слух, какое слово было произнесено</div>
-          <img className="game-img"src="https://res.cloudinary.com/travel-app/image/upload/v1617587319/rslang/44.png" alt="" />
+          <img className="game-img"src={ audioCallImage } alt="" />
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default Games;
