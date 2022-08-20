@@ -5,10 +5,12 @@ const Levels = () => {
   const levelsData = [
     { name: 'Beginner', shortName: 'A1' },
     { name: 'Elementary', shortName: 'A2' },
+  
     { name: 'Intermediate', shortName: 'B1' },
     { name: 'Upper-Intermediate', shortName: 'B2' },
+  
     { name: 'Advanced', shortName: 'C1' },
-    { name: 'Proficiency', shortName: 'C2' },
+    { name: 'Proficiency', shortName: 'C2' }
   ];
 
   const levelsElements = levelsData.map((level) => {
@@ -24,6 +26,12 @@ const Levels = () => {
   return (
     <div className="levels">
       { levelsElements }
+      <div className="separator"></div>
+      <div className="level level-complicated" key='D'>
+        <div className="level-name level-complicated-name">Сложные слова</div>
+        <div className="level-counter">(0)</div>
+        <div className="arrow"></div>
+      </div>
     </div>
   );
 }
