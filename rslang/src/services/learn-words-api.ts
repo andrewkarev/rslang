@@ -57,11 +57,15 @@ class LearnWordsApi {
       if (!(error instanceof Error)) return;
       if (!(error instanceof RequestError)) throw new Error(error.message);
 
-      if (error.message === '422' || error.message === '403') {
-        console.warn('Incorrect e-mail or password.')
+      if (error.message === '403') throw new Error(error.message);
+
+      if (error.message === '422') {
+        console.warn('Incorrect e-mail or password.');
       };
 
-      if (error.message === '400') console.warn('Bad request.');
+      if (error.message === '400') {
+        console.warn('Bad request.');
+      };
 
       if (error.message === '417') {
         const message = url.includes('words') ? 'word' : 'user';
@@ -81,7 +85,7 @@ class LearnWordsApi {
 
         const newOptions = { ...options };
         const newAuthorizationHeader = { 'Authorization': `Bearer ${this.token}` };
-        newOptions.headers = { ...newOptions.headers, ...newAuthorizationHeader }
+        newOptions.headers = { ...newOptions.headers, ...newAuthorizationHeader };
 
         await this.createRequest(url, newOptions);
       };
