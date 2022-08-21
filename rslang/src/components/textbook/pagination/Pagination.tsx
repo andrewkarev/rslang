@@ -1,9 +1,10 @@
 import React from 'react';
-import './pagination.css';
+import styles from './pagination.module.css';
 
 const Pagination = () => {
   const MAX_PAGE = 30;
   const currentPage = 1;
+
   const pagesData = new Array(7).fill(0).map((page, index) => {
     return (
     index === 0 ? index + 1 : 
@@ -19,7 +20,7 @@ const Pagination = () => {
   const pageElements = pagesData.map((page, index) => {
     return (
       <button 
-        className={ 'btn round-btn' + (page === currentPage ? ' active' : '') } 
+        className={ 'btn ' + styles['round-btn'] + (page === currentPage ? (' ' + styles['active']) : '') } 
         key={ index + 'page' }
       >
           { page }
@@ -28,11 +29,11 @@ const Pagination = () => {
   });
 
   return (
-    <div className="pagination">
-      <div className="pagination-wrapper">
-        <button className="btn round-btn btn-first-page">&#60;</button>
+    <div className={ styles['pagination'] }>
+      <div className={ styles['pagination-wrapper'] }>
+        <button className={'btn ' + styles['round-btn'] }>&#60;</button>
         { pageElements }
-        <button className="btn round-btn btn-last-page">&#62;</button>
+        <button className={'btn ' + styles['round-btn'] }>&#62;</button>
       </div>
     </div>
   )

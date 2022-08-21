@@ -1,22 +1,21 @@
-.textbook .games {
+.games {
   margin-bottom: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.textbook .games .description {
+.description {
   font-size: 20px;
   margin-bottom: 20px;
 }
 
-.textbook .games-wrapper {
+.games-wrapper {
   display: flex;
   gap: 40px;
 }
 
-
-.textbook .games .game {
+.game {
   width: 320px;
   padding: 25px 20px;
   display: flex;
@@ -26,16 +25,16 @@
   overflow: hidden;
 }
 
-.textbook .games .game-name {
+.game-name {
   margin-bottom: 15px;
   font-size: 24px;
 }
 
-.textbook .games .game-description {
+.game-description {
   margin-bottom: 25px;
 }
 
-.textbook .games .game-img {
+.game-img {
   width: 100%;
   align-self: center;
 }

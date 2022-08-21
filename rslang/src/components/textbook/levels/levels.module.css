@@ -1,4 +1,4 @@
-.textbook .levels {
+.levels {
   width: auto;
   max-height: 200px;
   display: grid;
@@ -9,7 +9,7 @@
   margin-bottom: 30px;
 }
 
-.textbook .level {
+.level {
   position: relative;
   width: 200px;
   padding: 12px 10px;
@@ -26,7 +26,7 @@
   transition: 0.3s;
 }
 
-.textbook .separator {
+.separator {
   width: 3px;
   height: 50%;
   grid-row: span 2;
@@ -34,20 +34,20 @@
   background-color: #e8e6e3;
 }
 
-.textbook .level-name {
+.level-name {
   font-size: 20px;
   font-weight: 700;
   z-index: 10;
 }
 
-.textbook .level-shortname,
+.level-shortname,
 .level-counter {
   font-size: 26px;
   font-weight: 700;
   z-index: 10;
 }
 
-.textbook .arrow {
+.arrow {
   position: absolute;
   right: 0;
   width: 70px;
@@ -57,34 +57,37 @@
   background-color: #e8e6e3;
 }
 
-.textbook .level:hover {
+.level:hover {
   border-color: #dcd9d6;
   color: #292623;
 }
 
-.textbook .level:hover:nth-child(1) .arrow,
-.textbook .level:hover:nth-child(2) .arrow {
-  background-color: #FE595D;
-}
-
-.textbook .level:hover:nth-child(3) .arrow,
-.textbook .level:hover:nth-child(4) .arrow {
-  background-color: #F8B81F;
-}
-
-.textbook .level:hover:nth-child(5) .arrow,
-.textbook .level:hover:nth-child(6) .arrow {
+.level:hover:nth-child(1) .arrow {
   background-color: #1AB69D;
 }
 
-.textbook .level:hover:nth-child(8) .arrow {
+.level:hover:nth-child(2) .arrow {
+  background-color: #189883;
+}
+
+.level:hover:nth-child(3) .arrow {
+  background-color: #F8B81F;
+}
+
+.level:hover:nth-child(4) .arrow {
+  background-color: #df9e07;
+}
+
+.level:hover:nth-child(5) .arrow {
+  background-color: #FE595D;
+}
+
+.level:hover:nth-child(6) .arrow {
+  background-color: #fe1b1e;
+}
+
+.level:hover:nth-child(8) .arrow {
   background-color: #808080;
 }
 
-@media (max-width: 1100px) {
-
-  .textbook .levels {
-    flex-wrap: wrap;
-  }
-}
 
