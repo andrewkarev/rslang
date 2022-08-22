@@ -1,19 +1,10 @@
 import React from 'react';
-import styles from './games-page.module.css';
 import Game from './game/Game';
+import gamesData from '../../data/games-data';
+import styles from './games-page.module.css';
 
 const GamesPage = () => {
-  const gamesData = [
-    { 
-      name: 'Спринт', 
-      description: 'Спринт - тренировка на скорость, В Вашем распоряжении 30 секунд, за которые необходимо угадать как можно больше слов', 
-    },
-    { 
-      name: 'Аудио-вызов', 
-      description: 'Аудио-вызов - тренировка на слух: улучшает восприятие слов, используя для этого такой метод обучения как аудирование', 
-    }
-  ];
-
+  
   const gameElements = gamesData.map((game, index) => {
     return (
       <Game name={ game.name } description={ game.description } key={ 'game' + index }/>
