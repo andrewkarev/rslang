@@ -1,5 +1,5 @@
 /* temporary styles */
-/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
 
 h2	{
   font-weight: 900;
@@ -37,8 +37,6 @@ h2	{
   position: relative;
   display: flex;
   flex-direction: column;
-  /* background: url(../../assets/images/shape-13.png) no-repeat top left,
-              url(../../assets/images/shape-16.png) no-repeat bottom right; */
 }
 
 .games-container::before,

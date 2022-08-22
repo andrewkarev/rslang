@@ -11,27 +11,25 @@ const GamesPage = () => {
     { 
       name: 'Аудио-вызов', 
       description: 'Аудио-вызов - тренировка на слух: улучшает восприятие слов, используя для этого такой метод обучения как аудирование', 
-      }
+    }
   ];
 
-  const gameElements = gamesData.map((game) => {
+  const gameElements = gamesData.map((game, index) => {
     return (
-      <Game name={ game.name } description={ game.description } />
+      <Game name={ game.name } description={ game.description } key={ 'game' + index }/>
     )
   });
 
   return (
     <>
-    <div className={ styles['games-page'] }>
-      <div className={ styles['wrapper'] + ' ' + styles['games-page-wrapper']}>
-        <h2 className={ styles['title'] }>Игры</h2>
-        <div className={ styles['games-container'] }>
-          { gameElements }
+      <div className={ styles['games-page'] }>
+        <div className={ styles['wrapper'] + ' ' + styles['games-page-wrapper']}>
+          <h2 className={ styles['title'] }>Игры</h2>
+          <div className={ styles['games-container'] }>
+            { gameElements }
+          </div>
         </div>
-      </div>
-    </div>
-
-    
+      </div>  
     </>
   );
 }
