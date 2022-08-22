@@ -1,0 +1,83 @@
+/* temporary styles */
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap'); */
+
+h2	{
+  font-weight: 900;
+  font-size: 32px;
+}
+
+.btn {
+  background-color: transparent;
+}
+
+.wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.header {
+  margin-bottom: 30px;
+}
+
+/* end temporary styles */
+
+.games-page {
+  background-image: url(https://edublink.html.devsblink.com/assets/images/cta/cta.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #F8B81F;
+}
+
+.title {
+  margin-bottom: 20px;
+}
+
+.games-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* background: url(../../assets/images/shape-13.png) no-repeat top left,
+              url(../../assets/images/shape-16.png) no-repeat bottom right; */
+}
+
+.games-container::before,
+.games-container::after {
+  content: '';
+  position: absolute;
+  width: 190px;
+  height: 190px;
+}
+
+.games-container::before {
+  left: 0;
+  top: 0;
+  background: url(../../assets/images/shape-13.png) no-repeat;
+  animation: rotate-right 10s linear infinite;
+}
+
+.games-container::after {
+  bottom: 0;
+  right: 0;
+  background: url(../../assets/images/shape-16.png) no-repeat;
+  animation: rotate-left 10s linear infinite;
+}
+
+@keyframes rotate-right {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-left {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
