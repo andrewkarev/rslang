@@ -2,24 +2,34 @@ import React from 'react';
 import styles from './games.module.css';
 import sprintImage from './../../../assets/images/sprint.png';
 import audioCallImage from './../../../assets/images/audio-call.png';
+import Game from './game/Game';
 
 const Games = () => {
-  
+  const gamesData = [
+    { 
+      name: 'Спринт', 
+      description: 'Спринт - тренировка на скорость, В Вашем распоряжении 30 секунд, за которые необходимо угадать как можно больше слов', 
+      image: sprintImage 
+    },
+    { 
+      name: 'Аудио-вызов', 
+      description: 'Аудио-вызов - тренировка на слух: улучшает восприятие слов, используя для этого такой метод обучения как аудирование', 
+      image: audioCallImage 
+    }
+  ];
+
+  const gameElements = gamesData.map((game) => {
+    return (
+      <Game name={ game.name } description={ game.description } image={ game.image }/>
+    )
+  });
+
   return (
     <div className={ styles['games'] }>
       <h2 className={ styles['title'] }>Игры</h2>
       <p className={ styles['description'] }>Закрепите слова с текущей страницы при помощи игр</p>
       <div className={ styles['games-wrapper'] }>
-        <div className={ styles['game'] }>
-          <h3 className={ styles['game-name'] }>Спринт</h3>
-          <div className={ styles['game-description'] }>На время определите, верно ли утвеждение или нет</div>
-          <img className={ styles['game-img'] } src={ sprintImage } alt="" />
-        </div>
-        <div className={ styles['game'] }>
-          <h3 className={ styles['game-name'] }>Аудио-вызов</h3>
-          <div className={ styles['game-description'] }>Определите на слух, какое слово было произнесено</div>
-          <img className={ styles['game-img'] } src={ audioCallImage } alt="" />
-        </div>
+        { gameElements }
       </div>
     </div>
   );

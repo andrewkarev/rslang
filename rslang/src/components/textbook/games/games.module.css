@@ -15,26 +15,3 @@
   gap: 40px;
 }
 
-.game {
-  width: 320px;
-  padding: 25px 20px;
-  display: flex;
-  flex-direction: column;
-  border-radius: 10px;
-  background-color: #F3F2F1;  
-  overflow: hidden;
-}
-
-.game-name {
-  margin-bottom: 15px;
-  font-size: 24px;
-}
-
-.game-description {
-  margin-bottom: 25px;
-}
-
-.game-img {
-  width: 100%;
-  align-self: center;
-}

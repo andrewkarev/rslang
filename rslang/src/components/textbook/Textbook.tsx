@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from '../header/Header';
 import Levels from './levels/Levels';
 import TextbookCards from './textbook-cards/TextbookCards';
 import SelectedCard from './selected-card/SelectedCard';
