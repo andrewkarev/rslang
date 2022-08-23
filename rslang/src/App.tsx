@@ -1,18 +1,35 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import MainPage from './components/main-page/MainPage';
 import Textbook from './components/textbook/Textbook';
 import { Route, Routes } from 'react-router-dom';
-import GamesPage from './components/games-page/GamesPage';
+import Header from './components/header/Header';
+import AuthorisationForm from './components/header/authorisation/AuthorisationForm';
 
 function App() {
+  //temporary state
+  const [isModalOpened, setIsModalOpened] = useState(false);
+
+  const toggleModalVisability = () => {
+    setIsModalOpened(!isModalOpened);
+  };
+
   return (
-    <Routes>
-      <Route path="/" element={<MainPage />} />
-      <Route path="textbook" element={<Textbook />} />
-      <Route path="games" element={<GamesPage />} />
-    </Routes>
+    <>
+      <Header toggleModalVisability={toggleModalVisability} />
+      <Routes>
+        <Route path="/" element={
+          <>
+            <MainPage />
+            {/* <Footer /> */}
+          </>
+        } />
+        <Route path="textbook" element={<Textbook />} />
+      </Routes>
+      {isModalOpened && <AuthorisationForm toggleModalVisability={toggleModalVisability} />}
+    </>
   );
 }
 

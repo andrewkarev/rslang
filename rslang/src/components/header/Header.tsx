@@ -2,7 +2,11 @@ import React from "react";
 import Navigation from "./navigation/Navigation";
 import './header.css';
 
-const Header = () => {
+interface HeaderProps {
+  toggleModalVisability: () => void,
+}
+
+const Header: React.FunctionComponent<HeaderProps> = ({ toggleModalVisability }) => {
   return (
     <div className="header">
       <div className="wrapper header-wrapper">
@@ -10,7 +14,7 @@ const Header = () => {
           RSlanguoLeo
         </div>
         <Navigation />
-        <button className="button" type="button">
+        <button className="button" type="button" onClick={toggleModalVisability}>
           Войти
         </button>
       </div>

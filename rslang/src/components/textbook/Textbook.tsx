@@ -9,13 +9,13 @@ import styles from './textbook.module.css';
 const Textbook = () => {
   return (
     <>
-      <div className={ styles['textbook'] }>
-        <div className={ styles['wrapper'] + ' textbook-wrapper' }>
-          <h2 className={ styles['title'] }>Учебник</h2>
+      <div className={styles['textbook']}>
+        <div className={styles['wrapper'] + ' textbook-wrapper'}>
+          <h2 className={styles['title']}>Учебник</h2>
           <Levels />
           <div className="book-wrapper a1-level-group" data-level="A">
-            <h2 className={ styles['title'] }>Слова</h2>
-            <div className={ styles['book-page-wrapper'] }>
+            <h2 className={styles['title']}>Слова</h2>
+            <div className={styles['book-page-wrapper']}>
               <TextbookCards />
               <SelectedCard />
             </div>
