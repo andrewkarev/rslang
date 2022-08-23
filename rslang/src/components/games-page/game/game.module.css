@@ -1,0 +1,129 @@
+.game {
+  display: flex;
+  width: 800px;
+  padding: 20px;
+  margin-bottom: 30px;
+  z-index: 2;
+  border-radius: 10px;
+  align-self: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+}
+
+.game:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, .4);
+}
+
+.game:first-child {
+  background: url('./../../../assets/images/sprint.png') no-repeat
+            #F3F2F1;
+  background-size: 270px;
+  background-position: right;
+  animation: fade-right 1s 0.3s;
+}
+
+.game:last-child {
+  background: url('./../../../assets/images/audio-call.png') no-repeat
+            #F3F2F1;
+  background-size: 270px;
+  background-position: right;
+  animation: fade-left 1s 0.3s;
+}
+
+@keyframes fade-right{
+	0% {
+		transform: translateX(90%);
+	}
+	100% {
+		transform: translateX(0%);
+	}	
+}
+
+@keyframes fade-left{
+	0% {
+		transform: translateX(-90%);
+	}
+	100% {
+		transform: translateX(0%);
+	}	
+}
+
+.game-name {
+  margin-bottom: 15px;
+  font-size: 34px;
+}
+
+.game-description {
+  width: 570px;
+  margin-bottom: 15px;
+  font-size: 22px;
+}
+
+.levels-intro {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.levels {
+  display: flex;
+  margin-bottom: 25px;
+  gap: 10px;
+}
+
+.level {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  font-size: 18px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.level-a1:hover {
+  border: 2px solid #1AB69D;
+}
+
+.level-a2:hover {
+  border: 2px solid #189883;
+}
+
+.level-b1:hover {
+  border: 2px solid #F8B81F;
+}
+
+.level-b2:hover {
+  border: 2px solid #df9e07;
+}
+
+.level-c1:hover {
+  border: 2px solid #FE595D;
+}
+
+.level-c2:hover {
+  border: 2px solid #fe1b1e;
+}
+
+.start-game-btn {
+  padding: 10px 35px;
+  border-radius: 30px;
+  font-size: 20px;
+  text-transform: uppercase;
+  background-color: #F8B81F;
+  color: #fff;
+  cursor: pointer;
+}
+
+.start-game-btn:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+}
+
+.game-img {
+  width: 270px;
+  align-self: center;
+}
+
