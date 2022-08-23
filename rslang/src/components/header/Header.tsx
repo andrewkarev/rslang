@@ -1,16 +1,16 @@
 import React from "react";
 import Navigation from "./navigation/Navigation";
-import './header.css';
+import styles from './header.module.css';
 
 const Header = () => {
   return (
-    <div className="header">
-      <div className="wrapper header-wrapper">
-        <div className="logo">
-          RSlanguoLeo
-        </div>
+    <div className={ styles['header'] }>
+      <div className={ styles['wrapper'] +' ' + styles['header-wrapper'] }>
+        <a className={ styles['logo-link']} href='/'>
+          <h1 className={ styles['logo']}>RSlanguoLeo</h1> 
+        </a>
         <Navigation />
-        <button className="button" type="button">
+        <button className={ styles['button']} type="button">
           Войти
         </button>
       </div>

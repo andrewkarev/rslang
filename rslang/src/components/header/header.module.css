@@ -1,0 +1,31 @@
+.header {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background-image: url(../../assets/images/bg/bg-image-23.jpg);
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.logo {}
+
+.button {
+  font-size: 2rem;
+  background: var(--btn-color);
+  padding: 10px 35px;
+  border-radius: 20px;
+}
+
+.button:hover {
+  background: var(--btn-hovered);
+}

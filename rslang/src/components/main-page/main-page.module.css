@@ -1,8 +1,11 @@
 @import '../../typography/base.css';
-
 .main-page {
   display: flex;
   flex-direction: column;
-  background-color: var(--bg-color-1);
   min-height: 100vh;
+}
+
+.wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
 }

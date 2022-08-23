@@ -1,4 +1,10 @@
 :root {
+  --btn-color: linear-gradient(to left, #1AB69D 0%, #31B978 76%);
+  --btn-hovered: linear-gradient(to left, #31B978 0%, #1AB69D 76%);
   --bg-color-1: rgb(62, 160, 57);
-  --bg-color-2: #1c1c1c;
+  --bg-color-2: #F3F2F1;
+  --bg-color-3: #dadada;
+  --color-text-1: #292623;
+  --color-black: #000;
+  --color-white: #fff;
 }
