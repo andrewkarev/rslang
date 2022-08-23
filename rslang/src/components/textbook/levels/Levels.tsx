@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { MouseEvent, useRef, useState } from 'react';
+
 import styles from './levels.module.css';
 
 const Levels = () => {
@@ -13,9 +14,25 @@ const Levels = () => {
     { name: 'Proficiency', shortName: 'C2' }
   ];
 
-  const levelsElements = levelsData.map((level) => {
+  const initialLevel = localStorage.getItem('level') || 'A1-level';
+  const [currentLevel, changeLevel] = useState(initialLevel);
+
+  const handleLevelClick = (event: MouseEvent) => {
+    const level = event.currentTarget as HTMLElement;
+    changeLevel(level.id);
+
+    localStorage.setItem('level', level.id);
+  }
+
+  const levelsElements = levelsData.map((level, index) => {
+
     return (
-      <div className={ styles['level'] } key={ level.name }>
+      <div 
+        className={`${ styles['level'] } ${ `${level.shortName}-level` === currentLevel ? styles['active'] : ''}`} 
+        key={ level.name } 
+        onClick={ handleLevelClick }
+        id = { level.shortName + '-level' }
+      >
         <div className={ styles['level-name'] }>{ level.name }</div>
         <div className={ styles['level-shortname'] }>{ level.shortName }</div>
         <div className={ styles['arrow'] }></div>

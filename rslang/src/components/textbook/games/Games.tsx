@@ -2,25 +2,30 @@ import React from 'react';
 import styles from './games.module.css';
 import sprintImage from './../../../assets/images/sprint.png';
 import audioCallImage from './../../../assets/images/audio-call.png';
+import gamesData from './../../../data/games-data';
 import Game from './game/Game';
 
 const Games = () => {
-  const gamesData = [
-    { 
-      name: 'Спринт', 
-      description: 'Спринт - тренировка на скорость, В Вашем распоряжении 30 секунд, за которые необходимо угадать как можно больше слов', 
-      image: sprintImage 
-    },
-    { 
-      name: 'Аудио-вызов', 
-      description: 'Аудио-вызов - тренировка на слух: улучшает восприятие слов, используя для этого такой метод обучения как аудирование', 
-      image: audioCallImage 
-    }
-  ];
+  // const gamesData = [
+  //   { 
+  //     name: 'Спринт', 
+  //     description: 'Спринт - тренировка на скорость, В Вашем распоряжении 30 секунд, за которые необходимо угадать как можно больше слов', 
+  //     image: sprintImage 
+  //   },
+  //   { 
+  //     name: 'Аудио-вызов', 
+  //     description: 'Аудио-вызов - тренировка на слух: улучшает восприятие слов, используя для этого такой метод обучения как аудирование', 
+  //     image: audioCallImage 
+  //   }
+  // ];
 
-  const gameElements = gamesData.map((game) => {
+  const gameElements = gamesData.map((game, index) => {
     return (
-      <Game name={ game.name } description={ game.description } image={ game.image }/>
+      <Game name={ game.name } 
+            description={ game.description } 
+            image={ game.image } 
+            key={ 'game' + index }
+      />
     )
   });
 
