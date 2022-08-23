@@ -25,7 +25,6 @@ const AuthorizationElement: React.FunctionComponent<AuthorizationElementProps> =
       <Form isRegistrationPage={props.isRegistrationPage} />
       <h3 className={styles.subtitle}>
         {props.isRegistrationPage ? 'Уже с нами?' : authorisationElementQuestion}
-        &nbsp;
         <span
           className={styles['registration-link']}
           onClick={props.changeFormType}
@@ -33,7 +32,7 @@ const AuthorizationElement: React.FunctionComponent<AuthorizationElementProps> =
           {props.isRegistrationPage ? 'Входите' : 'присоединиться'}
           <span className={styles['registration-line']}></span>
         </span>
-        &nbsp;{props.isRegistrationPage ? '.' : '!'}
+        {props.isRegistrationPage ? '.' : '!'}
       </h3>
     </>
   );
