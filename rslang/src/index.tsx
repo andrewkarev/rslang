@@ -4,6 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import { AuthorisationState } from './context/AuthorisationContext';
+import LearnWordsApi from './services/learn-words-api';
+
+const learWordAPI = new LearnWordsApi();
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,7 +16,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <AuthorisationState>
+        <App />
+      </AuthorisationState>
     </BrowserRouter>
   </React.StrictMode>
 );
@@ -21,3 +27,5 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+export { learWordAPI };
