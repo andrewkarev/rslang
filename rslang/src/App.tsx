@@ -7,6 +7,7 @@ import Textbook from './components/textbook/Textbook';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/header/Header';
 import AuthorisationForm from './components/header/authorisation/AuthorisationForm';
+import GamesPage from './components/games-page/GamesPage';
 
 function App() {
   const [isModalOpened, setIsModalOpened] = useState(false);
@@ -28,6 +29,8 @@ function App() {
           </>
         } />
         <Route path="textbook" element={<Textbook />} />
+        <Route path="games" element={<GamesPage />} />
+        {/* <Route path="statistics" element={< />} /> */}
       </Routes>
     </>
   );
