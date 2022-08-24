@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import Navigation from './navigation/Navigation';
 import './header.css';
 import RegistrationBtn from './registration-btn/RegistrationBtn';
