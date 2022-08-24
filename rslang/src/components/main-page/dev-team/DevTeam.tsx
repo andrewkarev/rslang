@@ -4,7 +4,7 @@ import avatar_sasha from '../../../assets/images/avatar_sasha.jpg';
 import avatar_andrei from '../../../assets/images/avatar_sasha.jpg';
 import avatar_tatyana from '../../../assets/images/avatar_sasha.jpg';
 import github from '../../../assets/icons/github.svg';
-import Developer from './developer/developer';
+import Developer from './developer/Developer';
 
 const DevTeam = () => {
   const devTeamData = [
