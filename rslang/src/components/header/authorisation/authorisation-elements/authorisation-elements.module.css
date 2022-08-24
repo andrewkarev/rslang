@@ -8,8 +8,8 @@
 }
 
 .registration-link {
-  display: inline-block;
   position: relative;
+  display: inline-block;
   padding-bottom: 3px;
   transition: all 0.3s ease-in-out;
   margin: 0 5px;

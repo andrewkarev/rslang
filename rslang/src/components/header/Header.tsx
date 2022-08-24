@@ -1,6 +1,7 @@
 import React from "react";
-import Navigation from "./navigation/Navigation";
+import Navigation from './navigation/Navigation';
 import './header.css';
+import RegistrationBtn from './registration-btn/RegistrationBtn';
 
 interface HeaderProps {
   toggleModalVisability: () => void,
@@ -14,9 +15,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({ toggleModalVisability })
           RSlanguoLeo
         </div>
         <Navigation />
-        <button className="button" type="button" onClick={toggleModalVisability}>
-          Войти
-        </button>
+        <RegistrationBtn handler={toggleModalVisability} />
       </div>
     </div>
   );
