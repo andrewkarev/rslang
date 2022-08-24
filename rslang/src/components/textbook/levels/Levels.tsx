@@ -3,30 +3,26 @@ import levelsData from '../../../data/levels-data';
 import styles from './levels.module.css';
 
 type Props = {
-  currentLevel: string;
-  changeLevel: (level: string) => void;
+  currentLevel: number;
+  changeLevel: (level: number) => void;
   getWords: (level: number, page: number) => void;
 }
 
 const Levels = (props: Props) => {
    
-  const handleLevelClick = async (event: MouseEvent) => {
-    const level = event.currentTarget as HTMLElement;
-    props.changeLevel(level.id);
+  const handleLevelClick = async (levelId: number, event: MouseEvent) => {
+    props.changeLevel(levelId);
 
-    const levelIdNumber = Number(level.id.slice(level.id.indexOf('-') + 1));
-    
-    await props.getWords(levelIdNumber, 1);
-    localStorage.setItem('level', level.id);
+    await props.getWords(levelId, 1);
+    localStorage.setItem('level', String(levelId));
   }
 
-  const levelsElements = levelsData.map((level) => {
+  const levelsElements = levelsData.map((level, index) => {
     return (
       <div 
-        className={`${ styles['level'] } ${ `level-${level.group}` === props.currentLevel ? styles['active'] : ''}`} 
+        className={`${ styles['level'] } ${ level.group === props.currentLevel ? styles['active'] : ''}`} 
         key={ level.name } 
-        onClick={ handleLevelClick }
-        id = { `level-${level.group}` }
+        onClick={ handleLevelClick.bind(null, index) }
       >
         <div className={ styles['level-name'] }>{ level.name }</div>
         <div className={ styles['level-shortname'] }>{ level.shortName }</div>

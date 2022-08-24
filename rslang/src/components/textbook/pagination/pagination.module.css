@@ -23,26 +23,26 @@
   background-color: #e8e6e3;
 }
 
-:global(.a1-level-group) .round-btn.active {
+:global(.level-group-0) .round-btn.active {
   background-color: #1AB69D;
 }
 
-:global(.a2-level-group)  .round-btn.active {
+:global(.level-group-1)  .round-btn.active {
   background-color: #189883;
 }
 
-:global(.b1-level-group) .round-btn.active {
+:global(.level-group-2) .round-btn.active {
   background-color: #F8B81F;
 }
 
-:global(.b2-level-group) .round-btn.active {
+:global(.level-group-3) .round-btn.active {
   background-color: #df9e07;
 }
 
-:global(.c1-level-group) .round-btn.active {
+:global(.level-group-4) .round-btn.active {
   background-color: #FE595D;
 }
 
-:global(.c2-level-group) .round-btn.active {
+:global(.level-group-5) .round-btn.active {
   background-color: #fe1b1e;
 }

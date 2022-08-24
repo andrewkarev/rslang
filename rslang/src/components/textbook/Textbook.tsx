@@ -9,7 +9,7 @@ import IWord from '../../types/services-interfaces/IWord';
 import apiService from '../..';
 
 const Textbook = () => {
-  const initialLevel = localStorage.getItem('level') || 'level-0';
+  const initialLevel = Number(localStorage.getItem('level')) || 0;
   const [currentLevel, changeLevel] = useState(initialLevel);
   const [currentLevelWords, setCurrentLevelWords] = useState<IWord[] | []>([]);
 
@@ -28,8 +28,7 @@ const Textbook = () => {
   
   useEffect(() => {
     const asyncFunction = async () => {
-      const levelId = Number(currentLevel.slice(currentLevel.indexOf('-') + 1));
-      await getWords(levelId, 1);
+      await getWords(currentLevel, 1);
     }
     asyncFunction();
   }, []); 
@@ -44,7 +43,7 @@ const Textbook = () => {
             changeLevel={ changeLevel }
             getWords={ getWords }
           />
-          <div className="book-wrapper a1-level-group">
+          <div className={ `book-wrapper level-group-${currentLevel}` }>
             <h2 className={ styles['title'] }>Слова</h2>
             <div className={ styles['book-page-wrapper'] }>
               <TextbookCards words={ currentLevelWords }/>
