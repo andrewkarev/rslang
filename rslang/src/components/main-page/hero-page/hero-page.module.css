@@ -1,6 +1,6 @@
 .hero-page {
   padding-top: 90px;
-  background: url(../../../assets/images/bg/bg-image-23.jpg) no-repeat;
+  background-color: var(--bg-color-4);
 }
 
 .wrapper {

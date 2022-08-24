@@ -3,6 +3,7 @@ import styles from './main-page.module.css';
 import Header from '../header/Header';
 import HeroPages from './hero-page/HeroPage';
 import Adventagies from './adventagies/Adventagies';
+import Presentation from './presentation/presentation';
 
 const MainPage = () => {
   return (
@@ -10,6 +11,7 @@ const MainPage = () => {
       <Header />
       <HeroPages />
       <Adventagies />
+      <Presentation />
       </div>
   );
 };
