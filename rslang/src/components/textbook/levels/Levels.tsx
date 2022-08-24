@@ -1,37 +1,32 @@
-import React, { MouseEvent, useRef, useState } from 'react';
-
+import React, { MouseEvent, useEffect, useState } from 'react';
+import levelsData from '../../../data/levels-data';
 import styles from './levels.module.css';
 
-const Levels = () => {
-  const levelsData = [
-    { name: 'Beginner', shortName: 'A1' },
-    { name: 'Elementary', shortName: 'A2' },
-  
-    { name: 'Intermediate', shortName: 'B1' },
-    { name: 'Upper-Intermediate', shortName: 'B2' },
-  
-    { name: 'Advanced', shortName: 'C1' },
-    { name: 'Proficiency', shortName: 'C2' }
-  ];
+type Props = {
+  currentLevel: string;
+  changeLevel: (level: string) => void;
+  getWords: (level: number, page: number) => void;
+}
 
-  const initialLevel = localStorage.getItem('level') || 'A1-level';
-  const [currentLevel, changeLevel] = useState(initialLevel);
-
-  const handleLevelClick = (event: MouseEvent) => {
+const Levels = (props: Props) => {
+   
+  const handleLevelClick = async (event: MouseEvent) => {
     const level = event.currentTarget as HTMLElement;
-    changeLevel(level.id);
+    props.changeLevel(level.id);
 
+    const levelIdNumber = Number(level.id.slice(level.id.indexOf('-') + 1));
+    
+    await props.getWords(levelIdNumber, 1);
     localStorage.setItem('level', level.id);
   }
 
-  const levelsElements = levelsData.map((level, index) => {
-
+  const levelsElements = levelsData.map((level) => {
     return (
       <div 
-        className={`${ styles['level'] } ${ `${level.shortName}-level` === currentLevel ? styles['active'] : ''}`} 
+        className={`${ styles['level'] } ${ `level-${level.group}` === props.currentLevel ? styles['active'] : ''}`} 
         key={ level.name } 
         onClick={ handleLevelClick }
-        id = { level.shortName + '-level' }
+        id = { `level-${level.group}` }
       >
         <div className={ styles['level-name'] }>{ level.name }</div>
         <div className={ styles['level-shortname'] }>{ level.shortName }</div>
