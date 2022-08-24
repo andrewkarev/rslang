@@ -1,0 +1,18 @@
+.adventagie {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #F3F2F1;
+  width: calc(100% / 4 - 30px);
+  min-width: 200px;
+  height: 400px;
+  gap: 20px;
+}
+
+.adventagie-img {
+  width: 256px;
+  height: 256px;
+}

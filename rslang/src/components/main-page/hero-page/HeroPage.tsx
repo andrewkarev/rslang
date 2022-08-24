@@ -8,8 +8,8 @@ const HeroPages = () => {
       <div className={ styles['wrapper']}>
         <div className={ styles['content']}>
           <div className={ styles['about-app']}>
-            <h2>Изучай английский с RSLanguoLeo</h2>
-            <p className={ styles['subtitle']}>Приложение для изучения английских слов. Для зарегистрированных пользователй - шире фукциональные возможности.</p>
+            <h2>Изучай английский с RSLanguoLeo!</h2>
+            <p className={ styles['subtitle']}>RSLanguoLeo — образовательная платформа для изучения и практики иностранного языка, построенная на игровой механике.</p>
             <button className={ styles['button']}>Зарегистрироваться</button>
           </div>
         <img className={ styles['img']} src={logo} alt="rslang"></img>
