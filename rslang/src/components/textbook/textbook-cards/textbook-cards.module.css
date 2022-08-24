@@ -25,27 +25,33 @@
   transition: background-color 0.3s;
 }
 
-:global(.a1-level-group) .card:hover {
+:global(.a1-level-group) .card:hover,
+:global(.a1-level-group) .card.active {
   background-color: #1AB69D;
 }
 
-:global(.a2-level-group) .card:hover {
+:global(.a2-level-group) .card:hover,
+:global(.a2-level-group) .card.active {
   background-color: #189883;
 }
 
-:global(.b1-level-group) .card:hover {
+:global(.b1-level-group) .card:hover,
+:global(.b1-level-group) .card.active {
   background-color: #F8B81F;
 }
 
-:global(.b2-level-group) .card:hover {
+:global(.b2-level-group) .card:hover,
+:global(.b2-level-group) .card.active {
   background-color: #df9e07;
 }
 
-:global(.c1-level-group) .card:hover {
+:global(.c1-level-group) .card:hover,
+:global(.c1-level-group) .card.active {
   background-color: #FE595D;  
 }
 
-:global(.c2-level-group) .card:hover {
+:global(.c2-level-group) .card:hover,
+:global(.c2-level-group) .card.active {
   background-color: #fe1b1e;  
 }
 
