@@ -4,6 +4,7 @@ import Header from '../header/Header';
 import HeroPages from './hero-page/HeroPage';
 import Adventagies from './adventagies/Adventagies';
 import Presentation from './presentation/presentation';
+import DevTeam from './dev-team/DevTeam'
 
 const MainPage = () => {
   return (
@@ -12,6 +13,7 @@ const MainPage = () => {
       <HeroPages />
       <Adventagies />
       <Presentation />
+      <DevTeam />
       </div>
   );
 };
