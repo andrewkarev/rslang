@@ -4,7 +4,8 @@
   margin-right: 15px;
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
+  align-self: flex-start;
+  gap: 55px 15px;
 }
 
 .card {
@@ -12,6 +13,7 @@
   width: 190px;
   height: 100px;
   padding: 15px 10px;
+  border: 2px solid #F3F2F1;
   flex-direction: column;
   gap: 3px;
   border-radius: 10px;
@@ -27,30 +29,54 @@
 
 :global(.level-group-0) .card:hover,
 :global(.level-group-0) .card.active {
+  border: 2px solid #1AB69D;
+}
+
+:global(.level-group-0) .card.active {
   background-color: #1AB69D;
 }
 
 :global(.level-group-1) .card:hover,
+:global(.level-group-1) .card.active {
+  border: 2px solid #189883;
+}
+
 :global(.level-group-1) .card.active {
   background-color: #189883;
 }
 
 :global(.level-group-2) .card:hover,
 :global(.level-group-2) .card.active {
+  border: 2px solid #F8B81F;
+}
+
+:global(.level-group-2) .card.active {
   background-color: #F8B81F;
 }
 
 :global(.level-group-3) .card:hover,
+:global(.level-group-3) .card.active {
+  border: 2px solid #df9e07;
+}
+
 :global(.level-group-3) .card.active {
   background-color: #df9e07;
 }
 
 :global(.level-group-4) .card:hover,
 :global(.level-group-4) .card.active {
+  border: 2px solid #FE595D;
+}
+
+:global(.level-group-4) .card.active {
   background-color: #FE595D;  
 }
 
 :global(.level-group-5) .card:hover,
+:global(.level-group-5) .card.active {
+  border: 2px solid #fe1b1e;
+}
+
 :global(.level-group-5) .card.active {
   background-color: #fe1b1e;  
 }

@@ -30,12 +30,10 @@ const Textbook = () => {
   }
 
   useEffect(() => {
-
     const asyncFunction = async () => {
       await getWords(currentLevel, 1);
     }
-    asyncFunction();
-    
+    asyncFunction();    
   }, []); 
 
   const [currentLevelWords, setCurrentLevelWords] = useState<IWord[] | []>([]);
