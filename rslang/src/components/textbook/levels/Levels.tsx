@@ -5,15 +5,21 @@ import styles from './levels.module.css';
 type Props = {
   currentLevel: number;
   setCurrentLevel: (level: number) => void;
+  setCurrentCard: (card: number) => void;
+  setCurrentPage: (page: number) => void;
   getWords: (level: number, page: number) => void;
 }
 
-const Levels: React.FC<Props> = ({ currentLevel, setCurrentLevel, getWords }) => {
+const Levels: React.FC<Props> = ({ currentLevel, setCurrentLevel, setCurrentCard, setCurrentPage, getWords }) => {
    
   const handleLevelClick = async (levelId: number, event: MouseEvent) => {
     setCurrentLevel(levelId);
-    
+    setCurrentCard(0);
+    setCurrentPage(0);
+
     localStorage.setItem('level', String(levelId));
+    localStorage.setItem('page', '0');
+    localStorage.setItem('card', '0');
   }
 
   const levelsElements = levelsData.map((level, index) => {

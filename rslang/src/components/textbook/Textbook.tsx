@@ -12,7 +12,7 @@ import apiService from '../..';
 const Textbook = () => {
   const initialLevel = Number(localStorage.getItem('level')) || 0;
   const initialCard = Number(localStorage.getItem('card')) || 0;
-  const initialPage = Number(localStorage.getItem('card')) || 0;
+  const initialPage = Number(localStorage.getItem('page')) || 0;
   
   const [currentLevel, setCurrentLevel] = useState(initialLevel);
   const [currentCard, setCurrentCard] = useState(initialCard);
@@ -38,19 +38,6 @@ const Textbook = () => {
   useEffect(() => {
     asyncFunction();    
   }, []);
-  
-  useEffect(() => {
-    asyncFunction();   
-
-    setCurrentCard(0);
-  }, [currentPage]); 
-
-  useEffect(() => {
-    asyncFunction();   
-    
-    setCurrentCard(0);
-    setCurrentPage(0);
-  }, [currentLevel]);
 
   const [currentLevelWords, setCurrentLevelWords] = useState<IWord[] | []>([]);
 
@@ -62,6 +49,8 @@ const Textbook = () => {
           <Levels 
             currentLevel={ currentLevel } 
             setCurrentLevel={ setCurrentLevel }
+            setCurrentCard={ setCurrentCard }
+            setCurrentPage={ setCurrentPage }
             getWords={ getWords }
           />
           <div className={ `book-wrapper level-group-${currentLevel}` }>
@@ -78,6 +67,7 @@ const Textbook = () => {
             </div>
             <Pagination 
               currentPage={currentPage} 
+              setCurrentCard={ setCurrentCard }
               setCurrentPage={ setCurrentPage }
             />
           </div>

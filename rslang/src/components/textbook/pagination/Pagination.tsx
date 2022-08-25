@@ -3,12 +3,13 @@ import styles from './pagination.module.css';
 
 type Props = {
   currentPage: number;
+  setCurrentCard: (card: number) => void;
   setCurrentPage: (page: number) => void;
 }
 
-const Pagination: React.FC<Props> = ({ currentPage, setCurrentPage }) => {
+const Pagination: React.FC<Props> = ({ currentPage, setCurrentCard, setCurrentPage }) => {
   const MAX_PAGE = 30;
-  
+ 
   const pagesData = new Array(7).fill(0).map((page, index) => {
       if (index === 0) return 1;
       if (index === 6) return MAX_PAGE;
@@ -28,6 +29,10 @@ const Pagination: React.FC<Props> = ({ currentPage, setCurrentPage }) => {
 
   const handlePageClick = (index: number) => {
     setCurrentPage(index);
+    setCurrentCard(0);
+    
+    localStorage.setItem('page', `${index}`);
+    localStorage.setItem('card', '0');
   }
 
   const pageElements = pagesData.map((page, index) => {

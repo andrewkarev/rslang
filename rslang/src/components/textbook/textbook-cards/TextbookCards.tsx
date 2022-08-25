@@ -11,10 +11,10 @@ type Props = {
 const TextbookCards: React.FC<Props> = ({ words, currentCard, setCurrentCard }) => {
   const cardsData = new Array(words.length).fill({ word: '', translation: '' });
 
-  const handlerCardClick = (cardId: number, event: MouseEvent) => {
-    setCurrentCard(cardId);
+  const handlerCardClick = (card: number, event: MouseEvent) => {
+    setCurrentCard(card);
 
-    localStorage.setItem('word', words[cardId].id);
+    localStorage.setItem('card', `${card}`);
   }
 
   const cardsElements = cardsData.map((card, index) => {
