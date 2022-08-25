@@ -6,7 +6,7 @@ import Pagination from './pagination/Pagination';
 import Games from './games/Games';
 import styles from './textbook.module.css';
 import IWord from '../../types/services-interfaces/IWord';
-import apiService from '../..';
+import {learWordAPI} from '../..';
 
 
 const Textbook = () => {
@@ -20,7 +20,7 @@ const Textbook = () => {
 
   const getWords = async (level: number, page: number) => {
     try {
-      const data = await apiService.getWords(level, page);
+      const data = await learWordAPI.getWords(level, page);
 
       if (data) {
         setCurrentLevelWords(data);

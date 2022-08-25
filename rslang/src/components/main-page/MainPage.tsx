@@ -1,11 +1,9 @@
 import React from 'react';
-import './main-page.css';
-import Header from '../header/Header';
+import styles from './main-page.module.css';
 
 const MainPage = () => {
   return (
-    <div className="main-page">
-      <Header />
+    <div className={styles['main-page']}>
     </div>
   );
 };
