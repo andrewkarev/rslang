@@ -7,9 +7,9 @@ import Textbook from './components/textbook/Textbook';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/header/Header';
 import AuthorisationForm from './components/header/authorisation/AuthorisationForm';
+import GamesPage from './components/games-page/GamesPage';
 
 function App() {
-  //temporary state
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   const toggleModalVisability = () => {
@@ -19,6 +19,8 @@ function App() {
   return (
     <>
       <Header toggleModalVisability={toggleModalVisability} />
+      {isModalOpened && <AuthorisationForm toggleModalVisability={toggleModalVisability} />}
+
       <Routes>
         <Route path="/" element={
           <>
@@ -27,8 +29,9 @@ function App() {
           </>
         } />
         <Route path="textbook" element={<Textbook />} />
+        <Route path="games" element={<GamesPage />} />
+        {/* <Route path="statistics" element={< />} /> */}
       </Routes>
-      {isModalOpened && <AuthorisationForm toggleModalVisability={toggleModalVisability} />}
     </>
   );
 }

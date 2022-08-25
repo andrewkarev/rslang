@@ -6,7 +6,7 @@ interface AuthorisationFormProps {
   toggleModalVisability: () => void,
 }
 
-const AuthorisationForm: React.FunctionComponent<AuthorisationFormProps> = (props) => {
+const AuthorisationForm: React.FunctionComponent<AuthorisationFormProps> = ({ toggleModalVisability }) => {
   const [isRegistrationPage, setIsRegistrationPage] = useState(false);
 
   const changeFormType = () => {
@@ -20,11 +20,12 @@ const AuthorisationForm: React.FunctionComponent<AuthorisationFormProps> = (prop
           <AuthorizationElement
             changeFormType={changeFormType}
             isRegistrationPage={isRegistrationPage}
+            toggleModalVisability={toggleModalVisability}
           />
           <button
             className={styles['close-form-btn']}
             type="button"
-            onClick={props.toggleModalVisability}
+            onClick={toggleModalVisability}
           >
             <div className={`${styles['close-btn-line']} ${styles['close-btn-line-1']}`}></div>
             <div className={`${styles['close-btn-line']} ${styles['close-btn-line-2']}`}></div>
