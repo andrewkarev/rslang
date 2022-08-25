@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEvent, useEffect, useState } from 'react';
 import styles from './selected-card.module.css';
 import audio from './../../../assets/icons/audio.png';
 import IWord from '../../../types/services-interfaces/IWord';
@@ -7,28 +7,63 @@ type Props = {
   currentWord: IWord;
 }
 
-const SelectedCard = (props: Props) => {
-  const URL = 'https://rslangappteam102.herokuapp.com/';
+const SelectedCard: React.FC<Props> = ({ currentWord }) => {
+  const ROOT_URL = 'https://rslangappteam102.herokuapp.com/';
+  
+  const audioPlayer = new Audio();
 
+  const handlerAudioBtnClick = (...args: (string | MouseEvent)[]) => {
+    const audioUrls = args.slice(0, args.length - 1);
+    let start = 0;
+
+    audioPlayer.src = `${ROOT_URL}${audioUrls[start++]}`;
+    audioPlayer.pause();
+    audioPlayer.play();
+
+    const startPlaying = () => {
+      if (start < audioUrls.length) {
+        audioPlayer.src = `${ROOT_URL}${audioUrls[start++]}`;
+        const promise = audioPlayer.play();
+        
+        if (promise !== null){
+          promise.catch(() => { audioPlayer.play(); })
+        }
+      } else {
+        audioPlayer.removeEventListener('ended', startPlaying);
+      }
+    }
+
+    audioPlayer.addEventListener('ended', startPlaying);
+  }
+
+  
   return (
     <div className={ styles['selected-card'] }>
       <img className={ styles['selected-card-image'] } 
-        src={ props.currentWord ? `${ URL }${ props.currentWord.image }` : '' } 
+        src={ currentWord ? `${ ROOT_URL }${ currentWord.image }` : '' } 
         alt="selected card img"
       />
       <div className={ styles['word-wrapper'] }>
         <h2 className={ styles['word'] }>
-          { props.currentWord ? props.currentWord.word : '' }
+          {currentWord ? currentWord.word : '' }
         </h2>
         <p className={ styles['translation'] }>
-          { props.currentWord ? props.currentWord.wordTranslate : '' }
+          { currentWord ? currentWord.wordTranslate : '' }
         </p>
 
         <div className={ styles['reading'] }>
           <p className={ styles['transcription'] }>
-            { props.currentWord ? props.currentWord.transcription : '' }
+            { currentWord ? currentWord.transcription : '' }
           </p>
-          <button className={ 'btn ' + styles['round-btn'] } id="word-audio-btn">
+          <button 
+            className={ 'btn ' + styles['round-btn'] } 
+            onClick={ currentWord ? handlerAudioBtnClick.bind(
+              null, 
+              currentWord.audio, 
+              currentWord.audioMeaning, 
+              currentWord.audioExample
+            ) : undefined }
+          >
             <img src={ audio } alt="word audio btn" />
           </button>
         </div>
@@ -42,11 +77,11 @@ const SelectedCard = (props: Props) => {
           <h3 className={ styles['title'] }>Значение</h3>
           <p 
             className={ styles['meaning-sentence'] } 
-            dangerouslySetInnerHTML={{__html: props.currentWord ? props.currentWord.textMeaning : ''}}
+            dangerouslySetInnerHTML={{__html: currentWord ? currentWord.textMeaning : ''}}
           >
           </p>
           <p className={ styles['meaning-translation'] }>
-            { props.currentWord ? props.currentWord.textMeaningTranslate : '' }
+            { currentWord ? currentWord.textMeaningTranslate : '' }
           </p>
         </div>
 
@@ -54,11 +89,11 @@ const SelectedCard = (props: Props) => {
           <h3 className={ styles['title'] }>Пример</h3>
           <p 
             className={ styles['example-sentence'] }
-            dangerouslySetInnerHTML={{__html: props.currentWord ? props.currentWord.textExample : ''}}
+            dangerouslySetInnerHTML={{__html: currentWord ? currentWord.textExample : ''}}
           >
           </p>
           <p className={ styles['example-translation'] }>
-            { props.currentWord ? props.currentWord.textExampleTranslate : '' }
+            { currentWord ? currentWord.textExampleTranslate : '' }
           </p>
         </div>
         
