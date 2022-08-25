@@ -1,7 +1,8 @@
-import React, { MouseEvent, useEffect, useState } from 'react';
+import React, { MouseEvent, useContext, useEffect, useState } from 'react';
 import styles from './selected-card.module.css';
 import audio from './../../../assets/icons/audio.png';
 import IWord from '../../../types/services-interfaces/IWord';
+import { AuthorisationContext } from '../../../context/AuthorisationContext';
 
 type Props = {
   currentWord: IWord;
@@ -9,6 +10,8 @@ type Props = {
 
 const SelectedCard: React.FC<Props> = ({ currentWord }) => {
   const ROOT_URL = 'https://rslangappteam102.herokuapp.com/';
+
+  const { isAuthorised } = useContext(AuthorisationContext);
   
   const audioPlayer = new Audio();
 
@@ -35,7 +38,6 @@ const SelectedCard: React.FC<Props> = ({ currentWord }) => {
 
     audioPlayer.addEventListener('ended', startPlaying);
   }
-
   
   return (
     <div className={ styles['selected-card'] }>
@@ -67,11 +69,14 @@ const SelectedCard: React.FC<Props> = ({ currentWord }) => {
             <img src={ audio } alt="word audio btn" />
           </button>
         </div>
-        <div className={ styles['btns'] }>
-          <button className={ 'btn ' + styles['rounded-word-btn'] }>В сложные</button>
-          <div className={ styles['btn-separator'] }></div>
-          <button className={ 'btn ' + styles['rounded-word-btn'] }>В изученнные</button>
-        </div>
+        { 
+          isAuthorised &&
+          <div className={ styles['btns'] }>
+            <button className={ 'btn ' + styles['rounded-word-btn'] }>В сложные</button>
+            <div className={ styles['btn-separator'] }></div>
+            <button className={ 'btn ' + styles['rounded-word-btn'] }>В изученнные</button>
+          </div>
+        }
 
         <div className={ styles['meaning'] }>
           <h3 className={ styles['title'] }>Значение</h3>

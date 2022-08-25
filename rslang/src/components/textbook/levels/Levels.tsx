@@ -1,4 +1,5 @@
-import React, { MouseEvent, useEffect, useState } from 'react';
+import React, { MouseEvent, useContext, useEffect, useState } from 'react';
+import { AuthorisationContext } from '../../../context/AuthorisationContext';
 import levelsData from '../../../data/levels-data';
 import styles from './levels.module.css';
 
@@ -11,7 +12,8 @@ type Props = {
 }
 
 const Levels: React.FC<Props> = ({ currentLevel, setCurrentLevel, setCurrentCard, setCurrentPage, getWords }) => {
-   
+  const { isAuthorised } = useContext(AuthorisationContext);
+
   const handleLevelClick = async (levelId: number, event: MouseEvent) => {
     setCurrentLevel(levelId);
     setCurrentCard(0);
@@ -39,12 +41,17 @@ const Levels: React.FC<Props> = ({ currentLevel, setCurrentLevel, setCurrentCard
   return (
     <div className={ styles['levels'] }>
       { levelsElements }
-      <div className={ styles['separator'] }></div>
-      <div className={ styles['level'] + ' level-complicated' } key='D'>
-        <div className={ styles['level-name'] + ' level-complicated-name' }>Сложные слова</div>
-        <div className={ styles['level-counter'] }>(0)</div>
-        <div className={ styles['arrow'] }></div>
-      </div>
+      { 
+        isAuthorised &&
+        <>
+          <div className={ styles['separator'] }></div>
+          <div className={ styles['level'] + ' level-complicated' } key='D'>
+            <div className={ styles['level-name'] + ' level-complicated-name' }>Сложные слова</div>
+            <div className={ styles['level-counter'] }>(0)</div>
+            <div className={ styles['arrow'] }></div>
+          </div>
+        </>
+      }
     </div>
   );
 }
