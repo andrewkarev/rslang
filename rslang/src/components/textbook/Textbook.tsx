@@ -12,9 +12,11 @@ import apiService from '../..';
 const Textbook = () => {
   const initialLevel = Number(localStorage.getItem('level')) || 0;
   const initialCard = Number(localStorage.getItem('card')) || 0;
+  const initialPage = Number(localStorage.getItem('card')) || 0;
   
   const [currentLevel, changeLevel] = useState(initialLevel);
   const [currentCard, setCurrentCard] = useState(initialCard);
+  const [currentPage, setCurrentPage] = useState(initialPage);
 
   const getWords = async (level: number, page: number) => {
     try {
@@ -31,10 +33,19 @@ const Textbook = () => {
 
   useEffect(() => {
     const asyncFunction = async () => {
-      await getWords(currentLevel, 1);
+      await getWords(currentLevel, 0);
     }
     asyncFunction();    
-  }, []); 
+  }, []);
+  
+  useEffect(() => {
+    const asyncFunction = async () => {
+      await getWords(currentLevel, currentPage);
+    }
+    asyncFunction();   
+
+    setCurrentCard(0);
+  }, [currentPage]); 
 
   const [currentLevelWords, setCurrentLevelWords] = useState<IWord[] | []>([]);
 
@@ -54,7 +65,7 @@ const Textbook = () => {
               <TextbookCards words={ currentLevelWords } setCurrentCard={ setCurrentCard }/>
               <SelectedCard currentWord={ currentLevelWords[currentCard] } />
             </div>
-            <Pagination />
+            <Pagination currentPage={currentPage} setCurrentPage={ setCurrentPage }/>
           </div>
           <Games />
         </div>

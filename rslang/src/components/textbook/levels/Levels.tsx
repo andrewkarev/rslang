@@ -13,7 +13,7 @@ const Levels = (props: Props) => {
   const handleLevelClick = async (levelId: number, event: MouseEvent) => {
     props.changeLevel(levelId);
 
-    await props.getWords(levelId, 1);
+    await props.getWords(levelId, 0);
     localStorage.setItem('level', String(levelId));
   }
 

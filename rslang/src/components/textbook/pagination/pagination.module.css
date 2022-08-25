@@ -23,6 +23,12 @@
   background-color: #e8e6e3;
 }
 
+.round-btn:disabled,
+.round-btn:disabled:hover {
+  background-color: transparent;
+  cursor: auto;
+}
+
 :global(.level-group-0) .round-btn.active {
   background-color: #1AB69D;
 }
