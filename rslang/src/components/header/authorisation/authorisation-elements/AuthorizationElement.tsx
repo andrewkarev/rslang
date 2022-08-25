@@ -5,6 +5,7 @@ import Form from './form/Form'
 interface AuthorizationElementProps {
   changeFormType: () => void,
   isRegistrationPage: boolean,
+  toggleModalVisability: () => void;
 }
 
 const AuthorizationElement: React.FunctionComponent<AuthorizationElementProps> = (props) => {
@@ -22,7 +23,10 @@ const AuthorizationElement: React.FunctionComponent<AuthorizationElementProps> =
       <h3 className={styles.subtitle}>
         {props.isRegistrationPage ? 'Присоединяйтесь!' : 'Не стоит останавливаться!'}
       </h3>
-      <Form isRegistrationPage={props.isRegistrationPage} />
+      <Form
+        isRegistrationPage={props.isRegistrationPage}
+        toggleModalVisability={props.toggleModalVisability}
+      />
       <h3 className={styles.subtitle}>
         {props.isRegistrationPage ? 'Уже с нами?' : authorisationElementQuestion}
         <span

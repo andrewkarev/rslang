@@ -20,6 +20,8 @@ function App() {
   return (
     <>
       <Header toggleModalVisability={toggleModalVisability} />
+      {isModalOpened && <AuthorisationForm toggleModalVisability={toggleModalVisability} />}
+
       <Routes>
         <Route path="/" element={
           <>
@@ -29,10 +31,9 @@ function App() {
         } />
         <Route path="textbook" element={<Textbook />} />
         <Route path="games" element={<GamesPage />} />
-
+        {/* <Route path="statistics" element={< />} /> */}
         <Route path="games/sprint" element={<SprintGame />} />
       </Routes>
-      {isModalOpened && <AuthorisationForm toggleModalVisability={toggleModalVisability} />}
     </>
   );
 }

@@ -20,6 +20,11 @@ class LearnWordsApi {
     this.usersPath = this.root + '/users';
   }
 
+  private setUsersData(name: string, id: string): void {
+    localStorage.setItem('name', name);
+    localStorage.setItem('id', id);
+  }
+
   private setTokensValue(token: string, refreshToken: string): void {
     localStorage.setItem('token', token)
     localStorage.setItem('refreshToken', refreshToken)
@@ -67,14 +72,17 @@ class LearnWordsApi {
         console.warn('Bad request.');
       };
 
-      if (error.message === '417') {
-        const message = url.includes('words') ? 'word' : 'user';
-        console.warn(`A ${message} with the same name already exists.`);
-      };
+      if (error.message === '417' || error.message === '404') {
+        const isWords = url.includes('words');
 
-      if (error.message === '404') {
-        const message = url.includes('words') ? 'User\'s word' : 'User';
-        console.warn(`${message} not found.`);
+        if (isWords) {
+          error.message === '417'
+            ? console.warn('A word with the same name already exists.')
+            : console.warn('User\'s word not found.');
+          return;
+        }
+
+        throw new Error(error.message);
       };
 
       if (error.message === '401') {
@@ -116,9 +124,10 @@ class LearnWordsApi {
 
     if (!response) return;
 
-    Object.entries(response).forEach(([key, value]) => {
-      localStorage.setItem(key, value);
-    });
+    const name = response.name;
+    const id = response.id;
+
+    this.setUsersData(name, id);
   }
 
   public async getUser(id: string): Promise<Pick<IUser, 'name' | 'email' | 'id'> | void> {
@@ -206,7 +215,10 @@ class LearnWordsApi {
 
     const token = response.token;
     const refreshToken = response.refreshToken;
+    const name = response.name;
+    const id = response.userId;
 
+    this.setUsersData(name, id);
     this.setTokensValue(token, refreshToken);
   }
 }
