@@ -4,6 +4,7 @@ import styles from './textbook-cards.module.css';
 
 type Props = {
   words: IWord[];
+  setCurrentCard: (cardId: number) => void;
 }
 
 const TextbookCards = (props: Props) => {
@@ -12,6 +13,9 @@ const TextbookCards = (props: Props) => {
 
   const handlerCardClick = (cardId: number, event: MouseEvent) => {
     setCurrentCard(cardId);
+    props.setCurrentCard(cardId);
+
+    localStorage.setItem('word', props.words[cardId].id);
   }
 
   const cardsElements = cardsData.map((card, index) => {
@@ -30,8 +34,6 @@ const TextbookCards = (props: Props) => {
       </div>
     )
   });
-
-  //console.log(props.words);
 
   return (
     <div className={ styles['words-grid'] }>

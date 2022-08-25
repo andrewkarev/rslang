@@ -1,20 +1,32 @@
 import React from 'react';
 import styles from './selected-card.module.css';
 import audio from './../../../assets/icons/audio.png';
+import IWord from '../../../types/services-interfaces/IWord';
 
-const SelectedCard = () => {
+type Props = {
+  currentWord: IWord;
+}
+
+const SelectedCard = (props: Props) => {
+  const URL = 'https://rslangappteam102.herokuapp.com/';
   return (
     <div className={ styles['selected-card'] }>
       <img className={ styles['selected-card-image'] } 
-        src="https://rslang-team69.herokuapp.com/files/01_3006.jpg" 
+        src={ props.currentWord ? `${ URL }${ props.currentWord.image }` : '' } 
         alt="selected card img"
       />
       <div className={ styles['word-wrapper'] }>
-        <h2 className={ styles['word'] }>convenient</h2>
-        <p className={ styles['translation'] }>удобный</p>
+        <h2 className={ styles['word'] }>
+          { props.currentWord ? props.currentWord.word : '' }
+        </h2>
+        <p className={ styles['translation'] }>
+          { props.currentWord ? props.currentWord.wordTranslate : '' }
+        </p>
 
         <div className={ styles['reading'] }>
-          <p className={ styles['transcription'] }>[kənvíːnjənt]</p>
+          <p className={ styles['transcription'] }>
+            { props.currentWord ? props.currentWord.transcription : '' }
+          </p>
           <button className={ 'btn ' + styles['round-btn'] } id="word-audio-btn">
             <img src={ audio } alt="word audio btn" />
           </button>
@@ -27,14 +39,24 @@ const SelectedCard = () => {
 
         <div className={ styles['meaning'] }>
           <h3 className={ styles['title'] }>Значение</h3>
-          <p className={ styles['meaning-sentence'] }>When something is convenient, it saves you time or effort.</p>
-          <p className={ styles['meaning-translation'] }>Когда что-то удобно, это экономит ваше время или усилия</p>
+          <p 
+            className={ styles['meaning-sentence'] } 
+            dangerouslySetInnerHTML={{__html: props.currentWord ? props.currentWord.textMeaning : ''}}
+          >
+          </p>
+          <p className={ styles['meaning-translation'] }>
+            { props.currentWord ? props.currentWord.textMeaningTranslate : '' }
+          </p>
         </div>
 
         <div className={ styles['example'] }>
           <h3 className={ styles['title'] }>Пример</h3>
-          <p className={ styles['example-sentence'] }>Walking through the park is a convenient way to exercise on the way to work.</p>
-          <p className={ styles['example-translation'] }>Прогулка по парку - это удобный способ тренировки по дороге на работу</p>
+          <p 
+            className={ styles['example-sentence'] }
+            dangerouslySetInnerHTML={{__html: props.currentWord ? props.currentWord.textExample : ''}}
+          >
+          </p>
+          <p className={ styles['example-translation'] }>{ props.currentWord ? props.currentWord.textExampleTranslate : '' }</p>
         </div>
         
         <div className={ styles['in-games'] }>

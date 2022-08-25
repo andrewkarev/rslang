@@ -8,10 +8,13 @@ import styles from './textbook.module.css';
 import IWord from '../../types/services-interfaces/IWord';
 import apiService from '../..';
 
+
 const Textbook = () => {
   const initialLevel = Number(localStorage.getItem('level')) || 0;
+  const initialCard = Number(localStorage.getItem('card')) || 0;
+  
   const [currentLevel, changeLevel] = useState(initialLevel);
-  const [currentLevelWords, setCurrentLevelWords] = useState<IWord[] | []>([]);
+  const [currentCard, setCurrentCard] = useState(initialCard);
 
   const getWords = async (level: number, page: number) => {
     try {
@@ -25,13 +28,17 @@ const Textbook = () => {
       console.warn(error.message);
     }
   }
-  
+
   useEffect(() => {
+
     const asyncFunction = async () => {
       await getWords(currentLevel, 1);
     }
     asyncFunction();
+    
   }, []); 
+
+  const [currentLevelWords, setCurrentLevelWords] = useState<IWord[] | []>([]);
 
   return (
     <>
@@ -46,8 +53,8 @@ const Textbook = () => {
           <div className={ `book-wrapper level-group-${currentLevel}` }>
             <h2 className={ styles['title'] }>Слова</h2>
             <div className={ styles['book-page-wrapper'] }>
-              <TextbookCards words={ currentLevelWords }/>
-              <SelectedCard />
+              <TextbookCards words={ currentLevelWords } setCurrentCard={ setCurrentCard }/>
+              <SelectedCard currentWord={ currentLevelWords[currentCard] } />
             </div>
             <Pagination />
           </div>
