@@ -3,6 +3,7 @@ import styles from './selected-card.module.css';
 import audio from './../../../assets/icons/audio.png';
 import IWord from '../../../types/services-interfaces/IWord';
 import { AuthorisationContext } from '../../../context/AuthorisationContext';
+import { learWordAPI } from '../../..';
 
 type Props = {
   currentWord: IWord;
@@ -12,6 +13,8 @@ const SelectedCard: React.FC<Props> = ({ currentWord }) => {
   const ROOT_URL = 'https://rslangappteam102.herokuapp.com/';
 
   const { isAuthorised } = useContext(AuthorisationContext);
+  const [isComplicated, setComplicated] = useState(false);
+  const [isLearned, setLearned] = useState(false);
   
   const audioPlayer = new Audio();
 
@@ -37,6 +40,41 @@ const SelectedCard: React.FC<Props> = ({ currentWord }) => {
     }
 
     audioPlayer.addEventListener('ended', startPlaying);
+  }
+
+  const handlerComplicatedBtnClick = async () => {
+    setComplicated(true);
+
+    const userId = localStorage.getItem('id');
+    if (userId) {
+      await learWordAPI.createUserWord(
+        userId, 
+        currentWord.id, 
+        {
+          optional: {
+            isNew: false, 
+            isDifficult: true, 
+            isLearned: false, 
+            correctAnswersStreak: 0,
+            games: {
+              sprint: {
+                answersAtAll: 0,
+                correctAnswers: 0
+              },
+              audioCall: {
+                answersAtAll: 0,
+                correctAnswers: 0
+              },
+            }
+          }
+        }
+      )
+    }
+  }
+
+  const handlerLearnedBtnClick = () => {
+    setLearned(true);
+    setComplicated(false);
   }
   
   return (
@@ -72,9 +110,27 @@ const SelectedCard: React.FC<Props> = ({ currentWord }) => {
         { 
           isAuthorised &&
           <div className={ styles['btns'] }>
-            <button className={ 'btn ' + styles['rounded-word-btn'] }>В сложные</button>
-            <div className={ styles['btn-separator'] }></div>
-            <button className={ 'btn ' + styles['rounded-word-btn'] }>В изученнные</button>
+            { 
+              !isComplicated && !isLearned &&
+              <>
+                <button 
+                  className={ `btn ${styles['rounded-word-btn'] }` }
+                  onClick={ handlerComplicatedBtnClick }
+                >
+                  В сложные
+                </button>
+                <div className={ styles['btn-separator'] }></div>
+              </>
+            }
+            {
+              !isLearned &&
+              <button 
+                className={ `btn ${styles['rounded-word-btn'] }` }
+                onClick={ handlerLearnedBtnClick }
+              >
+                В изученнные
+              </button>
+            } 
           </div>
         }
 

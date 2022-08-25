@@ -17,6 +17,7 @@ const Textbook = () => {
   const [currentLevel, setCurrentLevel] = useState(initialLevel);
   const [currentCard, setCurrentCard] = useState(initialCard);
   const [currentPage, setCurrentPage] = useState(initialPage);
+  const [currentLevelWords, setCurrentLevelWords] = useState<IWord[] | []>([]);
 
   const getWords = async (level: number, page: number) => {
     try {
@@ -32,14 +33,20 @@ const Textbook = () => {
   }
 
   const asyncFunction = async () => {
-    await getWords(currentLevel, 0);
+    await getWords(currentLevel, currentPage);
   }
 
   useEffect(() => {
     asyncFunction();    
   }, []);
 
-  const [currentLevelWords, setCurrentLevelWords] = useState<IWord[] | []>([]);
+  useEffect(() => {
+    asyncFunction();    
+  }, [currentLevel]);
+
+  useEffect(() => {
+    asyncFunction(); 
+  }, [currentPage]);
 
   return (
     <>

@@ -28,6 +28,7 @@ const Pagination: React.FC<Props> = ({ currentPage, setCurrentCard, setCurrentPa
   });
 
   const handlePageClick = (index: number) => {
+    
     setCurrentPage(index);
     setCurrentCard(0);
     
