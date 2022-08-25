@@ -4,18 +4,17 @@ import styles from './textbook-cards.module.css';
 
 type Props = {
   words: IWord[];
+  currentCard: number;
   setCurrentCard: (cardId: number) => void;
 }
 
-const TextbookCards = (props: Props) => {
-  const cardsData = new Array(props.words.length).fill({ word: 'Word', translation: 'перевод' });
-  const [currentCard, setCurrentCard] = useState(0);
+const TextbookCards: React.FC<Props> = ({ words, currentCard, setCurrentCard }) => {
+  const cardsData = new Array(words.length).fill({ word: '', translation: '' });
 
   const handlerCardClick = (cardId: number, event: MouseEvent) => {
     setCurrentCard(cardId);
-    props.setCurrentCard(cardId);
 
-    localStorage.setItem('word', props.words[cardId].id);
+    localStorage.setItem('word', words[cardId].id);
   }
 
   const cardsElements = cardsData.map((card, index) => {
@@ -26,10 +25,10 @@ const TextbookCards = (props: Props) => {
         key={ index + 'card' }
       >
         <h3 className={ styles['word'] }>
-          { props.words[index].word }
+          { words[index].word }
         </h3> 
         <p className={ styles['translation'] }>
-          { props.words[index].wordTranslate }
+          { words[index].wordTranslate }
         </p>
       </div>
     )

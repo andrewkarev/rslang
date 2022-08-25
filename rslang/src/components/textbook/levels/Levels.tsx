@@ -4,23 +4,22 @@ import styles from './levels.module.css';
 
 type Props = {
   currentLevel: number;
-  changeLevel: (level: number) => void;
+  setCurrentLevel: (level: number) => void;
   getWords: (level: number, page: number) => void;
 }
 
-const Levels = (props: Props) => {
+const Levels: React.FC<Props> = ({ currentLevel, setCurrentLevel, getWords }) => {
    
   const handleLevelClick = async (levelId: number, event: MouseEvent) => {
-    props.changeLevel(levelId);
-
-    await props.getWords(levelId, 0);
+    setCurrentLevel(levelId);
+    
     localStorage.setItem('level', String(levelId));
   }
 
   const levelsElements = levelsData.map((level, index) => {
     return (
       <div 
-        className={`${ styles['level'] } ${ level.group === props.currentLevel ? styles['active'] : ''}`} 
+        className={`${ styles['level'] } ${ level.group === currentLevel ? styles['active'] : ''}`} 
         key={ level.name } 
         onClick={ handleLevelClick.bind(null, index) }
       >

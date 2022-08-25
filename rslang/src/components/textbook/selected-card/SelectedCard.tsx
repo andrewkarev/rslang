@@ -9,6 +9,7 @@ type Props = {
 
 const SelectedCard = (props: Props) => {
   const URL = 'https://rslangappteam102.herokuapp.com/';
+
   return (
     <div className={ styles['selected-card'] }>
       <img className={ styles['selected-card-image'] } 
@@ -56,7 +57,9 @@ const SelectedCard = (props: Props) => {
             dangerouslySetInnerHTML={{__html: props.currentWord ? props.currentWord.textExample : ''}}
           >
           </p>
-          <p className={ styles['example-translation'] }>{ props.currentWord ? props.currentWord.textExampleTranslate : '' }</p>
+          <p className={ styles['example-translation'] }>
+            { props.currentWord ? props.currentWord.textExampleTranslate : '' }
+          </p>
         </div>
         
         <div className={ styles['in-games'] }>

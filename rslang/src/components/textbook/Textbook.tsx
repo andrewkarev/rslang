@@ -14,7 +14,7 @@ const Textbook = () => {
   const initialCard = Number(localStorage.getItem('card')) || 0;
   const initialPage = Number(localStorage.getItem('card')) || 0;
   
-  const [currentLevel, changeLevel] = useState(initialLevel);
+  const [currentLevel, setCurrentLevel] = useState(initialLevel);
   const [currentCard, setCurrentCard] = useState(initialCard);
   const [currentPage, setCurrentPage] = useState(initialPage);
 
@@ -31,21 +31,26 @@ const Textbook = () => {
     }
   }
 
+  const asyncFunction = async () => {
+    await getWords(currentLevel, 0);
+  }
+
   useEffect(() => {
-    const asyncFunction = async () => {
-      await getWords(currentLevel, 0);
-    }
     asyncFunction();    
   }, []);
   
   useEffect(() => {
-    const asyncFunction = async () => {
-      await getWords(currentLevel, currentPage);
-    }
     asyncFunction();   
 
     setCurrentCard(0);
   }, [currentPage]); 
+
+  useEffect(() => {
+    asyncFunction();   
+    
+    setCurrentCard(0);
+    setCurrentPage(0);
+  }, [currentLevel]);
 
   const [currentLevelWords, setCurrentLevelWords] = useState<IWord[] | []>([]);
 
@@ -56,16 +61,25 @@ const Textbook = () => {
           <h2 className={ styles['title'] }>Учебник</h2>
           <Levels 
             currentLevel={ currentLevel } 
-            changeLevel={ changeLevel }
+            setCurrentLevel={ setCurrentLevel }
             getWords={ getWords }
           />
           <div className={ `book-wrapper level-group-${currentLevel}` }>
             <h2 className={ styles['title'] }>Слова</h2>
             <div className={ styles['book-page-wrapper'] }>
-              <TextbookCards words={ currentLevelWords } setCurrentCard={ setCurrentCard }/>
-              <SelectedCard currentWord={ currentLevelWords[currentCard] } />
+              <TextbookCards 
+                words={ currentLevelWords } 
+                currentCard={ currentCard } 
+                setCurrentCard={ setCurrentCard }
+              />
+              <SelectedCard 
+                currentWord={ currentLevelWords[currentCard] } 
+              />
             </div>
-            <Pagination currentPage={currentPage} setCurrentPage={ setCurrentPage }/>
+            <Pagination 
+              currentPage={currentPage} 
+              setCurrentPage={ setCurrentPage }
+            />
           </div>
           <Games />
         </div>
