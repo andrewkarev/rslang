@@ -8,10 +8,10 @@ import { learWordAPI } from '../../..';
 type Props = {
   currentWord: IWord;
   audioPlayer: HTMLAudioElement;
-  setAudioPlayer: (audio: HTMLAudioElement) => void;
+  getUserWords: (userId: string) => void;
 }
 
-const SelectedCard: React.FC<Props> = ({ currentWord, audioPlayer, setAudioPlayer }) => {
+const SelectedCard: React.FC<Props> = ({ currentWord, audioPlayer,  getUserWords}) => {
   const ROOT_URL = 'https://rslangappteam102.herokuapp.com/';
 
   const { isAuthorised } = useContext(AuthorisationContext);
@@ -48,6 +48,38 @@ const SelectedCard: React.FC<Props> = ({ currentWord, audioPlayer, setAudioPlaye
 
   const handlerComplicatedBtnClick = async () => {
     setComplicated(true);
+
+    const userId = localStorage.getItem('id');
+    //getUserWords(userId as string)
+    if (userId) {
+      try {
+        // await learWordAPI.createUserWord(
+        //   userId, 
+        //   currentWord.id, 
+        //   {
+        //     optional: {
+        //       isNew: false, 
+        //       isDifficult: true, 
+        //       isLearned: false, 
+        //       correctAnswersStreak: 0,
+        //       games: {
+        //         sprint: {
+        //           answersAtAll: 0,
+        //           correctAnswers: 0
+        //         },
+        //         audioCall: {
+        //           answersAtAll: 0,
+        //           correctAnswers: 0
+        //         },
+        //       }
+        //     }
+        //   }
+        // )
+      } catch (error) {
+        if (!(error instanceof Error)) return;
+        console.log(error.message)
+      }
+    }
   }
 
   const handlerLearnedBtnClick = () => {

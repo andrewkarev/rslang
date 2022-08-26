@@ -8,10 +8,9 @@ type Props = {
   setCurrentLevel: (level: number) => void;
   setCurrentCard: (card: number) => void;
   setCurrentPage: (page: number) => void;
-  getWords: (level: number, page: number) => void;
 }
 
-const Levels: React.FC<Props> = ({ currentLevel, setCurrentLevel, setCurrentCard, setCurrentPage, getWords }) => {
+const Levels: React.FC<Props> = ({ currentLevel, setCurrentLevel, setCurrentCard, setCurrentPage }) => {
   const { isAuthorised } = useContext(AuthorisationContext);
 
   const handleLevelClick = async (levelId: number, event: MouseEvent) => {
