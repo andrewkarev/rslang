@@ -9,6 +9,7 @@
 }
 
 .card {
+  position: relative;
   display: flex;
   width: 190px;
   height: 100px;
@@ -22,9 +23,17 @@
   overflow: hidden;
 }
 
-.words-grid .card:hover {
+.card:hover {
   cursor: pointer;
   transition: background-color 0.3s;
+}
+
+.status {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-style: italic;
+  font-size: 14px;
 }
 
 :global(.level-group-0) .card:hover,

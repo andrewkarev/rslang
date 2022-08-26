@@ -59,7 +59,7 @@ const Textbook = () => {
     await getWords(currentLevel, currentPage);
     
     if (isAuthorised && userId) {
-      console.log('123')
+      console.log('userId')
       await getUserWords(userId)
     }
   }
@@ -72,13 +72,17 @@ const Textbook = () => {
 
   useEffect(() => {
     asyncFunction();    
-    audioPlayer.pause();
-  }, [currentLevel]);
+  }, [isAuthorised]);
 
   useEffect(() => {
-    asyncFunction(); 
+    asyncFunction();    
     audioPlayer.pause();
-  }, [currentPage]);
+  }, [currentLevel, currentPage]);
+
+  // useEffect(() => {
+  //   asyncFunction(); 
+  //   audioPlayer.pause();
+  // }, [currentPage]);
 
   useEffect(() => {
     audioPlayer.pause();

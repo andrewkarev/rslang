@@ -23,9 +23,17 @@ const TextbookCards: React.FC<Props> = ({ words, currentUserWords, currentCard, 
 
   const checkOnComplecated = (wordId: string) => {
     if (currentUserWords) {
-      console.log(currentUserWords);
       const isUserWordComplicated = 
         currentUserWords.find((word) => word.wordId === wordId && word.optional.isDifficult);
+        return isUserWordComplicated;
+    }
+    return false;
+  }
+
+  const checkOnLearned = (wordId: string) => {
+    if (currentUserWords) {
+      const isUserWordComplicated = 
+        currentUserWords.find((word) => word.wordId === wordId && word.optional.isLearned);
         return isUserWordComplicated;
     }
     return false;
@@ -44,9 +52,10 @@ const TextbookCards: React.FC<Props> = ({ words, currentUserWords, currentCard, 
         <p className={ styles['translation'] }>
           { words[index].wordTranslate }
         </p>
-        <p>
+        <div className={ styles['status'] }>
           { isAuthorised && checkOnComplecated(words[index].id) ? 'сложное' : ''}
-        </p>
+          { isAuthorised && checkOnLearned(words[index].id) ? 'изучено' : ''}
+        </div>
       </div>
     )
   });

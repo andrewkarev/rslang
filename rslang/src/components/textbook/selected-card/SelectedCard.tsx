@@ -82,9 +82,41 @@ const SelectedCard: React.FC<Props> = ({ currentWord, audioPlayer,  getUserWords
     }
   }
 
-  const handlerLearnedBtnClick = () => {
+  const handlerLearnedBtnClick = async () => {
     setLearned(true);
     setComplicated(false);
+
+    const userId = localStorage.getItem('id');
+    //getUserWords(userId as string)
+    if (userId) {
+      try {
+        await learWordAPI.createUserWord(
+          userId, 
+          currentWord.id, 
+          {
+            optional: {
+              isNew: false, 
+              isDifficult: false, 
+              isLearned: true, 
+              correctAnswersStreak: 0,
+              games: {
+                sprint: {
+                  answersAtAll: 0,
+                  correctAnswers: 0
+                },
+                audioCall: {
+                  answersAtAll: 0,
+                  correctAnswers: 0
+                },
+              }
+            }
+          }
+        )
+      } catch (error) {
+        if (!(error instanceof Error)) return;
+        console.log(error.message)
+      }
+    }
   }
   
   return (
