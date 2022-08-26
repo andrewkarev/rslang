@@ -36,17 +36,25 @@ const Textbook = () => {
     await getWords(currentLevel, currentPage);
   }
 
+  const [audioPlayer, setAudioPlayer] = useState(new Audio());
+
   useEffect(() => {
     asyncFunction();    
   }, []);
 
   useEffect(() => {
     asyncFunction();    
+    audioPlayer.pause();
   }, [currentLevel]);
 
   useEffect(() => {
     asyncFunction(); 
+    audioPlayer.pause();
   }, [currentPage]);
+
+  useEffect(() => {
+    audioPlayer.pause();
+  }, [currentCard]);
 
   return (
     <>
@@ -70,6 +78,8 @@ const Textbook = () => {
               />
               <SelectedCard 
                 currentWord={ currentLevelWords[currentCard] } 
+                audioPlayer={ audioPlayer }
+                setAudioPlayer={ setAudioPlayer }
               />
             </div>
             <Pagination 

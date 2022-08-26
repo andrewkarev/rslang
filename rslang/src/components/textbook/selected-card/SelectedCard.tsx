@@ -7,33 +7,37 @@ import { learWordAPI } from '../../..';
 
 type Props = {
   currentWord: IWord;
+  audioPlayer: HTMLAudioElement;
+  setAudioPlayer: (audio: HTMLAudioElement) => void;
 }
 
-const SelectedCard: React.FC<Props> = ({ currentWord }) => {
+const SelectedCard: React.FC<Props> = ({ currentWord, audioPlayer, setAudioPlayer }) => {
   const ROOT_URL = 'https://rslangappteam102.herokuapp.com/';
 
   const { isAuthorised } = useContext(AuthorisationContext);
   const [isComplicated, setComplicated] = useState(false);
   const [isLearned, setLearned] = useState(false);
   
-  const audioPlayer = new Audio();
-
   const handlerAudioBtnClick = (...args: (string | MouseEvent)[]) => {
     const audioUrls = args.slice(0, args.length - 1);
     let start = 0;
-
-    audioPlayer.src = `${ROOT_URL}${audioUrls[start++]}`;
+    
     audioPlayer.pause();
-    audioPlayer.play();
+    audioPlayer.src = `${ROOT_URL}${audioUrls[start++]}`; 
+    
+    const canplay = () => {
+      audioPlayer.play();
+      audioPlayer.removeEventListener('canplay', canplay);
+    }
+    
+    audioPlayer.addEventListener('canplay', canplay); 
 
     const startPlaying = () => {
       if (start < audioUrls.length) {
+        audioPlayer.pause();
         audioPlayer.src = `${ROOT_URL}${audioUrls[start++]}`;
-        const promise = audioPlayer.play();
-        
-        if (promise !== null){
-          promise.catch(() => { audioPlayer.play(); })
-        }
+               
+        audioPlayer.addEventListener('canplay', canplay); 
       } else {
         audioPlayer.removeEventListener('ended', startPlaying);
       }
@@ -44,32 +48,6 @@ const SelectedCard: React.FC<Props> = ({ currentWord }) => {
 
   const handlerComplicatedBtnClick = async () => {
     setComplicated(true);
-
-    const userId = localStorage.getItem('id');
-    if (userId) {
-      await learWordAPI.createUserWord(
-        userId, 
-        currentWord.id, 
-        {
-          optional: {
-            isNew: false, 
-            isDifficult: true, 
-            isLearned: false, 
-            correctAnswersStreak: 0,
-            games: {
-              sprint: {
-                answersAtAll: 0,
-                correctAnswers: 0
-              },
-              audioCall: {
-                answersAtAll: 0,
-                correctAnswers: 0
-              },
-            }
-          }
-        }
-      )
-    }
   }
 
   const handlerLearnedBtnClick = () => {
