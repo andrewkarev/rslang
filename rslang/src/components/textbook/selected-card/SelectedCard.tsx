@@ -11,7 +11,6 @@ type Props = {
   userWord?: IUserWord;
   audioPlayer: HTMLAudioElement;
   setCurrentUserWord: (userWord: IUserWord) => void;
-  //setWordStatus: (wordStatus: {isComplicated: boolean, isLearned: boolean}) => void
 }
 
 const SelectedCard: React.FC<Props> = ({ currentWord, userWord, audioPlayer, setCurrentUserWord}) => {
@@ -67,55 +66,108 @@ const SelectedCard: React.FC<Props> = ({ currentWord, userWord, audioPlayer, set
 
   const handlerComplicatedBtnClick = async () => {
     const userId = localStorage.getItem('id');
+    let word: IUserWord;
 
     if (userId) {
-      const word = {
-        optional: {
-          isNew: false, 
-          isDifficult: true, 
-          isLearned: false, 
-          correctAnswersStreak: 0,
-          games: {
-            sprint: {
-              answersAtAll: 0,
-              correctAnswers: 0
-            },
-            audioCall: {
-              answersAtAll: 0,
-              correctAnswers: 0
-            },
+      if (userWord) {
+        word = {
+          optional: {
+            ...userWord.optional, 
+            ...userWord.optional.games.audioCall,
+            ...userWord.optional.games.sprint
+          }
+        };
+
+        word.optional.isDifficult = true;
+      } else {
+        
+        word = {
+          optional: {
+            isNew: false, 
+            isDifficult: true, 
+            isLearned: false, 
+            correctAnswersStreak: 0,
+            games: {
+              sprint: {
+                answersAtAll: 0,
+                correctAnswers: 0
+              },
+              audioCall: {
+                answersAtAll: 0,
+                correctAnswers: 0
+              },
+            }
           }
         }
+      
       }
-
       await updateDatabaseData(userId, word);
     }
   }
 
   const handlerLearnedBtnClick = async () => {
     const userId = localStorage.getItem('id');
+    let word: IUserWord;
 
     if (userId) {
-      const word = {
-        optional: {
-          isNew: false, 
-          isDifficult: false, 
-          isLearned: true, 
-          correctAnswersStreak: 0,
-          games: {
-            sprint: {
-              answersAtAll: 0,
-              correctAnswers: 0
-            },
-            audioCall: {
-              answersAtAll: 0,
-              correctAnswers: 0
-            },
+      if (userWord) {
+        word = {
+          optional: {
+            ...userWord.optional, 
+            ...userWord.optional.games.audioCall,
+            ...userWord.optional.games.sprint
+          }
+        };
+        
+        word.optional.isDifficult = false;
+        word.optional.isLearned = true;
+      } else {
+
+        word = {
+          optional: {
+            isNew: false, 
+            isDifficult: false, 
+            isLearned: true, 
+            correctAnswersStreak: 0,
+            games: {
+              sprint: {
+                answersAtAll: 0,
+                correctAnswers: 0
+              },
+              audioCall: {
+                answersAtAll: 0,
+                correctAnswers: 0
+              },
+            }
           }
         }
+
       }
 
       updateDatabaseData(userId, word)
+    }
+  }
+
+  const handlerRemoveFromLearnedBtnClick = async () => {
+    const userId = localStorage.getItem('id');
+    let word: IUserWord;
+
+    if (userId) {
+      
+      if (userWord) {
+        word = {
+          optional: { 
+            ...userWord.optional, 
+            ...userWord.optional.games.audioCall,
+            ...userWord.optional.games.sprint
+          }
+        };
+        
+        word.optional.isDifficult = false;
+        word.optional.isLearned = false;
+
+        updateDatabaseData(userId, word);
+      } 
     }
   }
   
@@ -153,7 +205,6 @@ const SelectedCard: React.FC<Props> = ({ currentWord, userWord, audioPlayer, set
           isAuthorised &&
           <div className={ styles['btns'] }>
             { 
-              //!wordStatus?.isComplicated && !wordStatus?.isLearned &&
               !userWord?.optional.isDifficult && !userWord?.optional.isLearned &&
               <>
                 <button 
@@ -166,13 +217,21 @@ const SelectedCard: React.FC<Props> = ({ currentWord, userWord, audioPlayer, set
               </>
             }
             {
-              //!wordStatus?.isLearned &&
               !userWord?.optional.isLearned &&
               <button 
                 className={ `btn ${styles['rounded-word-btn'] }` }
                 onClick={ handlerLearnedBtnClick }
               >
                 В изученнные
+              </button>
+            } 
+            {
+              userWord?.optional.isLearned &&
+              <button 
+                className={ `btn ${styles['rounded-word-btn'] }` }
+                onClick={ handlerRemoveFromLearnedBtnClick }
+              >
+                Удалить из изученных
               </button>
             } 
             

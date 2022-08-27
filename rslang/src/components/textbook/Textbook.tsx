@@ -26,8 +26,7 @@ const Textbook = () => {
   const [currentLevelWords, setCurrentLevelWords] = useState<IWord[] | []>([]);
   const [currentUserWords, setCurrentUserWords] = useState<IUserWord[] | []>([]);
   const [currentUserWord, setCurrentUserWord] = useState<IUserWord | undefined>();
-  //const [wordStatus, setWordStatus] = useState<{isComplicated: boolean, isLearned: boolean}>();
-
+  
   const getWords = async (level: number, page: number) => {
     const data = await learWordAPI.getWords(level, page);
 
@@ -52,7 +51,6 @@ const Textbook = () => {
         const initialLearnedValue = (userWord.wordId === currentLevelWords[currentCard].id) 
           && userWord.optional.isLearned;
 
-        //setWordStatus({ isComplicated: initialComplecatedValue, isLearned: initialLearnedValue });
       } else {
         setCurrentUserWord(undefined);
         console.log('no status')
@@ -110,16 +108,9 @@ const Textbook = () => {
               />
               <SelectedCard 
                 currentWord={ currentLevelWords[currentCard] } 
-                // userWord={ 
-                //   isAuthorised 
-                //     ? currentUserWords.find((word) => word.wordId === currentLevelWords[currentCard].id)
-                //     : undefined
-                // }
                 userWord={ isAuthorised ? currentUserWord : undefined }
-                
                 audioPlayer={ audioPlayer }
                 setCurrentUserWord={ setCurrentUserWord }
-                //setWordStatus={ setWordStatus }
               />
             </div>
             <Pagination 
