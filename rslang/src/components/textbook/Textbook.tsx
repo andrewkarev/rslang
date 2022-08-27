@@ -10,7 +10,6 @@ import {learWordAPI} from '../..';
 import { AuthorisationContext } from '../../context/AuthorisationContext';
 import IUserWord from '../../types/services-interfaces/IUserWord';
 
-
 const Textbook = () => {
   const { isAuthorised } = useContext(AuthorisationContext);
   const userId = isAuthorised 
@@ -26,42 +25,47 @@ const Textbook = () => {
   const [currentPage, setCurrentPage] = useState(initialPage);
   const [currentLevelWords, setCurrentLevelWords] = useState<IWord[] | []>([]);
   const [currentUserWords, setCurrentUserWords] = useState<IUserWord[] | []>([]);
+  const [currentUserWord, setCurrentUserWord] = useState<IUserWord | undefined>();
+  //const [wordStatus, setWordStatus] = useState<{isComplicated: boolean, isLearned: boolean}>();
 
   const getWords = async (level: number, page: number) => {
-    try {
-      const data = await learWordAPI.getWords(level, page);
+    const data = await learWordAPI.getWords(level, page);
 
-      if (data) {
-        setCurrentLevelWords(data);
-      }
-    } catch (error) {
-      if (!(error instanceof Error)) return;
-      console.warn(error.message);
+    if (data) {
+      setCurrentLevelWords(data);
     }
   }
 
   const getUserWords = async (userId: string) => {
-    try {
-      if (!userId) return;
-      const data = await learWordAPI.getUserWords(userId);
+    if (!userId) return;
+    const data = await learWordAPI.getUserWords(userId);
 
-      if (data) {
-        setCurrentUserWords(data);
-        console.log(data);
+    if (data) {
+      setCurrentUserWords(data);
+      
+      const userWord = data.find((word) => word.wordId === currentLevelWords[currentCard].id);
+      if (userWord) {
+        setCurrentUserWord(userWord);
+        const initialComplecatedValue = (userWord.wordId === currentLevelWords[currentCard].id) 
+          && userWord.optional.isDifficult;
+        
+        const initialLearnedValue = (userWord.wordId === currentLevelWords[currentCard].id) 
+          && userWord.optional.isLearned;
+
+        //setWordStatus({ isComplicated: initialComplecatedValue, isLearned: initialLearnedValue });
+      } else {
+        setCurrentUserWord(undefined);
+        console.log('no status')
       }
-    } catch (error) {
-      if (!(error instanceof Error)) return;
-      console.warn(error.message);
-    }
+    }   
   }
 
   const asyncFunction = async () => {
-    await getWords(currentLevel, currentPage);
-    
     if (isAuthorised && userId) {
-      console.log('userId')
-      await getUserWords(userId)
+      await getUserWords(userId);
     }
+    
+    await getWords(currentLevel, currentPage);    
   }
 
   const [audioPlayer] = useState(new Audio());
@@ -77,16 +81,12 @@ const Textbook = () => {
   useEffect(() => {
     asyncFunction();    
     audioPlayer.pause();
-  }, [currentLevel, currentPage]);
+  }, [currentLevel, currentPage, currentCard, currentUserWord, audioPlayer]);
+
 
   // useEffect(() => {
-  //   asyncFunction(); 
   //   audioPlayer.pause();
-  // }, [currentPage]);
-
-  useEffect(() => {
-    audioPlayer.pause();
-  }, [currentCard]);
+  // }, [currentCard]);
 
   return (
     <>
@@ -110,8 +110,16 @@ const Textbook = () => {
               />
               <SelectedCard 
                 currentWord={ currentLevelWords[currentCard] } 
+                // userWord={ 
+                //   isAuthorised 
+                //     ? currentUserWords.find((word) => word.wordId === currentLevelWords[currentCard].id)
+                //     : undefined
+                // }
+                userWord={ isAuthorised ? currentUserWord : undefined }
+                
                 audioPlayer={ audioPlayer }
-                getUserWords={ getUserWords }
+                setCurrentUserWord={ setCurrentUserWord }
+                //setWordStatus={ setWordStatus }
               />
             </div>
             <Pagination 

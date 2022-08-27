@@ -1,4 +1,4 @@
-import React, { MouseEvent, useContext, useEffect, useState } from 'react';
+import React, { MouseEvent, useContext } from 'react';
 import { AuthorisationContext } from '../../../context/AuthorisationContext';
 import levelsData from '../../../data/levels-data';
 import styles from './levels.module.css';

@@ -1,4 +1,4 @@
-import React, { MouseEvent, useContext, useState } from 'react';
+import React, { MouseEvent, useContext } from 'react';
 import { AuthorisationContext } from '../../../context/AuthorisationContext';
 import IUserWord from '../../../types/services-interfaces/IUserWord';
 import IWord from '../../../types/services-interfaces/IWord';
