@@ -18,38 +18,6 @@ const SelectedCard: React.FC<Props> = ({ currentWord, userWord, audioPlayer, set
   const ROOT_URL = 'https://rslangappteam102.herokuapp.com/';
 
   const { isAuthorised } = useContext(AuthorisationContext);
-
-  // const initialComplecatedValue = 
-  //   userWord 
-  //     ? (userWord.wordId === currentWord.id) && userWord.optional.isDifficult 
-  //     : false;
-  
-  // const initialLearnedValue = 
-  //   userWord 
-  //     ? (userWord.wordId === currentWord.id) && userWord.optional.isLearned 
-  //     : false;
-  
-
-  // const [isComplicated, setComplicated] = useState(initialComplecatedValue);
-  // const [isLearned, setLearned] = useState(initialLearnedValue);
-
-  //const [wordStatus, setWordStatus] = useState<{isComplicated: boolean, isLearned: boolean}>();
-
-  // useEffect(() => {
-  //   setComplicated(initialComplecatedValue);
-  //   setLearned(initialLearnedValue);
-  // }, [currentWord, isAuthorised, userWord]);
-
-  // const func = useCallback(() => {
-  //   // setComplicated(initialComplecatedValue);
-  //   // setLearned(initialLearnedValue);
-  //   setWordStatus({isComplicated: initialComplecatedValue, isLearned: initialLearnedValue});
-  // }, [initialComplecatedValue, initialLearnedValue]);
-
-  // useEffect(() => {
-  //   func();
-  //   console.log("123")
-  // }, [func]);
   
   const handlerAudioBtnClick = (...args: (string | MouseEvent)[]) => {
     const audioUrls = args.slice(0, args.length - 1);
@@ -79,45 +47,56 @@ const SelectedCard: React.FC<Props> = ({ currentWord, userWord, audioPlayer, set
     audioPlayer.addEventListener('ended', startPlaying);
   }
 
-  const handlerComplicatedBtnClick = async () => {
-    // setComplicated(true);
+  const updateDatabaseData = async (userId: string, word: IUserWord) => {
+    if (!userWord) {
+      await learWordAPI.createUserWord(
+        userId, 
+        currentWord.id, 
+        word
+      );
+    } else {
+      await learWordAPI.updateUserWord(
+        userId, 
+        currentWord.id, 
+        word
+      );
+    }
+    
+    setCurrentUserWord({id: userId, wordId: currentWord.id, ...word});
+  }
 
+  const handlerComplicatedBtnClick = async () => {
     const userId = localStorage.getItem('id');
 
     if (userId) {
-      // await learWordAPI.createUserWord(
-        //   userId, 
-        //   currentWord.id, 
-        //   {
-        //     optional: {
-        //       isNew: false, 
-        //       isDifficult: true, 
-        //       isLearned: false, 
-        //       correctAnswersStreak: 0,
-        //       games: {
-        //         sprint: {
-        //           answersAtAll: 0,
-        //           correctAnswers: 0
-        //         },
-        //         audioCall: {
-        //           answersAtAll: 0,
-        //           correctAnswers: 0
-        //         },
-        //       }
-        //     }
-        //   }
-        // )
+      const word = {
+        optional: {
+          isNew: false, 
+          isDifficult: true, 
+          isLearned: false, 
+          correctAnswersStreak: 0,
+          games: {
+            sprint: {
+              answersAtAll: 0,
+              correctAnswers: 0
+            },
+            audioCall: {
+              answersAtAll: 0,
+              correctAnswers: 0
+            },
+          }
+        }
+      }
+
+      await updateDatabaseData(userId, word);
     }
   }
 
   const handlerLearnedBtnClick = async () => {
     const userId = localStorage.getItem('id');
 
-    //getUserWords(userId)
     if (userId) {
       const word = {
-        // id: userId,
-        // wordId: currentWord.id,
         optional: {
           isNew: false, 
           isDifficult: false, 
@@ -136,13 +115,7 @@ const SelectedCard: React.FC<Props> = ({ currentWord, userWord, audioPlayer, set
         }
       }
 
-      await learWordAPI.createUserWord(
-        userId, 
-        currentWord.id, 
-        word
-      );
-      
-      setCurrentUserWord({id: userId, wordId: currentWord.id, ...word});
+      updateDatabaseData(userId, word)
     }
   }
   
