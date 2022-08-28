@@ -20,71 +20,84 @@ const Textbook = () => {
   const initialCard = Number(localStorage.getItem('card')) || 0;
   const initialPage = Number(localStorage.getItem('page')) || 0;
   
-  const [currentLevel, setCurrentLevel] = useState(initialLevel);
-  const [currentCard, setCurrentCard] = useState(initialCard);
-  const [currentPage, setCurrentPage] = useState(initialPage);
+  const [currentStatus, setCurrentStatus] = useState({currentLevel: initialLevel, currentCard: initialCard, currentPage: initialPage});
   const [currentLevelWords, setCurrentLevelWords] = useState<IWord[] | []>([]);
   const [currentUserWords, setCurrentUserWords] = useState<IUserWord[] | []>([]);
   const [currentUserWord, setCurrentUserWord] = useState<IUserWord | undefined>();
   
-  const getWords = async (level: number, page: number) => {
-    const data = await learWordAPI.getWords(level, page);
-
-    if (data) {
-      setCurrentLevelWords(data);
-    }
-  }
-
-  const getUserWords = async (userId: string) => {
-    if (!userId) return;
-    const data = await learWordAPI.getUserWords(userId);
-
-    if (data) {
-      setCurrentUserWords(data);
-      
-      const userWord = data.find((word) => word.wordId === currentLevelWords[currentCard].id);
-      if (userWord) {
-        setCurrentUserWord(userWord);
-        const initialComplecatedValue = (userWord.wordId === currentLevelWords[currentCard].id) 
-          && userWord.optional.isDifficult;
-        
-        const initialLearnedValue = (userWord.wordId === currentLevelWords[currentCard].id) 
-          && userWord.optional.isLearned;
-
-      } else {
-        setCurrentUserWord(undefined);
-        console.log('no status')
-      }
-    }   
-  }
-
-  const asyncFunction = async () => {
-    if (isAuthorised && userId) {
-      await getUserWords(userId);
-    }
-    
-    await getWords(currentLevel, currentPage);    
-  }
-
   const [audioPlayer] = useState(new Audio());
 
   useEffect(() => {
-    asyncFunction();    
+    const asyncFunction = async () => {
+      if (isAuthorised && userId && initialLevel < 6) {
+        const data = await learWordAPI.getUserWords(userId);
+
+        if (data) {
+          setCurrentUserWords(data);
+        }
+      }
+           
+      const data = await learWordAPI.getWords(initialLevel, initialPage);
+
+      if (data) {
+        setCurrentLevelWords(data);
+      } 
+    }
+    asyncFunction();   
   }, []);
 
   useEffect(() => {
-    asyncFunction();    
-  }, [isAuthorised]);
+    const asyncFunction = async () => {
+      if (isAuthorised && userId && currentStatus.currentLevel < 6) {
+        const data = await learWordAPI.getUserWords(userId);
+        if (data) {
+          setCurrentUserWords(data);
+        }
+      }
 
-  useEffect(() => {
-    asyncFunction();    
-    audioPlayer.pause();
-  }, [currentLevel, currentPage, currentCard, currentUserWord, audioPlayer]);
+      if (isAuthorised && userId && currentStatus.currentLevel === 7) {
+        
+        const getComplicatedWords = async () => {
+          const complicatedUserWords: IWord[] = [];
+          const complicatedWords = currentUserWords.filter((userWord) => userWord.optional.isDifficult)
+          for (let userWord of complicatedWords) {
+            const word = await learWordAPI.getWord(userWord.wordId!);
+            console.log(word); //слова выводятся
+            if (word) {
+              complicatedUserWords.push(word);
+              console.log(complicatedUserWords); //массив выводится
+            }
+          }
+          return complicatedUserWords;
+        }
+        
+        const difficultWords = await getComplicatedWords();
+        if (!difficultWords) return;
+        console.log('1', difficultWords) //массив пустой. Этот console.log отработает первым
 
+        setCurrentLevelWords(difficultWords);
+  
+      } else {
+           
+        const data = await learWordAPI.getWords(currentStatus.currentLevel, currentStatus.currentPage);
+        if (data) {
+          setCurrentLevelWords(data);
+        } 
+      }
+    }
+    console.log('useEffect');
+    asyncFunction();  
+    audioPlayer.pause(); 
+  }, [isAuthorised, currentStatus, audioPlayer]);
 
   // useEffect(() => {
+  //   asyncFunction();    
+  // }, [isAuthorised]);
+
+  // useEffect(() => {
+  //   asyncFunction();    
   //   audioPlayer.pause();
-  // }, [currentCard]);
+  // }, [currentStatus, audioPlayer]);
 
   return (
     <>
@@ -92,31 +105,35 @@ const Textbook = () => {
         <div className={ styles['wrapper'] + ' textbook-wrapper' }>
           <h2 className={ styles['title'] }>Учебник</h2>
           <Levels 
-            currentLevel={ currentLevel } 
-            setCurrentLevel={ setCurrentLevel }
-            setCurrentCard={ setCurrentCard }
-            setCurrentPage={ setCurrentPage }
+            currentStatus={ currentStatus }
+            setCurrentStatus={ setCurrentStatus }
           />
-          <div className={ `book-wrapper level-group-${currentLevel}` }>
+          <div className={ `book-wrapper level-group-${currentStatus.currentLevel}` }>
             <h2 className={ styles['title'] }>Слова</h2>
             <div className={ styles['book-page-wrapper'] }>
               <TextbookCards 
                 words={ currentLevelWords } 
                 currentUserWords={ currentUserWords }
-                currentCard={ currentCard } 
-                setCurrentCard={ setCurrentCard }
+                currentStatus={ currentStatus }
+                setCurrentStatus={ setCurrentStatus }
               />
               <SelectedCard 
-                currentWord={ currentLevelWords[currentCard] } 
-                userWord={ isAuthorised ? currentUserWord : undefined }
+                currentWord={ currentLevelWords[currentStatus.currentCard] } 
+                //userWord={ isAuthorised ? currentUserWord : undefined }
+                userWord={ 
+                  isAuthorised 
+                    ? currentStatus.currentLevel < 6
+                      ? currentUserWords.find((word) => word.wordId === currentLevelWords[currentStatus.currentCard].id) 
+                      : undefined 
+                    : undefined
+                  }
                 audioPlayer={ audioPlayer }
                 setCurrentUserWord={ setCurrentUserWord }
               />
             </div>
             <Pagination 
-              currentPage={currentPage} 
-              setCurrentCard={ setCurrentCard }
-              setCurrentPage={ setCurrentPage }
+              currentStatus={ currentStatus }
+              setCurrentStatus={ setCurrentStatus }
             />
           </div>
           <Games />

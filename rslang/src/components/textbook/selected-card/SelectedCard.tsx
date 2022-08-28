@@ -13,7 +13,7 @@ type Props = {
   setCurrentUserWord: (userWord: IUserWord) => void;
 }
 
-const SelectedCard: React.FC<Props> = ({ currentWord, userWord, audioPlayer, setCurrentUserWord}) => {
+const SelectedCard: React.FC<Props> = ({ currentWord, userWord, audioPlayer }) => {
   const ROOT_URL = 'https://rslangappteam102.herokuapp.com/';
 
   const { isAuthorised } = useContext(AuthorisationContext);
@@ -61,7 +61,7 @@ const SelectedCard: React.FC<Props> = ({ currentWord, userWord, audioPlayer, set
       );
     }
     
-    setCurrentUserWord({id: userId, wordId: currentWord.id, ...word});
+    //setCurrentUserWord({id: userId, wordId: currentWord.id, ...word});
   }
 
   const handlerComplicatedBtnClick = async () => {

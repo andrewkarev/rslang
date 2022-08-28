@@ -1,4 +1,4 @@
-import React, { MouseEvent, useContext } from 'react';
+import React, { MouseEvent, useContext, useState } from 'react';
 import { AuthorisationContext } from '../../../context/AuthorisationContext';
 import IUserWord from '../../../types/services-interfaces/IUserWord';
 import IWord from '../../../types/services-interfaces/IWord';
@@ -7,16 +7,18 @@ import styles from './textbook-cards.module.css';
 type Props = {
   words: IWord[];
   currentUserWords: IUserWord[];
-  currentCard: number;
-  setCurrentCard: (cardId: number) => void;
+  currentStatus: {currentLevel: number, currentCard: number, currentPage: number}
+  setCurrentStatus: (status: {currentLevel: number, currentCard: number, currentPage: number}) => void;
 }
 
-const TextbookCards: React.FC<Props> = ({ words, currentUserWords, currentCard, setCurrentCard }) => {
+const TextbookCards: React.FC<Props> = ({ words, currentUserWords, currentStatus, setCurrentStatus }) => {
+  // console.log('length=', words.length);
   const cardsData = new Array(words.length).fill({ word: '', translation: '' });
+  
   const { isAuthorised } = useContext(AuthorisationContext);
 
   const handlerCardClick = (card: number, event: MouseEvent) => {
-    setCurrentCard(card);
+    setCurrentStatus({...currentStatus, currentCard: card });
 
     localStorage.setItem('card', `${card}`);
   }
@@ -42,7 +44,7 @@ const TextbookCards: React.FC<Props> = ({ words, currentUserWords, currentCard, 
   const cardsElements = cardsData.map((card, index) => {
     return (
       <div 
-        className={ `${styles['card']} ${index === currentCard ? styles['active'] : ''}` } 
+        className={ `${styles['card']} ${index === currentStatus.currentCard ? styles['active'] : ''}` } 
         onClick={ handlerCardClick.bind(null, index) }
         key={ index + 'card' }
       >
