@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 // import logo from './logo.svg';
 import './App.css';
@@ -7,7 +6,6 @@ import Textbook from './components/textbook/Textbook';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/header/Header';
 import AuthorisationForm from './components/header/authorisation/AuthorisationForm';
-import SprintGame from './components/games-page/sprint-game/SprintGame';
 import GamesPage from './components/games-page/GamesPage';
 
 function App() {
@@ -32,7 +30,7 @@ function App() {
         <Route path="textbook" element={<Textbook />} />
         <Route path="games" element={<GamesPage />} />
         {/* <Route path="statistics" element={< />} /> */}
-        <Route path="games/sprint" element={<SprintGame />} />
+        {/* <Route path="sprint" element={<SprintGame words={words} />} /> */}
       </Routes>
     </>
   );

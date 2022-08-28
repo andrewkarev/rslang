@@ -1,13 +1,16 @@
 import React from 'react';
-import styles from './game.module.css';
-import { NavLink } from "react-router-dom";
+import styles from './game-card.module.css';
 
 type Props = {
   name: string,
-  description: string
+  description: string,
+  handleGameChoice: (choice: string) => void,
 };
 
-const Game = (props: Props) => {
+const GameCard = (props: Props) => {
+  const clickHandler = () => {
+    props.handleGameChoice(props.name);
+  };
 
   return (
     <div className={styles['game']}>
@@ -25,12 +28,15 @@ const Game = (props: Props) => {
           <div className={styles['level'] + ' ' + styles['level-c1']}>C1</div>
           <div className={styles['level'] + ' ' + styles['level-c2']}>C2</div>
         </div>
-        <NavLink to={props.name === 'Спринт' ? 'sprint' : '/'}>
-          <button className={'btn ' + styles['start-game-btn']}>Играть</button>
-        </NavLink>
+        <button
+          className={'btn ' + styles['start-game-btn']}
+          onClick={clickHandler}
+        >
+          Играть
+        </button>
       </div>
     </div>
   );
 }
 
-export default Game;
+export default GameCard;
