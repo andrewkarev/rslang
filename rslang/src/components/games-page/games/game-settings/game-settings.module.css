@@ -1,0 +1,48 @@
+.game-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 10px 0;
+}
+
+.close-game,
+.volume-controls,
+.fullscreen-mode,
+.volume-controls-muted,
+.fullscreen-mode-active {
+  width: 20px;
+  height: 20px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transform: scale(1);
+  transition: all 0.3s ease-in-out;
+}
+
+.close-game {
+  background-image: url(../../../../assets/icons/cancel.png);
+}
+
+.volume-controls {
+  background-image: url(../../../../assets/icons/volume.png);
+}
+
+.fullscreen-mode {
+  background-image: url(../../../../assets/icons/expand.png);
+}
+
+.volume-controls-muted {
+  background-image: url(../../../../assets/icons/mute.png);
+}
+
+.fullscreen-mode-active {
+  background-image: url(../../../../assets/icons/full-screen-exit.png);
+}
+
+.close-game:active,
+.volume-controls:active,
+.fullscreen-mode:active,
+.volume-controls-muted:active,
+.fullscreen-mode-active:active {
+  transform: scale(0.7);
+}
