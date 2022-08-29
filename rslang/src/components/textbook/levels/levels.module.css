@@ -93,7 +93,8 @@
   background-color: #fe1b1e;
 }
 
-.level:hover:nth-child(8) .arrow {
+.level:hover:nth-child(8) .arrow, 
+.level.active:nth-child(8) .arrow {
   background-color: #808080;
 }
 

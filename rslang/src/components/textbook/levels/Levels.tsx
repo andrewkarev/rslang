@@ -15,20 +15,13 @@ const Levels: React.FC<Props> = ({ currentStatus, setCurrentStatus }) => {
     
     setCurrentStatus({ currentLevel: levelId, currentPage: 0, currentCard: 0 });
     
-    //setComplicated(false);
-
     localStorage.setItem('level', String(levelId));
     localStorage.setItem('page', '0');
     localStorage.setItem('card', '0');
   }
 
   const handleComplicatedLevelClick = (event: MouseEvent) => {
-    setCurrentStatus( { currentLevel: 7, currentPage: 0, currentCard: 0} );
-    // setComplicated(true);
-
-    //localStorage.setItem('level', '7');
-    // localStorage.setItem('page', '0');
-    // localStorage.setItem('card', '0');
+    setCurrentStatus( { currentLevel: 6, currentPage: 0, currentCard: 0} );
   }
 
   const levelsElements = levelsData.map((level, index) => {
@@ -53,7 +46,7 @@ const Levels: React.FC<Props> = ({ currentStatus, setCurrentStatus }) => {
         <>
           <div className={ styles['separator'] }></div>
           <div 
-            className={ `${ styles['level']} level-complicated` } 
+            className={`${styles['level']} level-complicated ${currentStatus.currentLevel === 6 ? styles['active'] : ''}` } 
             onClick={ handleComplicatedLevelClick }
             key='D'
           >

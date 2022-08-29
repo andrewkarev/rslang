@@ -104,6 +104,10 @@
   background-color: #fe1b1e;
 }
 
+:global(.level-group-6) .rounded-word-btn {
+  background-color: #808080;
+}
+
 .meaning-sentence,
 .example-sentence {
   margin-bottom: 10px;

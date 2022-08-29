@@ -90,6 +90,15 @@
   background-color: #fe1b1e;  
 }
 
+:global(.level-group-6) .card:hover,
+:global(.level-group-6) .card.active {
+  border: 2px solid #808080;
+}
+
+:global(.level-group-6) .card.active {
+  background-color: #808080;
+}
+
 @media (max-width: 1100px) {
 
   .words-grid {

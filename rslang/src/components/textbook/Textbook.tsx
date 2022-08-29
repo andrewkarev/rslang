@@ -38,7 +38,6 @@ const Textbook = () => {
       }
            
       const data = await learWordAPI.getWords(initialLevel, initialPage);
-
       if (data) {
         setCurrentLevelWords(data);
       } 
@@ -55,17 +54,16 @@ const Textbook = () => {
         }
       }
 
-      if (isAuthorised && userId && currentStatus.currentLevel === 7) {
+      if (isAuthorised && userId && currentStatus.currentLevel === 6) {
         
         const getComplicatedWords = async () => {
           const complicatedUserWords: IWord[] = [];
           const complicatedWords = currentUserWords.filter((userWord) => userWord.optional.isDifficult)
           for (let userWord of complicatedWords) {
             const word = await learWordAPI.getWord(userWord.wordId!);
-            console.log(word); //слова выводятся
+            
             if (word) {
               complicatedUserWords.push(word);
-              console.log(complicatedUserWords); //массив выводится
             }
           }
           return complicatedUserWords;
@@ -73,7 +71,6 @@ const Textbook = () => {
         
         const difficultWords = await getComplicatedWords();
         if (!difficultWords) return;
-        console.log('1', difficultWords) //массив пустой. Этот console.log отработает первым
 
         setCurrentLevelWords(difficultWords);
   
@@ -131,10 +128,14 @@ const Textbook = () => {
                 setCurrentUserWord={ setCurrentUserWord }
               />
             </div>
-            <Pagination 
-              currentStatus={ currentStatus }
-              setCurrentStatus={ setCurrentStatus }
-            />
+            {
+              currentStatus.currentLevel !== 6 &&
+              <Pagination
+                currentStatus={currentStatus}
+                setCurrentStatus={setCurrentStatus}
+              />
+            }
+            
           </div>
           <Games />
         </div>
