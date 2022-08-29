@@ -7,12 +7,11 @@ import styles from './textbook-cards.module.css';
 type Props = {
   words: IWord[];
   currentUserWords: IUserWord[];
-  currentStatus: {currentLevel: number, currentCard: number, currentPage: number}
+  currentStatus: {currentLevel: number, currentCard: number, currentPage: number};
   setCurrentStatus: (status: {currentLevel: number, currentCard: number, currentPage: number}) => void;
 }
 
 const TextbookCards: React.FC<Props> = ({ words, currentUserWords, currentStatus, setCurrentStatus }) => {
-  // console.log('length=', words.length);
   const cardsData = new Array(words.length).fill({ word: '', translation: '' });
   
   const { isAuthorised } = useContext(AuthorisationContext);
@@ -65,6 +64,10 @@ const TextbookCards: React.FC<Props> = ({ words, currentUserWords, currentStatus
   return (
     <div className={ styles['words-grid'] }>
       { cardsElements }
+      { 
+        !cardsElements.length &&
+        <p className={ styles['no-words'] }>Слова не добавлены</p>
+      }
     </div>
   )
 }

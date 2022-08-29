@@ -37,6 +37,7 @@ h2	{
 
 .book-page-wrapper {
   display: flex;
+  justify-content: space-between;
   margin-bottom: 20px;
   min-height: 800px;
 }

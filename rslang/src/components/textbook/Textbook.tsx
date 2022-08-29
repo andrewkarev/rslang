@@ -24,10 +24,12 @@ const Textbook = () => {
   const [currentLevelWords, setCurrentLevelWords] = useState<IWord[] | []>([]);
   const [currentUserWords, setCurrentUserWords] = useState<IUserWord[] | []>([]);
   const [currentUserWord, setCurrentUserWord] = useState<IUserWord | undefined>();
+  const [complicatedWordsAmount, changeComplicatedWordsAmount] = useState(0);
   
   const [audioPlayer] = useState(new Audio());
 
   useEffect(() => {
+    
     const asyncFunction = async () => {
       if (isAuthorised && userId && initialLevel < 6) {
         const data = await learWordAPI.getUserWords(userId);
@@ -36,7 +38,7 @@ const Textbook = () => {
           setCurrentUserWords(data);
         }
       }
-           
+      
       const data = await learWordAPI.getWords(initialLevel, initialPage);
       if (data) {
         setCurrentLevelWords(data);
@@ -47,32 +49,30 @@ const Textbook = () => {
 
   useEffect(() => {
     const asyncFunction = async () => {
-      if (isAuthorised && userId && currentStatus.currentLevel < 6) {
+      // if (isAuthorised && userId && currentStatus.currentLevel < 6) {
+      if (isAuthorised && userId ) {
+        
         const data = await learWordAPI.getUserWords(userId);
         if (data) {
           setCurrentUserWords(data);
+          changeComplicatedWordsAmount(data.filter((userWord) => userWord.optional.isDifficult).length);
         }
       }
-
+      
+      
       if (isAuthorised && userId && currentStatus.currentLevel === 6) {
-        
-        const getComplicatedWords = async () => {
-          const complicatedUserWords: IWord[] = [];
-          const complicatedWords = currentUserWords.filter((userWord) => userWord.optional.isDifficult)
-          for (let userWord of complicatedWords) {
-            const word = await learWordAPI.getWord(userWord.wordId!);
-            
-            if (word) {
-              complicatedUserWords.push(word);
-            }
+              
+        const complicatedUserWords: IWord[] = [];
+        const complicatedWords = currentUserWords.filter((userWord) => userWord.optional.isDifficult)
+        for (let userWord of complicatedWords) {
+          const word = await learWordAPI.getWord(userWord.wordId!);
+          
+          if (word) {
+            complicatedUserWords.push(word);
           }
-          return complicatedUserWords;
         }
         
-        const difficultWords = await getComplicatedWords();
-        if (!difficultWords) return;
-
-        setCurrentLevelWords(difficultWords);
+        setCurrentLevelWords(complicatedUserWords);
   
       } else {
            
@@ -85,16 +85,7 @@ const Textbook = () => {
     console.log('useEffect');
     asyncFunction();  
     audioPlayer.pause(); 
-  }, [isAuthorised, currentStatus, audioPlayer]);
-
-  // useEffect(() => {
-  //   asyncFunction();    
-  // }, [isAuthorised]);
-
-  // useEffect(() => {
-  //   asyncFunction();    
-  //   audioPlayer.pause();
-  // }, [currentStatus, audioPlayer]);
+  }, [isAuthorised, currentStatus, audioPlayer, currentUserWord, complicatedWordsAmount]);
 
   return (
     <>
@@ -102,7 +93,8 @@ const Textbook = () => {
         <div className={ styles['wrapper'] + ' textbook-wrapper' }>
           <h2 className={ styles['title'] }>Учебник</h2>
           <Levels 
-            currentStatus={ currentStatus }
+            currentStatus={ currentStatus }            
+            comlicatedWordsAmount={ complicatedWordsAmount }
             setCurrentStatus={ setCurrentStatus }
           />
           <div className={ `book-wrapper level-group-${currentStatus.currentLevel}` }>
@@ -114,19 +106,24 @@ const Textbook = () => {
                 currentStatus={ currentStatus }
                 setCurrentStatus={ setCurrentStatus }
               />
-              <SelectedCard 
-                currentWord={ currentLevelWords[currentStatus.currentCard] } 
-                //userWord={ isAuthorised ? currentUserWord : undefined }
-                userWord={ 
-                  isAuthorised 
-                    ? currentStatus.currentLevel < 6
-                      ? currentUserWords.find((word) => word.wordId === currentLevelWords[currentStatus.currentCard].id) 
-                      : undefined 
-                    : undefined
-                  }
-                audioPlayer={ audioPlayer }
-                setCurrentUserWord={ setCurrentUserWord }
-              />
+              { 
+                (currentStatus.currentLevel < 6 || (currentStatus.currentLevel === 6 && currentLevelWords.length > 0)) &&
+                  <SelectedCard 
+                    currentWord={ currentLevelWords[currentStatus.currentCard] } 
+                    //userWord={ isAuthorised ? currentUserWord : undefined }
+                    
+                    userWord={ 
+                      (isAuthorised && currentLevelWords.length > 0)
+                        ? currentStatus.currentLevel < 7
+                          ? currentUserWords.find((word) => word.wordId === currentLevelWords[currentStatus.currentCard].id) 
+                          : undefined 
+                        : undefined
+                    }
+                    currentStatus={ currentStatus }
+                    audioPlayer={ audioPlayer }
+                    setCurrentUserWord={ setCurrentUserWord }
+                  />
+              }
             </div>
             {
               currentStatus.currentLevel !== 6 &&

@@ -5,10 +5,11 @@ import styles from './levels.module.css';
 
 type Props = {
   currentStatus: {currentLevel: number, currentCard: number, currentPage: number}
+  comlicatedWordsAmount: number;
   setCurrentStatus: (status: {currentLevel: number, currentCard: number, currentPage: number}) => void;
 }
 
-const Levels: React.FC<Props> = ({ currentStatus, setCurrentStatus }) => {
+const Levels: React.FC<Props> = ({ currentStatus, comlicatedWordsAmount, setCurrentStatus }) => {
   const { isAuthorised } = useContext(AuthorisationContext);
 
   const handleLevelClick = (levelId: number, event: MouseEvent) => {
@@ -51,7 +52,7 @@ const Levels: React.FC<Props> = ({ currentStatus, setCurrentStatus }) => {
             key='D'
           >
             <div className={ styles['level-name'] + ' level-complicated-name' }>Сложные слова</div>
-            <div className={ styles['level-counter'] }>(0)</div>
+            <div className={ styles['level-counter'] }>({ comlicatedWordsAmount })</div>
             <div className={ styles['arrow'] }></div>
           </div>
         </>

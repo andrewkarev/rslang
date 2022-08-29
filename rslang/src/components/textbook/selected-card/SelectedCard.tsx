@@ -9,11 +9,12 @@ import IUserWord from '../../../types/services-interfaces/IUserWord';
 type Props = {
   currentWord: IWord;
   userWord?: IUserWord;
+  currentStatus: {currentLevel: number, currentCard: number, currentPage: number};
   audioPlayer: HTMLAudioElement;
   setCurrentUserWord: (userWord: IUserWord) => void;
 }
 
-const SelectedCard: React.FC<Props> = ({ currentWord, userWord, audioPlayer }) => {
+const SelectedCard: React.FC<Props> = ({ currentWord, userWord, currentStatus, audioPlayer, setCurrentUserWord }) => {
   const ROOT_URL = 'https://rslangappteam102.herokuapp.com/';
 
   const { isAuthorised } = useContext(AuthorisationContext);
@@ -61,7 +62,7 @@ const SelectedCard: React.FC<Props> = ({ currentWord, userWord, audioPlayer }) =
       );
     }
     
-    //setCurrentUserWord({id: userId, wordId: currentWord.id, ...word});
+    setCurrentUserWord({id: userId, wordId: currentWord.id, ...word});
   }
 
   const handlerComplicatedBtnClick = async () => {
@@ -217,6 +218,15 @@ const SelectedCard: React.FC<Props> = ({ currentWord, userWord, audioPlayer }) =
               </>
             }
             {
+              userWord?.optional.isDifficult && currentStatus.currentLevel === 6 &&
+              <button 
+                className={ `btn ${styles['rounded-word-btn'] }` }
+                onClick={ handlerRemoveFromLearnedBtnClick }
+              >
+                Удалить из сложных
+              </button>
+            }
+            {
               !userWord?.optional.isLearned &&
               <button 
                 className={ `btn ${styles['rounded-word-btn'] }` }
@@ -234,7 +244,6 @@ const SelectedCard: React.FC<Props> = ({ currentWord, userWord, audioPlayer }) =
                 Удалить из изученных
               </button>
             } 
-            
           </div>
           
         }

@@ -1,8 +1,8 @@
 .selected-card {
-  width: 600px;
-  min-width: 400px;
+  width: 400px;
   border-radius: 10px;
   align-self: flex-start;
+  flex-shrink: 0;
   overflow: hidden;
   background-color: #F3F2F1;
 }
