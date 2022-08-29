@@ -272,19 +272,34 @@ const SelectedCard: React.FC<Props> = ({ currentWord, userWord, currentStatus, a
           </p>
         </div>
         
-        <div className={ styles['in-games'] }>
-          <h3 className={ styles['title'] }>Встречалось в играх</h3>
-          <div className={ styles['results'] }>
-            <div className={ styles['game'] }>
-              <h4 className={ styles['game-name'] }>Спринт</h4>
-              <p className={ styles['result'] }>0</p>
+        {
+          isAuthorised &&
+            <div className={ styles['in-games'] }>
+              <h3 className={ styles['title'] }>Встречалось в играх</h3>
+              <div className={ styles['results'] }>
+                <div className={ styles['game'] }>
+                  <h4 className={ styles['game-name'] }>Спринт</h4>
+                  <p className={ styles['result'] }>
+                    { 
+                      userWord 
+                        ? `${userWord.optional.games.sprint.correctAnswers} из ${userWord.optional.games.sprint.answersAtAll}` 
+                        : '0 из 0' 
+                    }
+                  </p>
+                </div>
+                <div className={ styles['game'] }>
+                  <h4 className={ styles['game-name'] }>Аулио-вызов</h4>
+                  <p className={ styles['result'] }>
+                    { 
+                      userWord 
+                        ? `${userWord.optional.games.audioCall.correctAnswers} из ${userWord.optional.games.audioCall.answersAtAll}` 
+                        : '0 из 0' 
+                    }
+                  </p>
+                </div>
+              </div>
             </div>
-            <div className={ styles['game'] }>
-              <h4 className={ styles['game-name'] }>Аулио-вызов</h4>
-              <p className={ styles['result'] }>0 из 1</p>
-            </div>
-          </div>
-        </div>
+        }
       </div>
       
     </div>
