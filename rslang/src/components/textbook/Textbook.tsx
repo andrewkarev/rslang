@@ -6,7 +6,7 @@ import Pagination from './pagination/Pagination';
 import Games from './games/Games';
 import styles from './textbook.module.css';
 import IWord from '../../types/services-interfaces/IWord';
-import {learWordAPI} from '../..';
+import {learnWordAPI} from '../..';
 import { AuthorisationContext } from '../../context/AuthorisationContext';
 import IUserWord from '../../types/services-interfaces/IUserWord';
 
@@ -37,14 +37,14 @@ const Textbook = () => {
     
     const asyncFunction = async () => {
       if (isAuthorised && userId && initialLevel < 6) {
-        const data = await learWordAPI.getUserWords(userId);
+        const data = await learnWordAPI.getUserWords(userId);
 
         if (data) {
           setCurrentUserWords(data);
         }
       }
       
-      const data = await learWordAPI.getWords(initialLevel, initialPage);
+      const data = await learnWordAPI.getWords(initialLevel, initialPage);
       if (data) {
         setCurrentLevelWords(data);
       } 
@@ -62,7 +62,7 @@ const Textbook = () => {
         const complicatedUserWords: IWord[] = [];
         const complicatedWords = currentUserWords.filter((userWord) => userWord.optional.isDifficult)
         for (let userWord of complicatedWords) {
-          const word = await learWordAPI.getWord(userWord.wordId!);
+          const word = await learnWordAPI.getWord(userWord.wordId!);
           
           if (word) {
             complicatedUserWords.push(word);
@@ -73,7 +73,7 @@ const Textbook = () => {
   
       } else {
            
-        levelWords = await learWordAPI.getWords(currentStatus.currentLevel, currentStatus.currentPage);
+        levelWords = await learnWordAPI.getWords(currentStatus.currentLevel, currentStatus.currentPage);
        if (levelWords) {
           setCurrentLevelWords(levelWords);
         }
@@ -81,7 +81,7 @@ const Textbook = () => {
 
       if (isAuthorised && userId) {
 
-        const userData = await learWordAPI.getUserWords(userId);
+        const userData = await learnWordAPI.getUserWords(userId);
         if (userData) {
           setCurrentUserWords(userData);
           changeComplicatedWordsAmount(userData.filter((userWord) => userWord.optional.isDifficult).length);
