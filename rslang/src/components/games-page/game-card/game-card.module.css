@@ -70,66 +70,6 @@
   gap: 10px;
 }
 
-.level-active-a1,
-.level-active-a2,
-.level-active-b1,
-.level-active-b2,
-.level-active-c1,
-.level-active-c2,
-.level {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid transparent;
-  border-radius: 20px;
-  font-size: 18px;
-  background-color: #fff;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.level-active-a1,
-.level-active-a2,
-.level-active-b1,
-.level-active-b2,
-.level-active-c1,
-.level-active-c2 {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
-  transform: scale(1.02);
-}
-
-.level-active-a1,
-.level-a1:hover {
-  border: 2px solid #1AB69D;
-}
-
-.level-active-a2,
-.level-a2:hover {
-  border: 2px solid #189883;
-}
-
-.level-active-b1,
-.level-b1:hover {
-  border: 2px solid #F8B81F;
-}
-
-.level-active-b2,
-.level-b2:hover {
-  border: 2px solid #df9e07;
-}
-
-.level-active-c1,
-.level-c1:hover {
-  border: 2px solid #FE595D;
-}
-
-.level-active-c2,
-.level-c2:hover {
-  border: 2px solid #fe1b1e;
-}
-
 .start-game-btn-disabled,
 .start-game-btn {
   padding: 10px 35px;
