@@ -63,13 +63,16 @@ const TextbookCards: React.FC<Props> = ({ words, currentUserWords, currentStatus
   });
 
   return (
-    <div className={ `${styles['words-grid']}` }>
-      { cardsElements }
-      { 
-        currentStatus.currentLevel === 6 && !cardsElements.length &&
-        <p className={ styles['no-words'] }>Слова не добавлены</p>
-      }
-    </div>
+    <>
+      
+      <div className={ `${styles['words-grid']}` }>
+        { cardsElements }
+        { 
+          currentStatus.currentLevel === 6 && !cardsElements.length &&
+          <p className={ styles['no-words'] }>Слова не добавлены</p>
+        }
+      </div>
+    </>
   )
 }
 

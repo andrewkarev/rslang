@@ -38,37 +38,30 @@ h2	{
 .book-page-wrapper {
   position: relative;
   display: flex;
-  padding: 15px;
   justify-content: space-between;
   margin-bottom: 20px;
   min-height: 800px;
   border: 2px solid transparent;
+  
 }
 
 .a-level-group {
   display: block;
 }
 
-.learned {
-  padding-bottom: 45px;
-  border: 2px solid #e8e6e3;
-  border-radius: 10px;
+:global(.learned) {
+  filter: grayscale() opacity(0.6);
 }
-
 .learned-message {
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
   display: none;
 }
 
-.learned .learned-message {
+:global(.learned) .learned-message {
   position: absolute;
-  bottom: 5px;
-  left: 15px;
+  top: -43px;
+  right: 0;
   display: block;
+  font-size: 22px;
   font-style: italic;
-  text-decoration: underline;
-  font-weight: bold;
+  color: black;
 }
-

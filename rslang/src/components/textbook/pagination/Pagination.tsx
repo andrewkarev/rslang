@@ -43,7 +43,7 @@ const Pagination: React.FC<Props> = ({ currentStatus, isLearnedPage, setCurrentS
         className={ `btn ${styles['round-btn']} ${(page === currentPage + 1 ? styles['active'] : '')} ${isLearnedPage ? styles['learned'] : ''}`} 
         disabled={ page === '...' ? true : false}
         key={ 'page-' + index }
-        title={ `${isLearnedPage ? 'Страница изучена' : ''}` }
+        title={ `${page === currentPage + 1 && isLearnedPage ? 'Страница изучена' : ''}` }
         onClick={ handlePageClick.bind(null, Number(page) - 1) }
       >
           { page }

@@ -119,8 +119,12 @@ const Textbook = () => {
             setCurrentStatus={ setCurrentStatus }
           />
           <div className={ `book-wrapper level-group-${currentStatus.currentLevel}` }>
-            <h2 className={ styles['title'] }>Слова</h2>
-            <div className={ `${styles['book-page-wrapper']}  ${isLearnedPage ? styles['learned'] : ''}` }>
+            <h2 className={ styles['title'] }>
+              Слова
+            </h2>
+            <div className={ `${styles['book-page-wrapper']}  ${isLearnedPage ? 'learned' : ''}` }>
+              
+              <p className={ styles['learned-message'] }>* все слова на данной странице изучены *</p>
               <TextbookCards 
                 words={ currentLevelWords } 
                 currentUserWords={ currentUserWords }
@@ -146,7 +150,7 @@ const Textbook = () => {
                     setCurrentUserWord={ setCurrentUserWord }
                   />
               }
-              <p className={ styles['learned-message'] }>* Все слова на данной странице изучены *</p>
+              
             </div>
             {
               currentStatus.currentLevel !== 6 &&
