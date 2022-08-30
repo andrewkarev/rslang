@@ -52,3 +52,8 @@
 :global(.level-group-5) .round-btn.active {
   background-color: #fe1b1e;
 }
+
+.round-btn.active.learned {
+  border: 1px solid #808080;
+  outline: 3px solid #D6D3D3;
+}

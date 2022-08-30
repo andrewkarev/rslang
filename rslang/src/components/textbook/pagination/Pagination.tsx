@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import styles from './pagination.module.css';
 
 type Props = {
-  currentStatus: {currentLevel: number, currentCard: number, currentPage: number}
+  currentStatus: {currentLevel: number, currentCard: number, currentPage: number};
+  isLearnedPage: boolean;
   setCurrentStatus: (status: {currentLevel: number, currentCard: number, currentPage: number}) => void;
 }
 
-const Pagination: React.FC<Props> = ({ currentStatus, setCurrentStatus }) => {
+const Pagination: React.FC<Props> = ({ currentStatus, isLearnedPage, setCurrentStatus }) => {
   const MAX_PAGE = 30;
   // new
   const currentPage = currentStatus.currentPage;
@@ -39,9 +40,10 @@ const Pagination: React.FC<Props> = ({ currentStatus, setCurrentStatus }) => {
   const pageElements = pagesData.map((page, index) => {
     return (
       <button 
-        className={ `btn ${styles['round-btn']} ${(page === currentPage + 1 ? styles['active'] : '')}`} 
+        className={ `btn ${styles['round-btn']} ${(page === currentPage + 1 ? styles['active'] : '')} ${isLearnedPage ? styles['learned'] : ''}`} 
         disabled={ page === '...' ? true : false}
         key={ 'page-' + index }
+        title={ `${isLearnedPage ? 'Страница изучена' : ''}` }
         onClick={ handlePageClick.bind(null, Number(page) - 1) }
       >
           { page }

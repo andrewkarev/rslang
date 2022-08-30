@@ -36,12 +36,39 @@ h2	{
 }
 
 .book-page-wrapper {
+  position: relative;
   display: flex;
+  padding: 15px;
   justify-content: space-between;
   margin-bottom: 20px;
   min-height: 800px;
+  border: 2px solid transparent;
 }
 
 .a-level-group {
   display: block;
 }
+
+.learned {
+  
+  border: 2px solid #e8e6e3;
+  border-radius: 10px;
+}
+
+.learned-message {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  display: none;
+}
+
+.learned .learned-message {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  display: block;
+  font-style: italic;
+  text-decoration: underline;
+  font-weight: bold;
+}
+

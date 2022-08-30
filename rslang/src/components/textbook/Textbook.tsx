@@ -25,6 +25,7 @@ const Textbook = () => {
   const [currentUserWords, setCurrentUserWords] = useState<IUserWord[] | []>([]);
   const [currentUserWord, setCurrentUserWord] = useState<IUserWord | undefined>();
   const [complicatedWordsAmount, changeComplicatedWordsAmount] = useState(0);
+  const [isLearnedPage, setLearnedPage] = useState(false);
   
   const [audioPlayer] = useState(new Audio());
 
@@ -49,16 +50,8 @@ const Textbook = () => {
 
   useEffect(() => {
     const asyncFunction = async () => {
-      // if (isAuthorised && userId && currentStatus.currentLevel < 6) {
-      if (isAuthorised && userId ) {
-        
-        const data = await learWordAPI.getUserWords(userId);
-        if (data) {
-          setCurrentUserWords(data);
-          changeComplicatedWordsAmount(data.filter((userWord) => userWord.optional.isDifficult).length);
-        }
-      }
       
+      let levelWords: IWord[] | void;
       
       if (isAuthorised && userId && currentStatus.currentLevel === 6) {
               
@@ -76,10 +69,38 @@ const Textbook = () => {
   
       } else {
            
-        const data = await learWordAPI.getWords(currentStatus.currentLevel, currentStatus.currentPage);
-        if (data) {
-          setCurrentLevelWords(data);
-        } 
+        //const data = await learWordAPI.getWords(currentStatus.currentLevel, currentStatus.currentPage);
+        levelWords = await learWordAPI.getWords(currentStatus.currentLevel, currentStatus.currentPage);
+        // if (data) {
+        //   setCurrentLevelWords(data);
+        // } 
+        if (levelWords) {
+          setCurrentLevelWords(levelWords);
+        }
+      }
+
+      // if (isAuthorised && userId && currentStatus.currentLevel < 6) {
+      if (isAuthorised && userId) {
+
+        const userData = await learWordAPI.getUserWords(userId);
+        if (userData) {
+          setCurrentUserWords(userData);
+          changeComplicatedWordsAmount(userData.filter((userWord) => userWord.optional.isDifficult).length);
+
+          // console.log(levelWords);
+          if (levelWords && currentStatus.currentLevel < 6) {
+            const pageUserData = levelWords.filter((item) => 
+              userData.find((userItem) => 
+                userItem.wordId === item.id && (userItem.optional.isDifficult || userItem.optional.isLearned))
+            )
+            console.log(pageUserData);
+            if (pageUserData.length === 20) {
+              setLearnedPage(true);
+            } else {
+              setLearnedPage(false);
+            }
+          }
+        }
       }
     }
     console.log('useEffect');
@@ -94,16 +115,17 @@ const Textbook = () => {
           <h2 className={ styles['title'] }>Учебник</h2>
           <Levels 
             currentStatus={ currentStatus }            
-            comlicatedWordsAmount={ complicatedWordsAmount }
+            complicatedWordsAmount={ complicatedWordsAmount }
             setCurrentStatus={ setCurrentStatus }
           />
           <div className={ `book-wrapper level-group-${currentStatus.currentLevel}` }>
             <h2 className={ styles['title'] }>Слова</h2>
-            <div className={ styles['book-page-wrapper'] }>
+            <div className={ `${styles['book-page-wrapper']}  ${isLearnedPage ? styles['learned'] : ''}` }>
               <TextbookCards 
                 words={ currentLevelWords } 
                 currentUserWords={ currentUserWords }
                 currentStatus={ currentStatus }
+                //isLearnedPage={ isLearnedPage }
                 setCurrentStatus={ setCurrentStatus }
               />
               { 
@@ -124,12 +146,14 @@ const Textbook = () => {
                     setCurrentUserWord={ setCurrentUserWord }
                   />
               }
+              <p className={ styles['learned-message'] }>* Все слова на данной странице изучены *</p>
             </div>
             {
               currentStatus.currentLevel !== 6 &&
               <Pagination
-                currentStatus={currentStatus}
-                setCurrentStatus={setCurrentStatus}
+                currentStatus={ currentStatus }
+                isLearnedPage={isLearnedPage}
+                setCurrentStatus={ setCurrentStatus }
               />
             }
             

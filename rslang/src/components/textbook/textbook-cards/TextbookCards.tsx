@@ -8,6 +8,7 @@ type Props = {
   words: IWord[];
   currentUserWords: IUserWord[];
   currentStatus: {currentLevel: number, currentCard: number, currentPage: number};
+  //isLearnedPage: boolean;
   setCurrentStatus: (status: {currentLevel: number, currentCard: number, currentPage: number}) => void;
 }
 
@@ -22,7 +23,7 @@ const TextbookCards: React.FC<Props> = ({ words, currentUserWords, currentStatus
     localStorage.setItem('card', `${card}`);
   }
 
-  const checkOnComplecated = (wordId: string) => {
+  const checkOnComplicated = (wordId: string) => {
     if (currentUserWords) {
       const isUserWordComplicated = 
         currentUserWords.find((word) => word.wordId === wordId && word.optional.isDifficult);
@@ -54,7 +55,7 @@ const TextbookCards: React.FC<Props> = ({ words, currentUserWords, currentStatus
           { words[index].wordTranslate }
         </p>
         <div className={ styles['status'] }>
-          { isAuthorised && checkOnComplecated(words[index].id) ? 'сложное' : ''}
+          { isAuthorised && checkOnComplicated(words[index].id) ? 'сложное' : ''}
           { isAuthorised && checkOnLearned(words[index].id) ? 'изучено' : ''}
         </div>
       </div>
@@ -62,10 +63,10 @@ const TextbookCards: React.FC<Props> = ({ words, currentUserWords, currentStatus
   });
 
   return (
-    <div className={ styles['words-grid'] }>
+    <div className={ `${styles['words-grid']}` }>
       { cardsElements }
       { 
-        !cardsElements.length &&
+        currentStatus.currentLevel === 6 && !cardsElements.length &&
         <p className={ styles['no-words'] }>Слова не добавлены</p>
       }
     </div>
