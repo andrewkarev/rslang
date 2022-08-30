@@ -50,7 +50,7 @@ h2	{
 }
 
 .learned {
-  
+  padding-bottom: 45px;
   border: 2px solid #e8e6e3;
   border-radius: 10px;
 }
@@ -64,7 +64,7 @@ h2	{
 
 .learned .learned-message {
   position: absolute;
-  bottom: 10px;
+  bottom: 5px;
   left: 15px;
   display: block;
   font-style: italic;

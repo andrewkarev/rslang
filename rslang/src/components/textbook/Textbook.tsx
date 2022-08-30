@@ -158,7 +158,9 @@ const Textbook = () => {
             }
             
           </div>
-          <Games />
+          <Games 
+            isLearnedPage={ isLearnedPage }
+          />
         </div>
       </div>
     </>

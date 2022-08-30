@@ -1,11 +1,32 @@
 @import './../textbook-cards/textbook-cards.module.css';
 
 .words-grid {
-  /* margin-right: 15px; */
+  margin-right: 15px;
   display: flex;
   flex-wrap: wrap;
   align-self: flex-start;
   gap: 55px 15px;
+  max-height: 800px;
+  overflow-y: auto;
+}
+
+.words-grid::-webkit-scrollbar {
+  width: 10px;
+}
+
+.words-grid::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background: #e8e6e3;
+}
+
+.words-grid::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #888;
+}
+
+/* Handle on hover */
+.words-grid::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 

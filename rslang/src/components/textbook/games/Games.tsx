@@ -5,34 +5,34 @@ import audioCallImage from './../../../assets/images/audio-call.png';
 import gamesData from './../../../data/games-data';
 import Game from './game/Game';
 
-const Games = () => {
-  // const gamesData = [
-  //   { 
-  //     name: 'Спринт', 
-  //     description: 'Спринт - тренировка на скорость, В Вашем распоряжении 30 секунд, за которые необходимо угадать как можно больше слов', 
-  //     image: sprintImage 
-  //   },
-  //   { 
-  //     name: 'Аудио-вызов', 
-  //     description: 'Аудио-вызов - тренировка на слух: улучшает восприятие слов, используя для этого такой метод обучения как аудирование', 
-  //     image: audioCallImage 
-  //   }
-  // ];
+type Props = {
+  isLearnedPage: boolean;
+}
+
+const Games: React.FC<Props> = ({ isLearnedPage }) => {
 
   const gameElements = gamesData.map((game, index) => {
     return (
-      <Game name={ game.name } 
-            description={ game.description } 
-            image={ game.image } 
-            key={ 'game' + index }
+      <Game 
+        name={ game.name } 
+        description={ game.description } 
+        image={ game.image } 
+        key={ 'game' + index }
+        isLearnedPage={ isLearnedPage }
       />
     )
   });
 
   return (
-    <div className={ styles['games'] }>
+    <div className={ `${styles['games']}` }>
       <h2 className={ styles['title'] }>Игры</h2>
-      <p className={ styles['description'] }>Закрепите слова с текущей страницы при помощи игр</p>
+      <p className={ styles['description'] }>
+        {
+          !isLearnedPage 
+            ? 'Закрепите слова с текущей страницы при помощи игр'
+            : 'Игры для данной страницы не доступны'
+        }
+      </p>
       <div className={ styles['games-wrapper'] }>
         { gameElements }
       </div>
