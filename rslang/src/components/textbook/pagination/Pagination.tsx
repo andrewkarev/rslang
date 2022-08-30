@@ -54,9 +54,21 @@ const Pagination: React.FC<Props> = ({ currentStatus, isLearnedPage, setCurrentS
   return (
     <div className={ styles['pagination'] }>
       <div className={ styles['pagination-wrapper'] }>
-        <button className={'btn ' + styles['round-btn'] }>&#60;</button>
+        <button 
+          className={'btn ' + styles['round-btn'] }
+          disabled={ !currentStatus.currentPage ? true : false }
+          onClick={ handlePageClick.bind(null, currentStatus.currentPage - 1) }
+        >
+          &#60;
+        </button>
         { pageElements }
-        <button className={'btn ' + styles['round-btn'] }>&#62;</button>
+        <button 
+          className={'btn ' + styles['round-btn'] }
+          disabled={ currentStatus.currentPage === MAX_PAGE - 1 ? true : false }
+          onClick={ handlePageClick.bind(null, currentStatus.currentPage + 1) }
+        >
+          &#62;
+        </button>
       </div>
     </div>
   )
