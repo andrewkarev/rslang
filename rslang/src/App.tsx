@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 // import logo from './logo.svg';
 import './App.css';
@@ -31,6 +30,7 @@ function App() {
         <Route path="textbook" element={<Textbook />} />
         <Route path="games" element={<GamesPage />} />
         {/* <Route path="statistics" element={< />} /> */}
+        {/* <Route path="sprint" element={<SprintGame words={words} />} /> */}
       </Routes>
     </>
   );
