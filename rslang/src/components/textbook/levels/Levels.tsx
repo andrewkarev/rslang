@@ -13,7 +13,6 @@ const Levels: React.FC<Props> = ({ currentStatus, complicatedWordsAmount, setCur
   const { isAuthorised } = useContext(AuthorisationContext);
 
   const handleLevelClick = (levelId: number, event: MouseEvent) => {
-    
     setCurrentStatus({ currentLevel: levelId, currentPage: 0, currentCard: 0 });
     
     localStorage.setItem('level', String(levelId));

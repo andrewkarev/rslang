@@ -8,7 +8,6 @@ type Props = {
   words: IWord[];
   currentUserWords: IUserWord[];
   currentStatus: {currentLevel: number, currentCard: number, currentPage: number};
-  //isLearnedPage: boolean;
   setCurrentStatus: (status: {currentLevel: number, currentCard: number, currentPage: number}) => void;
 }
 

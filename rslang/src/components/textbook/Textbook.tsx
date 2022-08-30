@@ -20,7 +20,11 @@ const Textbook = () => {
   const initialCard = Number(localStorage.getItem('card')) || 0;
   const initialPage = Number(localStorage.getItem('page')) || 0;
   
-  const [currentStatus, setCurrentStatus] = useState({currentLevel: initialLevel, currentCard: initialCard, currentPage: initialPage});
+  const [currentStatus, setCurrentStatus] = useState({
+    currentLevel: initialLevel, 
+    currentCard: initialCard, 
+    currentPage: initialPage
+  });
   const [currentLevelWords, setCurrentLevelWords] = useState<IWord[] | []>([]);
   const [currentUserWords, setCurrentUserWords] = useState<IUserWord[] | []>([]);
   const [currentUserWord, setCurrentUserWord] = useState<IUserWord | undefined>();
@@ -69,17 +73,12 @@ const Textbook = () => {
   
       } else {
            
-        //const data = await learWordAPI.getWords(currentStatus.currentLevel, currentStatus.currentPage);
         levelWords = await learWordAPI.getWords(currentStatus.currentLevel, currentStatus.currentPage);
-        // if (data) {
-        //   setCurrentLevelWords(data);
-        // } 
-        if (levelWords) {
+       if (levelWords) {
           setCurrentLevelWords(levelWords);
         }
       }
 
-      // if (isAuthorised && userId && currentStatus.currentLevel < 6) {
       if (isAuthorised && userId) {
 
         const userData = await learWordAPI.getUserWords(userId);
@@ -87,7 +86,6 @@ const Textbook = () => {
           setCurrentUserWords(userData);
           changeComplicatedWordsAmount(userData.filter((userWord) => userWord.optional.isDifficult).length);
 
-          // console.log(levelWords);
           if (levelWords && currentStatus.currentLevel < 6) {
             const pageUserData = levelWords.filter((item) => 
               userData.find((userItem) => 
@@ -103,7 +101,7 @@ const Textbook = () => {
         }
       }
     }
-    console.log('useEffect');
+    
     asyncFunction();  
     audioPlayer.pause(); 
   }, [isAuthorised, currentStatus, audioPlayer, currentUserWord, complicatedWordsAmount]);
@@ -129,15 +127,12 @@ const Textbook = () => {
                 words={ currentLevelWords } 
                 currentUserWords={ currentUserWords }
                 currentStatus={ currentStatus }
-                //isLearnedPage={ isLearnedPage }
                 setCurrentStatus={ setCurrentStatus }
               />
               { 
                 (currentStatus.currentLevel < 6 || (currentStatus.currentLevel === 6 && currentLevelWords.length > 0)) &&
                   <SelectedCard 
                     currentWord={ currentLevelWords[currentStatus.currentCard] } 
-                    //userWord={ isAuthorised ? currentUserWord : undefined }
-                    
                     userWord={ 
                       (isAuthorised && currentLevelWords.length > 0)
                         ? currentStatus.currentLevel < 7

@@ -9,7 +9,6 @@ type Props = {
 
 const Pagination: React.FC<Props> = ({ currentStatus, isLearnedPage, setCurrentStatus }) => {
   const MAX_PAGE = 30;
-  // new
   const currentPage = currentStatus.currentPage;
  
   const pagesData = new Array(7).fill(0).map((page, index) => {
