@@ -52,6 +52,7 @@ h2	{
 :global(.learned) {
   filter: grayscale() opacity(0.6);
 }
+
 .learned-message {
   display: none;
 }
@@ -63,5 +64,5 @@ h2	{
   display: block;
   font-size: 22px;
   font-style: italic;
-  color: black;
+  color: #000;
 }
