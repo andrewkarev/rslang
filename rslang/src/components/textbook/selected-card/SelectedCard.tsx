@@ -3,7 +3,7 @@ import styles from './selected-card.module.css';
 import audio from './../../../assets/icons/audio.png';
 import IWord from '../../../types/services-interfaces/IWord';
 import { AuthorisationContext } from '../../../context/AuthorisationContext';
-import { learWordAPI } from '../../..';
+import { learnWordAPI } from '../../..';
 import IUserWord from '../../../types/services-interfaces/IUserWord';
 
 type Props = {
@@ -49,13 +49,13 @@ const SelectedCard: React.FC<Props> = ({ currentWord, userWord, currentStatus, a
 
   const updateDatabaseData = async (userId: string, word: IUserWord) => {
     if (!userWord) {
-      await learWordAPI.createUserWord(
+      await learnWordAPI.createUserWord(
         userId, 
         currentWord.id, 
         word
       );
     } else {
-      await learWordAPI.updateUserWord(
+      await learnWordAPI.updateUserWord(
         userId, 
         currentWord.id, 
         word
