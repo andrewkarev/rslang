@@ -8,7 +8,7 @@ import AnswersIndicator from './indicator/AnswersIndicator';
 import useSound from 'use-sound';
 import successSound from '../../../../assets/sounds/sound-of-success.ogg';
 import failureSound from '../../../../assets/sounds/sound-of-failure.ogg';
-import updateUsersWords from '../../../../services/updateUserWords';
+import updateUsersWords from '../../../../services/update-user-words';
 import { AuthorisationContext } from '../../../../context/AuthorisationContext';
 
 interface SprintGameProps {
