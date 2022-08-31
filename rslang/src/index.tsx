@@ -7,20 +7,22 @@ import { BrowserRouter } from 'react-router-dom';
 import { AuthorisationState } from './context/AuthorisationContext';
 import LearnWordsApi from './services/learn-words-api';
 
-const learWordAPI = new LearnWordsApi();
+const learnWordAPI = new LearnWordsApi();
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
+  <>
     <BrowserRouter>
       <AuthorisationState>
         <App />
       </AuthorisationState>
     </BrowserRouter>
-  </React.StrictMode>
+  </>
+  //</React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
@@ -28,4 +30,4 @@ root.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 
-export { learWordAPI };
+export { learnWordAPI };

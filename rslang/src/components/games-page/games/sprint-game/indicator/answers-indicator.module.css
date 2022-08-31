@@ -1,0 +1,32 @@
+.right-answers-indicator {
+  display: flex;
+  gap: 15px;
+}
+
+
+.counter-mark {
+  position: relative;
+  width: 30px;
+  height: 30px;
+}
+
+.counter-check-mark {
+  width: 30px;
+  height: 30px;
+  background-image: url(../../../../../assets/icons/check.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.counter-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(242, 242, 242, 0.8);
+}
+
+.counter-shadow-disabled {
+  background-color: transparent;
+}

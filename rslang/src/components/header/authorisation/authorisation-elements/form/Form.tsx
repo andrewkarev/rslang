@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { learWordAPI } from '../../../../..';
+import { learnWordAPI } from '../../../../..';
 import { AuthorisationContext } from '../../../../../context/AuthorisationContext';
 import styles from './form.module.css';
 import WarningMessage from './warning-message/WarningMessage';
@@ -65,10 +65,10 @@ const Form: React.FunctionComponent<FormProps> = (props) => {
           return;
         }
 
-        await learWordAPI.createUser({ name, email, password });
+        await learnWordAPI.createUser({ name, email, password });
       }
 
-      await learWordAPI.signIn({ email, password });
+      await learnWordAPI.signIn({ email, password });
     } catch (error) {
       if (!(error instanceof Error)) return;
 
