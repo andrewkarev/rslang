@@ -10,6 +10,11 @@ import GameResults from './games/game-results/GameResults';
 import getRandomPages from '../../services/getRandomPages';
 
 const GamesPage = () => {
+  const sprintlongestSreak = useRef<{ best: number, current: number }>({
+    best: 0,
+    current: 0,
+  });
+
   const [choosenGame, setChoosenGame] = useState('');
   const [chosenGameCard, setChosenGameCard] = useState({
     sprint: false, audioCall: false,
@@ -84,6 +89,7 @@ const GamesPage = () => {
           closeGame={handleGameChoice}
           setLastGameResults={setLastGameResults}
           setIsResultsVisible={setIsResultsVisible}
+          longestSreak={sprintlongestSreak}
         />
         : ''}
       {isResultsVisible && <GameResults
@@ -91,6 +97,7 @@ const GamesPage = () => {
         setIsResultsVisible={setIsResultsVisible}
         choosenGame={choosenGame}
         handleGameChoice={handleGameChoice}
+        sprintlongestSreak={sprintlongestSreak}
       />}
     </>
   );
