@@ -91,7 +91,7 @@ const Textbook = () => {
               userData.find((userItem) => 
                 userItem.wordId === item.id && (userItem.optional.isDifficult || userItem.optional.isLearned))
             )
-            console.log(pageUserData);
+            
             if (pageUserData.length === 20) {
               setLearnedPage(true);
             } else {
@@ -151,7 +151,7 @@ const Textbook = () => {
               currentStatus.currentLevel !== 6 &&
               <Pagination
                 currentStatus={ currentStatus }
-                isLearnedPage={isLearnedPage}
+                isLearnedPage={ isLearnedPage }
                 setCurrentStatus={ setCurrentStatus }
               />
             }
@@ -159,6 +159,9 @@ const Textbook = () => {
           </div>
           <Games 
             isLearnedPage={ isLearnedPage }
+            currentLevelWords={ currentLevelWords }
+            currentUserWords={ currentUserWords }
+            currentStatus={ currentStatus }
           />
         </div>
       </div>
