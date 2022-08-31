@@ -2,17 +2,18 @@ import React from 'react';
 import styles from './game.module.css';
 
 type Props = {
-  name: string,
-  description: string,
-  image: string
+  name: string;
+  description: string
+  image: string;
+  isLearnedPage: boolean;
 };
 
-const Game = (props: Props) => {
+const Game: React.FC<Props> = ({ name, description, image, isLearnedPage }) => {
   return (
-    <div className={ styles['game'] }>
-      <h3 className={ styles['game-name'] }>{ props.name }</h3>
-      <div className={ styles['game-description'] }>{ props.description }</div>
-      <img className={ styles['game-img'] } src={ props.image } alt="game img" />
+    <div className={ `${styles['game']} ${isLearnedPage ? styles['disabled'] : ''}` }>
+      <h3 className={ styles['game-name'] }>{ name }</h3>
+      <div className={ styles['game-description'] }>{ description }</div>
+      <img className={ styles['game-img'] } src={ image } alt="game img" />
     </div>
   );
 }

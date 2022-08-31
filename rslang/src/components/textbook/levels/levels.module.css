@@ -24,6 +24,7 @@
   color: #D6D3D3;
   background-color: #F3F2F1;
   transition: 0.3s;
+  cursor: pointer;
 }
 
 .separator {
@@ -57,36 +58,44 @@
   background-color: #e8e6e3;
 }
 
-.level:hover {
+.level:hover,
+.level.active {
   border-color: #dcd9d6;
   color: #292623;
 }
 
-.level:hover:nth-child(1) .arrow {
+.level:hover:nth-child(1) .arrow,
+.level.active:nth-child(1) .arrow {
   background-color: #1AB69D;
 }
 
-.level:hover:nth-child(2) .arrow {
+.level:hover:nth-child(2) .arrow,
+.level.active:nth-child(2) .arrow {
   background-color: #189883;
 }
 
-.level:hover:nth-child(3) .arrow {
+.level:hover:nth-child(3) .arrow,
+.level.active:nth-child(3) .arrow {
   background-color: #F8B81F;
 }
 
-.level:hover:nth-child(4) .arrow {
+.level:hover:nth-child(4) .arrow,
+.level.active:nth-child(4) .arrow {
   background-color: #df9e07;
 }
 
-.level:hover:nth-child(5) .arrow {
+.level:hover:nth-child(5) .arrow,
+.level.active:nth-child(5) .arrow {
   background-color: #FE595D;
 }
 
-.level:hover:nth-child(6) .arrow {
+.level:hover:nth-child(6) .arrow,
+.level.active:nth-child(6) .arrow {
   background-color: #fe1b1e;
 }
 
-.level:hover:nth-child(8) .arrow {
+.level:hover:nth-child(8) .arrow, 
+.level.active:nth-child(8) .arrow {
   background-color: #808080;
 }
 
