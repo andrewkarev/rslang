@@ -73,12 +73,8 @@ class LearnWordsApi {
       };
 
       if (error.message === '417' || error.message === '404') {
-        const isWords = url.includes('words');
-
-        if (isWords) {
-          error.message === '417'
-            ? console.warn('A word with the same name already exists.')
-            : console.warn('User\'s word not found.');
+        if (url.includes('words') && error.message === '417') {
+          console.warn('A word with the same name already exists.')
           return;
         }
 
@@ -164,6 +160,7 @@ class LearnWordsApi {
     : Promise<IUserWord | void> {
     const queryURL = `${this.usersPath}/${id}/words/${wordId}`;
     const stringifiedBody = JSON.stringify(body);
+
     return await this.createRequest(queryURL, {
       method: 'POST',
       body: `${stringifiedBody}`,
@@ -188,6 +185,7 @@ class LearnWordsApi {
     : Promise<IUserWord | void> {
     const queryURL = `${this.usersPath}/${id}/words/${wordId}`;
     const stringifiedBody = JSON.stringify(body);
+
     return await this.createRequest(queryURL, {
       method: 'PUT',
       body: `${stringifiedBody}`,
