@@ -17,19 +17,19 @@
   background: url('./../../../assets/images/sprint.png') no-repeat #F3F2F1;
   background-size: 270px;
   background-position: right;
-  animation: fade-right 1s 0.3s;
+  animation: fade-right 0.8s ease-out;
 }
 
 .game:last-child {
   background: url('./../../../assets/images/audio-call.png') no-repeat #F3F2F1;
   background-size: 270px;
   background-position: right;
-  animation: fade-left 1s 0.3s;
+  animation: fade-left 0.8s ease-out;
 }
 
 @keyframes fade-right {
   0% {
-    transform: translateX(90%);
+    transform: translateX(200%);
   }
 
   100% {
@@ -39,7 +39,7 @@
 
 @keyframes fade-left {
   0% {
-    transform: translateX(-90%);
+    transform: translateX(-200%);
   }
 
   100% {
