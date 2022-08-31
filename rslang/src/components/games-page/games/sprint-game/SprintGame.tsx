@@ -8,6 +8,7 @@ import AnswersIndicator from './indicator/AnswersIndicator';
 import useSound from 'use-sound';
 import successSound from '../../../../assets/sounds/sound-of-success.ogg';
 import failureSound from '../../../../assets/sounds/sound-of-failure.ogg';
+import updateUsersWords from '../../../../services/updateUserWords';
 
 interface SprintGameProps {
   words: IWord[],
@@ -17,6 +18,10 @@ interface SprintGameProps {
     isCorrect: boolean;
   }[]>) => void,
   setIsResultsVisible: (value: React.SetStateAction<boolean>) => void,
+  longestSreak: React.MutableRefObject<{
+    best: number;
+    current: number;
+  }>,
 }
 
 const SprintGame: React.FunctionComponent<SprintGameProps> = (props) => {
@@ -83,7 +88,6 @@ const SprintGame: React.FunctionComponent<SprintGameProps> = (props) => {
     if (wordsInGame.current.length >= props.words.length) {
       props.setLastGameResults(wordsInGame.current);
       props.setIsResultsVisible(true);
-      props.closeGame('');
     } else {
       setScoreValue();
       setPairOfWords();
@@ -103,19 +107,22 @@ const SprintGame: React.FunctionComponent<SprintGameProps> = (props) => {
     if (answerStatus) {
       !isMuted && onSuccess();
       rightAnswersStreak.current++;
+      props.longestSreak.current.current++;
     } else {
       !isMuted && onFailure();
       rightAnswersStreak.current = 0;
+      props.longestSreak.current.best = Math.max(props.longestSreak.current.best, props.longestSreak.current.current)
+      props.longestSreak.current.current = 0;
     }
 
     updateGameStatus();
-  }, [cardInner, onFailure, onSuccess, isMuted, updateGameStatus]);
+    updateUsersWords('Спринт', newWord);
+  }, [cardInner, onFailure, onSuccess, isMuted, updateGameStatus, props.longestSreak]);
 
   useEffect(() => {
     if (!seconds) {
       props.setLastGameResults(wordsInGame.current);
       props.setIsResultsVisible(true);
-      props.closeGame('');
     }
   }, [props, seconds]);
 

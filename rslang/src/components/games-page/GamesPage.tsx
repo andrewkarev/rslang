@@ -7,30 +7,53 @@ import IWord from '../../types/services-interfaces/IWord';
 import { learnWordAPI } from '../..';
 import shuffle from '../../services/shuffle';
 import GameResults from './games/game-results/GameResults';
+import getRandomPages from '../../services/getRandomPages';
 
 const GamesPage = () => {
+  const sprintlongestSreak = useRef<{ best: number, current: number }>({
+    best: 0,
+    current: 0,
+  });
+
   const [choosenGame, setChoosenGame] = useState('');
+  const [chosenGameCard, setChosenGameCard] = useState({
+    sprint: false, audioCall: false,
+  });
 
   const handleGameChoice = (choice: string) => {
     setChoosenGame(choice);
   }
 
   const [isResultsVisible, setIsResultsVisible] = useState(false);
-  const [lastGameResults, setLastGameResults] = useState<{ word: IWord, isCorrect: boolean }[] | []>([]);
+  const [wordsGroup, setWordsGroup] = useState(0);
+  const [lastGameResults, setLastGameResults] = useState<{
+    word: IWord, isCorrect: boolean
+  }[] | []>([]);
 
   const words = useRef<IWord[] | []>([]);
 
   useEffect(() => {
     const getWords = async () => {
-      const wordsList = await learnWordAPI.getWords(0, 0);
+      const pagesToUseInGame = getRandomPages();
+      const request: Promise<IWord[] | void>[] = [];
 
-      if (wordsList) {
-        words.current = shuffle(wordsList);
+      for (let page of pagesToUseInGame) {
+        request.push(learnWordAPI.getWords(wordsGroup, page));
       }
-    }
 
+      const response = await Promise.all(request);
+      let wordsList: IWord[] = [];
+
+      for (let list of response) {
+        if (list) {
+          wordsList = wordsList.concat(list);
+        }
+      }
+
+      words.current = shuffle(wordsList);
+    }
     getWords();
-  }, []);
+  }, [wordsGroup]);
 
   const gameElements = gamesData.map((game, index) => {
     return (
@@ -39,6 +62,9 @@ const GamesPage = () => {
         description={game.description}
         key={'game' + index}
         handleGameChoice={handleGameChoice}
+        setWordsGroup={setWordsGroup}
+        chosenGameCard={chosenGameCard}
+        setChosenGameCard={setChosenGameCard}
       />
     )
   });
@@ -63,11 +89,15 @@ const GamesPage = () => {
           closeGame={handleGameChoice}
           setLastGameResults={setLastGameResults}
           setIsResultsVisible={setIsResultsVisible}
+          longestSreak={sprintlongestSreak}
         />
         : ''}
       {isResultsVisible && <GameResults
         lastGameResults={lastGameResults}
         setIsResultsVisible={setIsResultsVisible}
+        choosenGame={choosenGame}
+        handleGameChoice={handleGameChoice}
+        sprintlongestSreak={sprintlongestSreak}
       />}
     </>
   );
