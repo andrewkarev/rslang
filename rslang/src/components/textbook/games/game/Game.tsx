@@ -43,11 +43,10 @@ const Game: React.FC<Props> = (props: Props) => {
         const previousPageWords = response.filter((word) => 
           !props.currentUserWords.find((userWord) => userWord.wordId === word.id && userWord.optional.isLearned)
         );
-        //console.log(previousPageWords);
+        
         const shuffledWords = shuffle(previousPageWords);
         const required = 20 - gameWords.length;
 
-        console.log(required)
         gameWords.push(...shuffledWords.slice(0, required));
       } else {
         break;
