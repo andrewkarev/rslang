@@ -58,17 +58,21 @@ const Textbook = () => {
       
       if (isAuthorised && userId && currentStatus.currentLevel === 6) {
               
-        const complicatedUserWords: IWord[] = [];
-        const complicatedWords = currentUserWords.filter((userWord) => userWord.optional.isDifficult)
+        const complicatedUserWords: Promise<IWord | void>[] = [];
+        const complicatedWords = currentUserWords.filter((userWord) => userWord.optional.isDifficult);
+
         for (let userWord of complicatedWords) {
-          const word = await learnWordAPI.getWord(userWord.wordId!);
-          
-          if (word) {
-            complicatedUserWords.push(word);
-          }
+          complicatedUserWords.push(learnWordAPI.getWord(userWord.wordId!));
         }
-        
-        setCurrentLevelWords(complicatedUserWords);
+
+        const results = await Promise.all(complicatedUserWords);
+
+        let words: IWord[] = [];
+        for (let word of results) {
+          if (word) words.push(word);
+        }
+
+        setCurrentLevelWords(words);
   
       } else {
            
