@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import styles from './sprint-game.module.css';
 import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 import GameSettings from '../game-settings/GameSettings';
@@ -8,7 +8,8 @@ import AnswersIndicator from './indicator/AnswersIndicator';
 import useSound from 'use-sound';
 import successSound from '../../../../assets/sounds/sound-of-success.ogg';
 import failureSound from '../../../../assets/sounds/sound-of-failure.ogg';
-import updateUsersWords from '../../../../services/updateUserWords';
+import updateUsersWords from '../../../../services/update-user-words';
+import { AuthorisationContext } from '../../../../context/AuthorisationContext';
 
 interface SprintGameProps {
   words: IWord[],
@@ -25,6 +26,8 @@ interface SprintGameProps {
 }
 
 const SprintGame: React.FunctionComponent<SprintGameProps> = (props) => {
+  const { isAuthorised } = useContext(AuthorisationContext);
+
   const [seconds, setSeconds] = useState(60);
 
   const handle = useFullScreenHandle();
@@ -116,8 +119,11 @@ const SprintGame: React.FunctionComponent<SprintGameProps> = (props) => {
     }
 
     updateGameStatus();
-    updateUsersWords('Спринт', newWord);
-  }, [cardInner, onFailure, onSuccess, isMuted, updateGameStatus, props.longestSreak]);
+
+    if (isAuthorised) {
+      updateUsersWords('Спринт', newWord);
+    }
+  }, [cardInner, onFailure, onSuccess, isMuted, updateGameStatus, props.longestSreak, isAuthorised]);
 
   useEffect(() => {
     if (!seconds) {

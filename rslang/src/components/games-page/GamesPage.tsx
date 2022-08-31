@@ -7,7 +7,7 @@ import IWord from '../../types/services-interfaces/IWord';
 import { learnWordAPI } from '../..';
 import shuffle from '../../services/shuffle';
 import GameResults from './games/game-results/GameResults';
-import getRandomPages from '../../services/getRandomPages';
+import getRandomPages from '../../services/get-random-pages';
 
 const GamesPage = () => {
   const sprintlongestSreak = useRef<{ best: number, current: number }>({
