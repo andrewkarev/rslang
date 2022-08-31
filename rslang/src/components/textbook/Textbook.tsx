@@ -73,7 +73,7 @@ const Textbook = () => {
       } else {
            
         levelWords = await learnWordAPI.getWords(currentStatus.currentLevel, currentStatus.currentPage);
-       if (levelWords) {
+        if (levelWords) {
           setCurrentLevelWords(levelWords);
         }
       }
@@ -90,7 +90,7 @@ const Textbook = () => {
               userData.find((userItem) => 
                 userItem.wordId === item.id && (userItem.optional.isDifficult || userItem.optional.isLearned))
             )
-            console.log(pageUserData);
+            
             if (pageUserData.length === 20) {
               setLearnedPage(true);
             } else {
