@@ -27,9 +27,13 @@ const Game: React.FC<Props> = (props: Props) => {
   const getWords = async () => {
     if (!isAuthorised) return props.currentLevelWords;
 
-    const gameWords = props.currentLevelWords.filter((word) => 
-      !props.currentUserWords.find((userWord) => userWord.wordId === word.id && userWord.optional.isLearned)
-    );
+    const getNotLearnedWords = (words: IWord[]) => {
+      return words.filter((word) => 
+        !props.currentUserWords.find((userWord) => userWord.wordId === word.id && userWord.optional.isLearned)
+      );
+    }
+        
+    const gameWords = getNotLearnedWords(props.currentLevelWords);
 
     let pageForLookup = props.currentStatus.currentPage;
 
@@ -40,9 +44,7 @@ const Game: React.FC<Props> = (props: Props) => {
         
         if (!response) return;
       
-        const previousPageWords = response.filter((word) => 
-          !props.currentUserWords.find((userWord) => userWord.wordId === word.id && userWord.optional.isLearned)
-        );
+        const previousPageWords = getNotLearnedWords(response);
         
         const shuffledWords = shuffle(previousPageWords);
         const required = 20 - gameWords.length;
