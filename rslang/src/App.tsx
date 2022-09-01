@@ -8,6 +8,7 @@ import Header from './components/header/Header';
 import AuthorisationForm from './components/header/authorisation/AuthorisationForm';
 import GamesPage from './components/games-page/GamesPage';
 import { AuthorisationContext } from './context/AuthorisationContext';
+import StatisticsPage from './components/statistics-page/StatisticsPage';
 
 function App() {
   const [isModalOpened, setIsModalOpened] = useState(false);
@@ -37,7 +38,7 @@ function App() {
         } />
         <Route path="textbook" element={<Textbook />} />
         <Route path="games" element={<GamesPage />} />
-        {/* <Route path="statistics" element={< />} /> */}
+        <Route path="statistics" element={<StatisticsPage />} />
       </Routes>
     </>
   );
