@@ -1,8 +1,7 @@
 .header {
-  position: absolute;
-  left: 0;
-  width: 100%;
   background-color: transparent;
+  box-shadow: 0 1px 5px rgb(0 0 0 / 30%);
+  z-index: 1;
 }
 
 .wrapper {
@@ -12,20 +11,41 @@
 
 .header-wrapper {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   padding: 20px 0;
 }
 
-.logo {}
-
 .button {
+  color: #F3F2F1;
   font-size: 2rem;
   background: var(--btn-color);
   padding: 10px 35px;
   border-radius: 20px;
+  cursor: pointer;
+  position: relative;
 }
 
-.button:hover {
+.button::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0%;
+  height: 100%;
+  border-radius: 18px;
   background: var(--btn-hovered);
+  transition: 0.5s;
+  transform-origin: 0 0;
+  transition-timing-function: cubic-bezier(0.5, 1.7, 0.4, 0.7);
+}
+
+.button:hover::before,
+.button:focus::before {
+  width: 100%;
+}
+
+.button-title {
+  position: relative;
 }

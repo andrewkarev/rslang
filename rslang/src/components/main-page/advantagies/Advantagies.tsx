@@ -1,17 +1,18 @@
 import React from 'react';
-import styles from './adventagies.module.css';
+import styles from './advantagies.module.css';
 import textbook from './../../../assets/images/books.png';
 import padlock from './../../../assets/images/padlock.png';
 import diagram from './../../../assets/images/diagram.png';
 import trophy from './../../../assets/images/trophy.png';
-import Adventagie from './adventagie/Adventagie';
+import Advantagie from './advantagie/Advantagie';
 
-const Games = () => {
+const Advantagies = () => {
   const gamesData = [
     { 
       name: 'Учебник', 
       description: 'Более 3500 тысяч слов для изучения, разбитых на разделы по уровню твоей подготовки с удобной навигацией.', 
-      image: textbook 
+      image: textbook,
+      url: '/textbook',
     },
     { 
       name: 'Регистрация', 
@@ -21,26 +22,28 @@ const Games = () => {
     { 
       name: 'Статистика', 
       description: 'Отслеживайте статистику по мини-играм и по словам за каждый день изучения', 
-      image: diagram 
+      image: diagram,
+      url: '/statistics',
     },
     { 
       name: 'Игры', 
       description: 'Спринт и Аудио-вызов - увлекательные игры на развитие запоминания слов, восприятия на слух и письма.', 
-      image: trophy 
+      image: trophy,
+      url: '/games',
     },
   ];
 
   const gameElements = gamesData.map((adventagie) => {
     return (
-      <Adventagie image={ adventagie.image } name={ adventagie.name } description={ adventagie.description } />
+      <Advantagie image={ adventagie.image } name={ adventagie.name } description={ adventagie.description } url={ adventagie.url} />
     )
   });
 
   return (
-    <section className={ styles['adventagies']}>
+    <section className={ styles['advantagies']}>
       <div className={ styles['wrapper']}>
-        <h2 className={ styles['adventagies-title']}>Используйте все преимущества приложения</h2>
-          <div className={ styles['adventagies-content']}>
+        <h2 className={ styles['title']}>Используйте все преимущества приложения</h2>
+          <div className={ styles['content']}>
             { gameElements }
           </div>        
       </div>
@@ -48,4 +51,4 @@ const Games = () => {
   );
 }
 
-export default Games;
+export default Advantagies;

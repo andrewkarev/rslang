@@ -9,3 +9,38 @@
   max-width: 1280px;
   margin: 0 auto;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+html {
+  font-size: 10px;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: 'Roboto', Verdana, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 4rem;
+}
+
+h2 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+h4 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30px;
+}
+
+button {
+  font-size: 1.6rem;
+  font-family: 'Roboto', Verdana, sans-serif;
+}
