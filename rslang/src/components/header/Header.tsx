@@ -1,9 +1,14 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import Navigation from "./navigation/Navigation";
+import React from 'react';
+import Navigation from './navigation/Navigation';
 import styles from './header.module.css';
+import RegistrationBtn from './registration-btn/RegistrationBtn';
+import { NavLink } from "react-router-dom";
 
-const Header = () => {
+interface HeaderProps {
+  toggleModalVisability: () => void,
+}
+
+const Header: React.FunctionComponent<HeaderProps> = ({ toggleModalVisability }) => {
   return (
     <div className={ styles['header'] }>
       <div className={ styles['wrapper'] +' ' + styles['header-wrapper'] }>
@@ -11,9 +16,7 @@ const Header = () => {
           <h1 className={ styles['logo']}>EasyLang</h1> 
         </NavLink>
         <Navigation />
-        <button className={ styles['button']} type="button">
-          <span className={ styles['button-title']}>Войти</span>
-        </button>
+        <RegistrationBtn handler={toggleModalVisability} />
       </div>
     </div>
   );
