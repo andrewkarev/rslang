@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import './navigation.css';
+import styles from './navigation.module.css';
 
 const Navigation = () => {
   const navItems = [
@@ -24,15 +24,15 @@ const Navigation = () => {
 
   const navElements = navItems.map((item) => {
     return (
-      <li className="nav-item" key={item.name}>
+      <li className={ styles["nav-item"]} key={item.name}>
         <NavLink to={`${item.url}`}>{item.name}</NavLink>
       </li>
     );
   });
 
   return (
-    <nav className="nav">
-      <ul className="nav-list">
+    <nav className={ styles["nav"] }>
+      <ul className={ styles["nav-list"]}>
         {navElements}
       </ul>
     </nav>
