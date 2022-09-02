@@ -1,17 +1,40 @@
 @import './../textbook-cards/textbook-cards.module.css';
 
 .words-grid {
-  margin-right: 15px;
   display: flex;
+  margin-right: 15px;
   flex-wrap: wrap;
-  gap: 15px;
+  align-self: flex-start;
+  gap: 55px 15px;
+  max-height: 800px;
+  overflow-y: auto;
+}
+
+.words-grid::-webkit-scrollbar {
+  width: 10px;
+}
+
+.words-grid::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background: #e8e6e3;
+}
+
+.words-grid::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #888;
+}
+
+.words-grid::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .card {
+  position: relative;
   display: flex;
-  width: 190px;
+  width: 180px;
   height: 100px;
-  padding: 15px 10px;
+  padding: 10px;
+  border: 2px solid #F3F2F1;
   flex-direction: column;
   gap: 3px;
   border-radius: 10px;
@@ -20,33 +43,84 @@
   overflow: hidden;
 }
 
-.words-grid .card:hover {
+.card:hover {
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-:global(.a1-level-group) .card:hover {
+.status {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.no-words {
+  font-size: 20px;
+}
+
+:global(.level-group-0) .card:hover,
+:global(.level-group-0) .card.active {
+  border: 2px solid #1AB69D;
+}
+
+:global(.level-group-0) .card.active {
   background-color: #1AB69D;
 }
 
-:global(.a2-level-group) .card:hover {
+:global(.level-group-1) .card:hover,
+:global(.level-group-1) .card.active {
+  border: 2px solid #189883;
+}
+
+:global(.level-group-1) .card.active {
   background-color: #189883;
 }
 
-:global(.b1-level-group) .card:hover {
+:global(.level-group-2) .card:hover,
+:global(.level-group-2) .card.active {
+  border: 2px solid #F8B81F;
+}
+
+:global(.level-group-2) .card.active {
   background-color: #F8B81F;
 }
 
-:global(.b2-level-group) .card:hover {
+:global(.level-group-3) .card:hover,
+:global(.level-group-3) .card.active {
+  border: 2px solid #df9e07;
+}
+
+:global(.level-group-3) .card.active {
   background-color: #df9e07;
 }
 
-:global(.c1-level-group) .card:hover {
+:global(.level-group-4) .card:hover,
+:global(.level-group-4) .card.active {
+  border: 2px solid #FE595D;
+}
+
+:global(.level-group-4) .card.active {
   background-color: #FE595D;  
 }
 
-:global(.c2-level-group) .card:hover {
+:global(.level-group-5) .card:hover,
+:global(.level-group-5) .card.active {
+  border: 2px solid #fe1b1e;
+}
+
+:global(.level-group-5) .card.active {
   background-color: #fe1b1e;  
+}
+
+:global(.level-group-6) .card:hover,
+:global(.level-group-6) .card.active {
+  border: 2px solid #808080;
+}
+
+:global(.level-group-6) .card.active {
+  background-color: #808080;
 }
 
 @media (max-width: 1100px) {
