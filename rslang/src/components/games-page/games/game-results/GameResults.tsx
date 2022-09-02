@@ -13,6 +13,10 @@ interface GameResultsProps {
     best: number;
     current: number;
   }>,
+  audioCallLongestSreak: React.MutableRefObject<{
+    best: number;
+    current: number;
+  }>,
 }
 
 const GameResults: React.FunctionComponent<GameResultsProps> = (props) => {

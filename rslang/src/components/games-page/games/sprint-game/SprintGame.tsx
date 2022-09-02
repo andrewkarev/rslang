@@ -13,6 +13,7 @@ import { AuthorisationContext } from '../../../../context/AuthorisationContext';
 
 interface SprintGameProps {
   words: IWord[],
+  choosenGame: string,
   closeGame: (choice: string) => void,
   setLastGameResults: (value: React.SetStateAction<[] | {
     word: IWord;
@@ -114,7 +115,7 @@ const SprintGame: React.FunctionComponent<SprintGameProps> = (props) => {
     } else {
       !isMuted && onFailure();
       rightAnswersStreak.current = 0;
-      props.longestSreak.current.best = Math.max(props.longestSreak.current.best, props.longestSreak.current.current)
+      props.longestSreak.current.best = Math.max(props.longestSreak.current.best, props.longestSreak.current.current);
       props.longestSreak.current.current = 0;
     }
 
@@ -202,6 +203,7 @@ const SprintGame: React.FunctionComponent<SprintGameProps> = (props) => {
           closeGame={props.closeGame}
           changeSoundState={changeSoundState}
           isMuted={isMuted}
+          choosenGame={props.choosenGame}
         />
         <div className={styles['game-board']}>
           <div className={styles['game-statistics']}>

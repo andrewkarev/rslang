@@ -1,5 +1,5 @@
 .container {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   display: flex;
@@ -154,6 +154,8 @@
   background-color: #1ab69d;
 }
 
+.wrong-answer-btn:active,
+.right-answer-btn:active,
 .wrong-answer-btn-active,
 .right-answer-btn-active {
   transform: translateY(-2px);

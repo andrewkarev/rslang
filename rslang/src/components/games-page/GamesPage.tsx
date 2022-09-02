@@ -8,9 +8,14 @@ import { learnWordAPI } from '../..';
 import shuffle from '../../services/shuffle';
 import GameResults from './games/game-results/GameResults';
 import getRandomPages from '../../services/get-random-pages';
+import AudioCallGame from './games/audiocall-game/AudioCall';
 
 const GamesPage = () => {
   const sprintlongestSreak = useRef<{ best: number, current: number }>({
+    best: 0,
+    current: 0,
+  });
+  const audioCallLongestSreak = useRef<{ best: number, current: number }>({
     best: 0,
     current: 0,
   });
@@ -83,21 +88,30 @@ const GamesPage = () => {
   return (
     <>
       {!choosenGame && !isResultsVisible && gamesPage}
-      {!isResultsVisible && choosenGame === 'Спринт'
-        ? <SprintGame
-          words={words.current}
-          closeGame={handleGameChoice}
-          setLastGameResults={setLastGameResults}
-          setIsResultsVisible={setIsResultsVisible}
-          longestSreak={sprintlongestSreak}
-        />
-        : ''}
+      {!isResultsVisible && choosenGame === 'Спринт' && <SprintGame
+        words={words.current}
+        choosenGame={choosenGame}
+        closeGame={handleGameChoice}
+        setLastGameResults={setLastGameResults}
+        setIsResultsVisible={setIsResultsVisible}
+        longestSreak={sprintlongestSreak}
+      />}
+      {!isResultsVisible && choosenGame === 'Аудио-вызов' && <AudioCallGame
+        words={words.current}
+        choosenGame={choosenGame}
+        closeGame={handleGameChoice}
+        setLastGameResults={setLastGameResults}
+        setIsResultsVisible={setIsResultsVisible}
+        longestSreak={audioCallLongestSreak}
+      />
+      }
       {isResultsVisible && <GameResults
         lastGameResults={lastGameResults}
         setIsResultsVisible={setIsResultsVisible}
         choosenGame={choosenGame}
         handleGameChoice={handleGameChoice}
         sprintlongestSreak={sprintlongestSreak}
+        audioCallLongestSreak={audioCallLongestSreak}
       />}
     </>
   );

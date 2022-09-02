@@ -11,6 +11,7 @@ interface GameSettingsProps {
     node: React.MutableRefObject<HTMLDivElement | null>;
   },
   isMuted: boolean,
+  choosenGame: string,
 }
 
 const GameSettings: React.FunctionComponent<GameSettingsProps> = (props) => {
@@ -29,12 +30,12 @@ const GameSettings: React.FunctionComponent<GameSettingsProps> = (props) => {
           className={styles['close-game']}
           onClick={handleCloseButtonClick}>
         </div>
-        <div
+        {props.choosenGame !== 'Аудио-вызов' && <div
           className={styles[`${props.isMuted
             ? 'volume-controls-muted'
             : 'volume-controls'}`]}
           onClick={handleVolumeButtonClick}
-        ></div>
+        ></div>}
         <div
           className={styles[`${props.handle.active
             ? 'fullscreen-mode-active'
