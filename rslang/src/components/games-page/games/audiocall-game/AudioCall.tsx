@@ -216,11 +216,10 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
       updateStreak(false);
     }
 
-    console.log(props.longestSreak.current);
     setAnswersGiven(wordIndex.current);
     setIsOptionLightned(optionLightning);
     setAlternativeMode(!alternativeMode);
-  }, [props.longestSreak, alternativeMode, currentWord, translations, getWordsTranslation, updateGameWordStatus, updateStreak]);
+  }, [alternativeMode, currentWord, translations, getWordsTranslation, updateGameWordStatus, updateStreak]);
 
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {
@@ -248,6 +247,7 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
         handleOptionButtonEvent={handleOptionButtonEvent}
         translation={translation}
         index={index}
+        key={translation}
       />
     );
   });
