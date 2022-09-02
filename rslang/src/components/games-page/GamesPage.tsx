@@ -20,6 +20,7 @@ const GamesPage = () => {
     sprint: false, audioCall: false,
   });
 
+
   const handleGameChoice = (choice: string) => {
     setChoosenGame(choice);
   }

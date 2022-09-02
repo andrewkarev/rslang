@@ -12,6 +12,14 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+.game.disabled {
+  color: #D6D3D3;
+}
+
+.game.disabled:hover {
+  box-shadow: none;
+}
+
 .game-name {
   margin-bottom: 15px;
   font-size: 24px;
@@ -24,4 +32,8 @@
 .game-img {
   width: 100%;
   align-self: center;
+}
+
+.game.disabled .game-img {
+  filter: grayscale() opacity(0.3);
 }

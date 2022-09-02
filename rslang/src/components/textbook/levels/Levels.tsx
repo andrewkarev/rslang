@@ -1,21 +1,36 @@
-import React from 'react';
+import React, { MouseEvent, useContext } from 'react';
+import { AuthorisationContext } from '../../../context/AuthorisationContext';
+import levelsData from '../../../data/levels-data';
 import styles from './levels.module.css';
 
-const Levels = () => {
-  const levelsData = [
-    { name: 'Beginner', shortName: 'A1' },
-    { name: 'Elementary', shortName: 'A2' },
-  
-    { name: 'Intermediate', shortName: 'B1' },
-    { name: 'Upper-Intermediate', shortName: 'B2' },
-  
-    { name: 'Advanced', shortName: 'C1' },
-    { name: 'Proficiency', shortName: 'C2' }
-  ];
+type Props = {
+  currentStatus: {currentLevel: number, currentCard: number, currentPage: number}
+  complicatedWordsAmount: number;
+  setCurrentStatus: (status: {currentLevel: number, currentCard: number, currentPage: number}) => void;
+}
 
-  const levelsElements = levelsData.map((level) => {
+const Levels: React.FC<Props> = ({ currentStatus, complicatedWordsAmount, setCurrentStatus }) => {
+  const { isAuthorised } = useContext(AuthorisationContext);
+
+  const handleLevelClick = (levelId: number, event: MouseEvent) => {
+    setCurrentStatus({ currentLevel: levelId, currentPage: 0, currentCard: 0 });
+    
+    localStorage.setItem('level', String(levelId));
+    localStorage.setItem('page', '0');
+    localStorage.setItem('card', '0');
+  }
+
+  const handleComplicatedLevelClick = (event: MouseEvent) => {
+    setCurrentStatus( { currentLevel: 6, currentPage: 0, currentCard: 0} );
+  }
+
+  const levelsElements = levelsData.map((level, index) => {
     return (
-      <div className={ styles['level'] } key={ level.name }>
+      <div 
+        className={`${ styles['level'] } ${ level.group === currentStatus.currentLevel ? styles['active'] : ''}`} 
+        key={ level.name } 
+        onClick={ handleLevelClick.bind(null, index) }
+      >
         <div className={ styles['level-name'] }>{ level.name }</div>
         <div className={ styles['level-shortname'] }>{ level.shortName }</div>
         <div className={ styles['arrow'] }></div>
@@ -26,12 +41,21 @@ const Levels = () => {
   return (
     <div className={ styles['levels'] }>
       { levelsElements }
-      <div className={ styles['separator'] }></div>
-      <div className={ styles['level'] + ' level-complicated' } key='D'>
-        <div className={ styles['level-name'] + ' level-complicated-name' }>Сложные слова</div>
-        <div className={ styles['level-counter'] }>(0)</div>
-        <div className={ styles['arrow'] }></div>
-      </div>
+      { 
+        isAuthorised &&
+        <>
+          <div className={ styles['separator'] }></div>
+          <div 
+            className={`${styles['level']} level-complicated ${currentStatus.currentLevel === 6 ? styles['active'] : ''}` } 
+            onClick={ handleComplicatedLevelClick }
+            key='D'
+          >
+            <div className={ styles['level-name'] + ' level-complicated-name' }>Сложные слова</div>
+            <div className={ styles['level-counter'] }>({ complicatedWordsAmount })</div>
+            <div className={ styles['arrow'] }></div>
+          </div>
+        </>
+      }
     </div>
   );
 }

@@ -2,32 +2,45 @@ import React from 'react';
 import styles from './games.module.css';
 import sprintImage from './../../../assets/images/sprint.png';
 import audioCallImage from './../../../assets/images/audio-call.png';
+import gamesData from './../../../data/games-data';
 import Game from './game/Game';
+import IWord from '../../../types/services-interfaces/IWord';
+import IUserWord from '../../../types/services-interfaces/IUserWord';
 
-const Games = () => {
-  const gamesData = [
-    { 
-      name: 'Спринт', 
-      description: 'Спринт - тренировка на скорость, В Вашем распоряжении 30 секунд, за которые необходимо угадать как можно больше слов', 
-      image: sprintImage 
-    },
-    { 
-      name: 'Аудио-вызов', 
-      description: 'Аудио-вызов - тренировка на слух: улучшает восприятие слов, используя для этого такой метод обучения как аудирование', 
-      image: audioCallImage 
-    }
-  ];
+type Props = {
+  isLearnedPage: boolean;
+  currentLevelWords: IWord[];
+  currentUserWords: IUserWord[];
+  currentStatus: {currentLevel: number, currentCard: number, currentPage: number};
+}
 
-  const gameElements = gamesData.map((game) => {
+const Games: React.FC<Props> = ({ isLearnedPage, currentLevelWords, currentUserWords, currentStatus }) => {
+
+  const gameElements = gamesData.map((game, index) => {
     return (
-      <Game name={ game.name } description={ game.description } image={ game.image }/>
+      <Game 
+        name={ game.name } 
+        description={ game.description } 
+        image={ game.image } 
+        key={ 'game' + index }
+        isLearnedPage={ isLearnedPage }
+        currentLevelWords={ currentLevelWords }
+        currentUserWords={ currentUserWords }
+        currentStatus={ currentStatus }
+      />
     )
   });
 
   return (
-    <div className={ styles['games'] }>
+    <div className={ `${styles['games']}` }>
       <h2 className={ styles['title'] }>Игры</h2>
-      <p className={ styles['description'] }>Закрепите слова с текущей страницы при помощи игр</p>
+      <p className={ styles['description'] }>
+        {
+          !isLearnedPage 
+            ? 'Закрепите слова с текущей страницы при помощи игр'
+            : 'Игры для данной страницы не доступны'
+        }
+      </p>
       <div className={ styles['games-wrapper'] }>
         { gameElements }
       </div>
