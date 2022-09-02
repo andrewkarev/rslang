@@ -10,6 +10,7 @@ import useSound from 'use-sound';
 import shuffle from '../../../../services/shuffle';
 import updateUsersWords from '../../../../services/update-user-words';
 import { AuthorisationContext } from '../../../../context/AuthorisationContext';
+import OptionButton from './option-button/OptionButton';
 
 interface AudioCallGameProps {
   words: IWord[],
@@ -26,7 +27,7 @@ interface AudioCallGameProps {
   }>,
 }
 
-const AudioCallGame: React.FunctionComponent<AudioCallGameProps> = (props) => {
+const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
   const { isAuthorised } = useContext(AuthorisationContext);
 
   const BASE_URL = 'https://rslangappteam102.herokuapp.com';
@@ -240,6 +241,17 @@ const AudioCallGame: React.FunctionComponent<AudioCallGameProps> = (props) => {
     }
   }, [props, answersGiven]);
 
+  const options = translations.map((translation, index) => {
+    return (
+      <OptionButton
+        isOptionLightned={isOptionLightned}
+        handleOptionButtonEvent={handleOptionButtonEvent}
+        translation={translation}
+        index={index}
+      />
+    );
+  });
+
   return (
     <FullScreen handle={handle}>
       <div className={styles['container']}>
@@ -282,66 +294,7 @@ const AudioCallGame: React.FunctionComponent<AudioCallGameProps> = (props) => {
               </div>
             </div>
             <div className={styles['options-btns-container']}>
-              <button
-                className={styles[`${isOptionLightned[0] === 'right'
-                  ? 'option-btn-right'
-                  : isOptionLightned[0] === 'wrong'
-                    ? 'option-btn-wrong'
-                    : 'option-btn'}`
-                ]}
-                type="button"
-                onClick={() => handleOptionButtonEvent(0)}
-              >
-                1 {translations[0]}
-              </button>
-              <button
-                className={styles[`${isOptionLightned[1] === 'right'
-                  ? 'option-btn-right'
-                  : isOptionLightned[1] === 'wrong'
-                    ? 'option-btn-wrong'
-                    : 'option-btn'}`
-                ]}
-                type="button"
-                onClick={() => handleOptionButtonEvent(1)}
-              >
-                2 {translations[1]}
-              </button>
-              <button
-                className={styles[`${isOptionLightned[2] === 'right'
-                  ? 'option-btn-right'
-                  : isOptionLightned[2] === 'wrong'
-                    ? 'option-btn-wrong'
-                    : 'option-btn'}`
-                ]}
-                type="button"
-                onClick={() => handleOptionButtonEvent(2)}
-              >
-                3 {translations[2]}
-              </button>
-              <button
-                className={styles[`${isOptionLightned[3] === 'right'
-                  ? 'option-btn-right'
-                  : isOptionLightned[3] === 'wrong'
-                    ? 'option-btn-wrong'
-                    : 'option-btn'}`
-                ]}
-                type="button"
-                onClick={() => handleOptionButtonEvent(3)}
-              >
-                4 {translations[3]}
-              </button>
-              <button
-                className={styles[`${isOptionLightned[4] === 'right'
-                  ? 'option-btn-right'
-                  : isOptionLightned[4] === 'wrong'
-                    ? 'option-btn-wrong'
-                    : 'option-btn'}`
-                ]}
-                type="button"
-                onClick={() => handleOptionButtonEvent(4)}
-              >
-                5 {translations[4]}
-              </button>
+              {options}
             </div>
             <button
               className={styles['next-btn']}
