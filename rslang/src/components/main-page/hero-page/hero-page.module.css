@@ -2,15 +2,15 @@
   margin-top: -180px;
   padding-top: 350px;
   background-color: #f8b81f;
-  z-index: 0;
 }
 
 .wrapper {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
 }
 
 .content {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,24 +21,24 @@
   z-index: 1;
 }
 
-.content::before,
-.content::after {
+.conteiner::before,
+.conteiner::after {
   content: '';
   position: absolute;
   width: 312px;
   height: 291px;
-  z-index: -1;
+  z-index: 0;
 }
 
-.content::before {
+.conteiner::before {
   left: 100px;
   top: 150px;
   background: url(../../../assets/images/shape-01.png) no-repeat;
   animation: rotate-right 10s linear infinite;
 }
 
-.content::after {
-  bottom: 200px;
+.conteiner::after {
+  top: 450px;
   right: 100px;
   background: url(../../../assets/images/shape-02.png) no-repeat;
   animation: rotate-left 10s linear infinite;
