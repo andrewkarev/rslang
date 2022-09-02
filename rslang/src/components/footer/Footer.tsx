@@ -8,7 +8,7 @@ const Footer = () => {
     <div className={ styles["footer"]}>
       <div className={ styles["wrapper"]}>
         <div className={ styles["content"]}>
-          <a>2022</a>
+          <p>2022</p>
           <a href="https://rs.school/js/">
             <img className={ styles['logo']} src={logo} alt='logo'></img>
           </a>
