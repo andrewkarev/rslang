@@ -6,15 +6,19 @@ import Presentation from './presentation/Presentation';
 import DevTeam from './dev-team/DevTeam';
 import Scroll from './scroll-up/Scroll'
 
-const MainPage = () => {
+interface MainPageProps {
+  toggleModalVisability: () => void;
+}
+
+const MainPage: React.FC<MainPageProps> = ({ toggleModalVisability }) => {
   return (
-    <div className={ styles["main-page"]}>
-      <HeroPages />
+    <div className={styles["main-page"]}>
+      <HeroPages toggleModalVisability={toggleModalVisability} />
       <Advantagies />
       <Presentation />
       <DevTeam />
       <Scroll />
-      </div>
+    </div>
   );
 };
 

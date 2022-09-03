@@ -40,10 +40,8 @@ function App() {
       {isModalOpened && <AuthorisationForm toggleModalVisability={toggleModalVisability} />}
 
       <Routes>
-        <Route path="/" element={
-          <>
-            <MainPage />
-          </>
+        <Route path="/" element={<MainPage
+          toggleModalVisability={toggleModalVisability} />
         } />
         <Route path="textbook" element={<Textbook />} />
         <Route path="games" element={<GamesPage />} />
