@@ -20,7 +20,7 @@
   margin-top: -220px;
   position: relative;
   left: 0;
-  top: 71px;
+  top: 82px;
   width: 100%;
   overflow: hidden;
   line-height: 0;
@@ -31,4 +31,11 @@
   position: relative;
   display: block;
   width: calc(100% + 1.3px);
+}
+
+.bg {
+  height: 80px;
+  position: relative;
+  background-color: #f8b81f;
+  z-index: -1;
 }

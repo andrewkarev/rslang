@@ -8,12 +8,14 @@ const Footer = () => {
     <div className={ styles["footer"]}>
       <div className={ styles["wrapper"]}>
         <div className={ styles["content"]}>
-          <p>2022</p>
-          <a href="https://rs.school/js/">
-            <img className={ styles['logo']} src={logo} alt='logo'></img>
-          </a>
+          <div className={ styles["year"]}>2022</div>
+          <div className={ styles["logo-conteiner"]}>
+            <a href="https://rs.school/js/">
+              <img className={ styles['logo']} src={logo} alt='logo'></img>
+            </a>
+          </div>
           <div className={ styles['developer']}>
-            Разработчики:
+      
             <a className={ styles['link']} href='https://github.com/andrewkarev' data-tooltip="Андрей">
               <img className={ styles['github'] } src={github} alt="github" />
             </a>
