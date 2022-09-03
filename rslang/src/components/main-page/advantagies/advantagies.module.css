@@ -1,0 +1,21 @@
+.advantagies {
+  margin: 40px auto;
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title {
+  margin: 90px auto;
+  text-align: center;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 32px;
+}

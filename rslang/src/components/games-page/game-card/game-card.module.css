@@ -14,37 +14,37 @@
 }
 
 .game:first-child {
-  background: url('./../../../assets/images/sprint.png') no-repeat
-            #F3F2F1;
+  background: url('./../../../assets/images/sprint.png') no-repeat #F3F2F1;
   background-size: 270px;
   background-position: right;
-  animation: fade-right 1s 0.3s;
+  animation: fade-right 0.8s ease-out;
 }
 
 .game:last-child {
-  background: url('./../../../assets/images/audio-call.png') no-repeat
-            #F3F2F1;
+  background: url('./../../../assets/images/audio-call.png') no-repeat #F3F2F1;
   background-size: 270px;
   background-position: right;
-  animation: fade-left 1s 0.3s;
+  animation: fade-left 0.8s ease-out;
 }
 
-@keyframes fade-right{
-	0% {
-		transform: translateX(90%);
-	}
-	100% {
-		transform: translateX(0%);
-	}	
+@keyframes fade-right {
+  0% {
+    transform: translateX(200%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
 }
 
-@keyframes fade-left{
-	0% {
-		transform: translateX(-90%);
-	}
-	100% {
-		transform: translateX(0%);
-	}	
+@keyframes fade-left {
+  0% {
+    transform: translateX(-200%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
 }
 
 .game-name {
@@ -70,44 +70,7 @@
   gap: 10px;
 }
 
-.level {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid transparent;
-  border-radius: 20px;
-  font-size: 18px;
-  background-color: #fff;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.level-a1:hover {
-  border: 2px solid #1AB69D;
-}
-
-.level-a2:hover {
-  border: 2px solid #189883;
-}
-
-.level-b1:hover {
-  border: 2px solid #F8B81F;
-}
-
-.level-b2:hover {
-  border: 2px solid #df9e07;
-}
-
-.level-c1:hover {
-  border: 2px solid #FE595D;
-}
-
-.level-c2:hover {
-  border: 2px solid #fe1b1e;
-}
-
+.start-game-btn-disabled,
 .start-game-btn {
   padding: 10px 35px;
   border-radius: 30px;
@@ -122,8 +85,12 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
 }
 
+.start-game-btn-disabled {
+  background-color: #a2a09d;
+  cursor: default;
+}
+
 .game-img {
   width: 270px;
   align-self: center;
 }
-

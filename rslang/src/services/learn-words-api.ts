@@ -1,5 +1,6 @@
 import RequestError from '../types/errors/RequestError';
 import IRequestFunctionOptions from '../types/services-interfaces/IRequestFunction';
+import IStatistics from '../types/services-interfaces/IStatistics';
 import IUser from '../types/services-interfaces/IUser';
 import IUserToken from '../types/services-interfaces/IUserToken';
 import IUserWord from '../types/services-interfaces/IUserWord';
@@ -73,12 +74,8 @@ class LearnWordsApi {
       };
 
       if (error.message === '417' || error.message === '404') {
-        const isWords = url.includes('words');
-
-        if (isWords) {
-          error.message === '417'
-            ? console.warn('A word with the same name already exists.')
-            : console.warn('User\'s word not found.');
+        if (url.includes('words') && error.message === '417') {
+          console.warn('A word with the same name already exists.')
           return;
         }
 
@@ -164,6 +161,7 @@ class LearnWordsApi {
     : Promise<IUserWord | void> {
     const queryURL = `${this.usersPath}/${id}/words/${wordId}`;
     const stringifiedBody = JSON.stringify(body);
+
     return await this.createRequest(queryURL, {
       method: 'POST',
       body: `${stringifiedBody}`,
@@ -188,6 +186,7 @@ class LearnWordsApi {
     : Promise<IUserWord | void> {
     const queryURL = `${this.usersPath}/${id}/words/${wordId}`;
     const stringifiedBody = JSON.stringify(body);
+
     return await this.createRequest(queryURL, {
       method: 'PUT',
       body: `${stringifiedBody}`,
@@ -220,6 +219,29 @@ class LearnWordsApi {
 
     this.setUsersData(name, id);
     this.setTokensValue(token, refreshToken);
+  }
+
+  async getStatistics(id: string): Promise<IStatistics | void> {
+    const queryURL = `${this.usersPath}/${id}/statistics`;
+    return await this.createRequest(queryURL, {
+      headers: {
+        'Authorization': `Bearer ${this.token}`,
+      },
+    });
+  }
+
+  async updateStatistics(id: string, body: IStatistics): Promise<IStatistics | void> {
+    const queryURL = `${this.usersPath}/${id}/statistics`;
+    const stringifiedBody = JSON.stringify(body);
+    return await this.createRequest(queryURL, {
+      method: 'PUT',
+      body: `${stringifiedBody}`,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${this.token}`,
+      },
+    });
   }
 }
 

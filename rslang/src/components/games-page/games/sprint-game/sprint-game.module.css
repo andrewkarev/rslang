@@ -1,5 +1,5 @@
 .container {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   display: flex;
@@ -109,12 +109,15 @@
 .word {
   font-size: 42px;
   font-weight: 700;
+  text-align: center;
 }
+
 
 .word-translation {
   font-size: 36px;
   font-weight: 500;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .control-btns-container {
@@ -152,6 +155,8 @@
   background-color: #1ab69d;
 }
 
+.wrong-answer-btn:active,
+.right-answer-btn:active,
 .wrong-answer-btn-active,
 .right-answer-btn-active {
   transform: translateY(-2px);

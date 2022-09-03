@@ -9,6 +9,7 @@ import AuthorisationForm from './components/header/authorisation/AuthorisationFo
 import GamesPage from './components/games-page/GamesPage';
 import { AuthorisationContext } from './context/AuthorisationContext';
 import StatisticsPage from './components/statistics-page/StatisticsPage';
+import Footer from './components/footer/Footer'
 
 function App() {
   const [isModalOpened, setIsModalOpened] = useState(false);
@@ -21,6 +22,16 @@ function App() {
   }, [changeAuthorisationStatus, isAuthorised]);
 
   const toggleModalVisability = () => {
+    const body = document.querySelector('body');
+
+    if (!body) return;
+
+    if (!isModalOpened) {
+      body.style.overflow = 'hidden';
+    } else {
+      body.style.overflow = 'auto';
+    }
+
     setIsModalOpened(!isModalOpened);
   };
 
@@ -30,16 +41,16 @@ function App() {
       {isModalOpened && <AuthorisationForm toggleModalVisability={toggleModalVisability} />}
 
       <Routes>
-        <Route path="/" element={
-          <>
-            <MainPage />
-            {/* <Footer /> */}
-          </>
+        <Route path="/" element={<MainPage
+          toggleModalVisability={toggleModalVisability} />
         } />
         <Route path="textbook" element={<Textbook />} />
         <Route path="games" element={<GamesPage />} />
         <Route path="statistics" element={<StatisticsPage />} />
+        {/* <Route path="statistics" element={< />} /> */}
+        {/* <Route path="sprint" element={<SprintGame words={words} />} /> */}
       </Routes>
+      <Footer />
     </>
   );
 }

@@ -12,9 +12,17 @@ type Props = {
   currentStatus: {currentLevel: number, currentCard: number, currentPage: number};
   audioPlayer: HTMLAudioElement;
   setCurrentUserWord: (userWord: IUserWord) => void;
+  setCurrentStatus: (status: {currentLevel: number, currentCard: number, currentPage: number}) => void;
 }
 
-const SelectedCard: React.FC<Props> = ({ currentWord, userWord, currentStatus, audioPlayer, setCurrentUserWord }) => {
+const SelectedCard: React.FC<Props> = ({ 
+  currentWord, 
+  userWord, 
+  currentStatus, 
+  audioPlayer, 
+  setCurrentUserWord,
+  setCurrentStatus 
+}) => {
   const ROOT_URL = 'https://rslangappteam102.herokuapp.com/';
 
   const { isAuthorised } = useContext(AuthorisationContext);
@@ -63,6 +71,10 @@ const SelectedCard: React.FC<Props> = ({ currentWord, userWord, currentStatus, a
     }
     
     setCurrentUserWord({id: userId, wordId: currentWord.id, ...word});
+
+    if (currentStatus.currentLevel === 6) {
+      setCurrentStatus({...currentStatus, currentCard: 0 });
+    }
   }
 
   const handlerComplicatedBtnClick = async () => {
@@ -84,7 +96,7 @@ const SelectedCard: React.FC<Props> = ({ currentWord, userWord, currentStatus, a
         
         word = {
           optional: {
-            isNew: false, 
+            isNew: true, 
             isDifficult: true, 
             isLearned: false, 
             correctAnswersStreak: 0,
@@ -126,7 +138,7 @@ const SelectedCard: React.FC<Props> = ({ currentWord, userWord, currentStatus, a
 
         word = {
           optional: {
-            isNew: false, 
+            isNew: true, 
             isDifficult: false, 
             isLearned: true, 
             correctAnswersStreak: 0,
@@ -145,7 +157,7 @@ const SelectedCard: React.FC<Props> = ({ currentWord, userWord, currentStatus, a
 
       }
 
-      updateDatabaseData(userId, word)
+      updateDatabaseData(userId, word);
     }
   }
 
@@ -288,7 +300,7 @@ const SelectedCard: React.FC<Props> = ({ currentWord, userWord, currentStatus, a
                   </p>
                 </div>
                 <div className={ styles['game'] }>
-                  <h4 className={ styles['game-name'] }>Аулио-вызов</h4>
+                  <h4 className={ styles['game-name'] }>Аудио-вызов</h4>
                   <p className={ styles['result'] }>
                     { 
                       userWord 

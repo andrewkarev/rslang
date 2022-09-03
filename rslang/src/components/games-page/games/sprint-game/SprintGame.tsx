@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import styles from './sprint-game.module.css';
 import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 import GameSettings from '../game-settings/GameSettings';
@@ -8,18 +8,30 @@ import AnswersIndicator from './indicator/AnswersIndicator';
 import useSound from 'use-sound';
 import successSound from '../../../../assets/sounds/sound-of-success.ogg';
 import failureSound from '../../../../assets/sounds/sound-of-failure.ogg';
+import updateUsersWords from '../../../../services/update-user-words';
+import { AuthorisationContext } from '../../../../context/AuthorisationContext';
+import shuffle from '../../../../services/shuffle';
 
 interface SprintGameProps {
   words: IWord[],
+  choosenGame: string,
   closeGame: (choice: string) => void,
   setLastGameResults: (value: React.SetStateAction<[] | {
     word: IWord;
     isCorrect: boolean;
   }[]>) => void,
   setIsResultsVisible: (value: React.SetStateAction<boolean>) => void,
+  longestSreak: React.MutableRefObject<{
+    best: number;
+    current: number;
+  }>,
 }
 
 const SprintGame: React.FunctionComponent<SprintGameProps> = (props) => {
+  const { isAuthorised } = useContext(AuthorisationContext);
+
+  const gameWords = useRef(shuffle(props.words));
+
   const [seconds, setSeconds] = useState(60);
 
   const handle = useFullScreenHandle();
@@ -68,22 +80,21 @@ const SprintGame: React.FunctionComponent<SprintGameProps> = (props) => {
     wordIndex.current++;
     const translationWordIndicator = Math.random() > 0.5;
     const newWordTranslation = !translationWordIndicator
-      ? props.words[getRandomIndex(props.words)]
-      : props.words[wordIndex.current];
+      ? gameWords.current[getRandomIndex(gameWords.current)]
+      : gameWords.current[wordIndex.current];
 
     if (!newWordTranslation) return;
 
     setCardInner({
-      word: props.words[wordIndex.current],
+      word: gameWords.current[wordIndex.current],
       translation: newWordTranslation,
     })
-  }, [props.words]);
+  }, []);
 
   const updateGameStatus = useCallback(() => {
-    if (wordsInGame.current.length >= props.words.length) {
+    if (wordsInGame.current.length >= gameWords.current.length) {
       props.setLastGameResults(wordsInGame.current);
       props.setIsResultsVisible(true);
-      props.closeGame('');
     } else {
       setScoreValue();
       setPairOfWords();
@@ -100,22 +111,30 @@ const SprintGame: React.FunctionComponent<SprintGameProps> = (props) => {
     const newWord = { word: cardInner.word, isCorrect: answerStatus };
     wordsInGame.current.push(newWord);
 
+    const streak = props.longestSreak.current;
+
     if (answerStatus) {
       !isMuted && onSuccess();
       rightAnswersStreak.current++;
+      streak.current++;
     } else {
       !isMuted && onFailure();
       rightAnswersStreak.current = 0;
+      streak.best = Math.max(streak.best, streak.current);
+      streak.current = 0;
     }
 
     updateGameStatus();
-  }, [cardInner, onFailure, onSuccess, isMuted, updateGameStatus]);
+
+    if (isAuthorised) {
+      updateUsersWords('Спринт', newWord);
+    }
+  }, [cardInner, onFailure, onSuccess, isMuted, updateGameStatus, props.longestSreak, isAuthorised]);
 
   useEffect(() => {
     if (!seconds) {
       props.setLastGameResults(wordsInGame.current);
       props.setIsResultsVisible(true);
-      props.closeGame('');
     }
   }, [props, seconds]);
 
@@ -126,13 +145,13 @@ const SprintGame: React.FunctionComponent<SprintGameProps> = (props) => {
   }, [isMuted]);
 
   useEffect(() => {
-    const translationIndex = getRandomIndex(props.words);
+    const translationIndex = getRandomIndex(gameWords.current);
 
     setCardInner({
-      word: props.words[wordIndex.current],
-      translation: props.words[translationIndex],
+      word: gameWords.current[wordIndex.current],
+      translation: gameWords.current[translationIndex],
     });
-  }, [props.words]);
+  }, []);
 
   useEffect(() => {
     let timerValue = 60;
@@ -189,6 +208,7 @@ const SprintGame: React.FunctionComponent<SprintGameProps> = (props) => {
           closeGame={props.closeGame}
           changeSoundState={changeSoundState}
           isMuted={isMuted}
+          choosenGame={props.choosenGame}
         />
         <div className={styles['game-board']}>
           <div className={styles['game-statistics']}>
