@@ -14,7 +14,7 @@ const MainPage: React.FC<MainPageProps> = ({ toggleModalVisability }) => {
   return (
     <div className={styles["main-page"]}>
       <HeroPages toggleModalVisability={toggleModalVisability} />
-      <Advantagies />
+      <Advantagies toggleModalVisability={toggleModalVisability} />
       <Presentation />
       <DevTeam />
       <Scroll />
