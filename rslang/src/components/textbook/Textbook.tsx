@@ -124,7 +124,7 @@ const Textbook = () => {
             <h2 className={ styles['title'] }>
               Слова
             </h2>
-            <div className={ `${styles['book-page-wrapper']}  ${isLearnedPage ? 'learned' : ''}` }>
+            <div className={ `${styles['book-page-wrapper']} ${isLearnedPage && currentStatus.currentLevel !==6 ? 'learned' : ''}` }>
               
               <p className={ styles['learned-message'] }>* все слова на данной странице изучены</p>
               <TextbookCards 
