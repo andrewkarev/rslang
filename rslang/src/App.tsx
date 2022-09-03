@@ -21,6 +21,16 @@ function App() {
   }, [changeAuthorisationStatus, isAuthorised]);
 
   const toggleModalVisability = () => {
+    const body = document.querySelector('body');
+
+    if (!body) return;
+
+    if (!isModalOpened) {
+      body.style.overflow = 'hidden';
+    } else {
+      body.style.overflow = 'auto';
+    }
+
     setIsModalOpened(!isModalOpened);
   };
 
