@@ -12,6 +12,7 @@ import IUserWord from '../../types/services-interfaces/IUserWord';
 
 const Textbook = () => {
   const { isAuthorised } = useContext(AuthorisationContext);
+
   const userId = isAuthorised && localStorage.getItem('id');
 
   const initialLevel = Number(localStorage.getItem('level')) || 0;
