@@ -8,6 +8,7 @@
 .wrapper {
   max-width: 1280px;
   margin: 0 auto;
+  padding: 20px 40px
 }
 
 .header-wrapper {
@@ -15,7 +16,6 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
 }
 
 .button {
@@ -48,4 +48,5 @@
   display: inline-block;
   z-index: 2;
   font-size: 2rem;
+  font-family: 'Roboto', Verdana, sans-serif;
 }
