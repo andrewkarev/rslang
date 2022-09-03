@@ -21,6 +21,16 @@ function App() {
   }, [changeAuthorisationStatus, isAuthorised]);
 
   const toggleModalVisability = () => {
+    const body = document.querySelector('body');
+
+    if (!body) return;
+
+    if (!isModalOpened) {
+      body.style.overflow = 'hidden';
+    } else {
+      body.style.overflow = 'auto';
+    }
+
     setIsModalOpened(!isModalOpened);
   };
 
@@ -30,10 +40,8 @@ function App() {
       {isModalOpened && <AuthorisationForm toggleModalVisability={toggleModalVisability} />}
 
       <Routes>
-        <Route path="/" element={
-          <>
-            <MainPage />
-          </>
+        <Route path="/" element={<MainPage
+          toggleModalVisability={toggleModalVisability} />
         } />
         <Route path="textbook" element={<Textbook />} />
         <Route path="games" element={<GamesPage />} />

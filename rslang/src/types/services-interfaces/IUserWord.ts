@@ -1,3 +1,4 @@
+// 'id' and 'wordId' fields are used only for response description and shouldn't be used on request sending
 interface IUserWord {
   id?: string,
   wordId?: string,

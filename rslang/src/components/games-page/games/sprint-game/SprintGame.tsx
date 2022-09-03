@@ -10,6 +10,7 @@ import successSound from '../../../../assets/sounds/sound-of-success.ogg';
 import failureSound from '../../../../assets/sounds/sound-of-failure.ogg';
 import updateUsersWords from '../../../../services/update-user-words';
 import { AuthorisationContext } from '../../../../context/AuthorisationContext';
+import shuffle from '../../../../services/shuffle';
 
 interface SprintGameProps {
   words: IWord[],
@@ -28,6 +29,8 @@ interface SprintGameProps {
 
 const SprintGame: React.FunctionComponent<SprintGameProps> = (props) => {
   const { isAuthorised } = useContext(AuthorisationContext);
+
+  const gameWords = useRef(shuffle(props.words));
 
   const [seconds, setSeconds] = useState(60);
 
@@ -77,19 +80,19 @@ const SprintGame: React.FunctionComponent<SprintGameProps> = (props) => {
     wordIndex.current++;
     const translationWordIndicator = Math.random() > 0.5;
     const newWordTranslation = !translationWordIndicator
-      ? props.words[getRandomIndex(props.words)]
-      : props.words[wordIndex.current];
+      ? gameWords.current[getRandomIndex(gameWords.current)]
+      : gameWords.current[wordIndex.current];
 
     if (!newWordTranslation) return;
 
     setCardInner({
-      word: props.words[wordIndex.current],
+      word: gameWords.current[wordIndex.current],
       translation: newWordTranslation,
     })
-  }, [props.words]);
+  }, []);
 
   const updateGameStatus = useCallback(() => {
-    if (wordsInGame.current.length >= props.words.length) {
+    if (wordsInGame.current.length >= gameWords.current.length) {
       props.setLastGameResults(wordsInGame.current);
       props.setIsResultsVisible(true);
     } else {
@@ -108,15 +111,17 @@ const SprintGame: React.FunctionComponent<SprintGameProps> = (props) => {
     const newWord = { word: cardInner.word, isCorrect: answerStatus };
     wordsInGame.current.push(newWord);
 
+    const streak = props.longestSreak.current;
+
     if (answerStatus) {
       !isMuted && onSuccess();
       rightAnswersStreak.current++;
-      props.longestSreak.current.current++;
+      streak.current++;
     } else {
       !isMuted && onFailure();
       rightAnswersStreak.current = 0;
-      props.longestSreak.current.best = Math.max(props.longestSreak.current.best, props.longestSreak.current.current);
-      props.longestSreak.current.current = 0;
+      streak.best = Math.max(streak.best, streak.current);
+      streak.current = 0;
     }
 
     updateGameStatus();
@@ -140,13 +145,13 @@ const SprintGame: React.FunctionComponent<SprintGameProps> = (props) => {
   }, [isMuted]);
 
   useEffect(() => {
-    const translationIndex = getRandomIndex(props.words);
+    const translationIndex = getRandomIndex(gameWords.current);
 
     setCardInner({
-      word: props.words[wordIndex.current],
-      translation: props.words[translationIndex],
+      word: gameWords.current[wordIndex.current],
+      translation: gameWords.current[translationIndex],
     });
-  }, [props.words]);
+  }, []);
 
   useEffect(() => {
     let timerValue = 60;
