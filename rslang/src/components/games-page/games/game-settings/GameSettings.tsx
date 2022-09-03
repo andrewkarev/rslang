@@ -27,21 +27,30 @@ const GameSettings: React.FunctionComponent<GameSettingsProps> = (props) => {
     <>
       <div className={styles['game-settings']}>
         <div
-          className={styles['close-game']}
+          className={styles['close-game-wrapper']}
           onClick={handleCloseButtonClick}>
+          <div className={styles['close-game']}></div>
         </div>
         {props.choosenGame !== 'Аудио-вызов' && <div
-          className={styles[`${props.isMuted
-            ? 'volume-controls-muted'
-            : 'volume-controls'}`]}
-          onClick={handleVolumeButtonClick}
-        ></div>}
+          className={styles['volume-controls-wrapper']}
+          onClick={handleVolumeButtonClick}>
+          <div
+            className={styles[`${props.isMuted
+              ? 'volume-controls-muted'
+              : 'volume-controls'}`]}
+          ></div>
+        </div>
+        }
         <div
-          className={styles[`${props.handle.active
-            ? 'fullscreen-mode-active'
-            : 'fullscreen-mode'}`]}
+          className={styles['fullscreen-mode-wrapper']}
           onClick={props.handleFullScreenButtonClick}
-        ></div>
+        >
+          <div
+            className={styles[`${props.handle.active
+              ? 'fullscreen-mode-active'
+              : 'fullscreen-mode'}`]}
+          ></div>
+        </div>
       </div>
     </>
   );

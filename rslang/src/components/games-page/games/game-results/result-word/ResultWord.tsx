@@ -19,11 +19,11 @@ const ResultWord: React.FunctionComponent<ResultWordProps> = ({ result }) => {
   return (
     <tr>
       <td>
-        <button
-          className={styles['word-pronunciation']}
-          onClick={handleClick}
-        >
-        </button>
+        <div
+          className={styles['word-pronunciation-wrapper']}
+          onClick={handleClick}>
+          <button className={styles['word-pronunciation']}></button>
+        </div>
       </td>
       <td className={styles['word']}>
         {result.word.word}
