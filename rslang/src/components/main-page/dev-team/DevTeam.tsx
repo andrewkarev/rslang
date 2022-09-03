@@ -4,10 +4,16 @@ import devTeamData from '../../../data/devTeam-data';
 import Developer from './developer/Developer'
 
 const DevTeam = () => {
-  
+
   const cardElements = devTeamData.map((developer) => {
     return (
-      <Developer avatar={ developer.avatar } name={ developer.name } link = { developer.link } github = { developer.github } description={ developer.description } />
+      <Developer
+        avatar={developer.avatar}
+        name={developer.name}
+        link={developer.link}
+        github={developer.github}
+        description={developer.description}
+        key={developer.name} />
     )
   });
 

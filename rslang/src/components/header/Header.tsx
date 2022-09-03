@@ -10,13 +10,15 @@ interface HeaderProps {
 
 const Header: React.FunctionComponent<HeaderProps> = ({ toggleModalVisability }) => {
   return (
-    <div className={ styles['header'] }>
-      <div className={ styles['wrapper'] +' ' + styles['header-wrapper'] }>
+    <div className={styles['header']}>
+      <div className={styles['wrapper'] + ' ' + styles['header-wrapper']}>
         <NavLink to={'/'}>
-          <h1 className={ styles['logo']}>EasyLang</h1> 
+          <h1 className={styles['logo']}>EasyLang</h1>
         </NavLink>
         <Navigation />
-        <RegistrationBtn handler={toggleModalVisability} />
+        <RegistrationBtn
+          toggleModalVisability={toggleModalVisability}
+          isHeaderButton={true} />
       </div>
     </div>
   );

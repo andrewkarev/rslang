@@ -12,7 +12,7 @@ import IUserWord from '../../types/services-interfaces/IUserWord';
 
 const Textbook = () => {
   const { isAuthorised } = useContext(AuthorisationContext);
-  
+
   const userId = isAuthorised && localStorage.getItem('id');
 
   const initialLevel = Number(localStorage.getItem('level')) || 0;
@@ -77,6 +77,7 @@ const Textbook = () => {
       } else {
            
         levelWords = await learnWordAPI.getWords(currentStatus.currentLevel, currentStatus.currentPage);
+
         if (levelWords) {
           setCurrentLevelWords(levelWords);
         }
@@ -123,7 +124,7 @@ const Textbook = () => {
             <h2 className={ styles['title'] }>
               Слова
             </h2>
-            <div className={ `${styles['book-page-wrapper']}  ${isLearnedPage ? 'learned' : ''}` }>
+            <div className={ `${styles['book-page-wrapper']} ${isLearnedPage && currentStatus.currentLevel !==6 ? 'learned' : ''}` }>
               
               <p className={ styles['learned-message'] }>* все слова на данной странице изучены</p>
               <TextbookCards 
@@ -146,6 +147,7 @@ const Textbook = () => {
                     currentStatus={ currentStatus }
                     audioPlayer={ audioPlayer }
                     setCurrentUserWord={ setCurrentUserWord }
+                    setCurrentStatus={ setCurrentStatus }
                   />
               }
               
@@ -154,7 +156,7 @@ const Textbook = () => {
               currentStatus.currentLevel !== 6 &&
               <Pagination
                 currentStatus={ currentStatus }
-                isLearnedPage={isLearnedPage}
+                isLearnedPage={ isLearnedPage }
                 setCurrentStatus={ setCurrentStatus }
               />
             }
@@ -162,6 +164,9 @@ const Textbook = () => {
           </div>
           <Games 
             isLearnedPage={ isLearnedPage }
+            currentLevelWords={ currentLevelWords }
+            currentUserWords={ currentUserWords }
+            currentStatus={ currentStatus }
           />
         </div>
       </div>

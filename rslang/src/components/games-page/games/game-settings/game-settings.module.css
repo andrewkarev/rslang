@@ -5,6 +5,13 @@
   margin: 10px 0;
 }
 
+.close-game-wrapper,
+.fullscreen-mode-wrapper,
+.volume-controls-wrapper {
+  width: 20px;
+  height: 20px;
+}
+
 .close-game,
 .volume-controls,
 .fullscreen-mode,
