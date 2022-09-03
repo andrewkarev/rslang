@@ -96,7 +96,7 @@ const SelectedCard: React.FC<Props> = ({
         
         word = {
           optional: {
-            isNew: false, 
+            isNew: true, 
             isDifficult: true, 
             isLearned: false, 
             correctAnswersStreak: 0,
@@ -138,7 +138,7 @@ const SelectedCard: React.FC<Props> = ({
 
         word = {
           optional: {
-            isNew: false, 
+            isNew: true, 
             isDifficult: false, 
             isLearned: true, 
             correctAnswersStreak: 0,
