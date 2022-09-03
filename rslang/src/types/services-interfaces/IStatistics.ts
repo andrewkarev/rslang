@@ -17,7 +17,7 @@ interface IStatistics {
           longestStreak: number,
         },
       },
-    }[],
+    },
   }
 };
 
