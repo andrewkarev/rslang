@@ -4,7 +4,8 @@
   align-items: center;
   border-radius: 10px;
   background-color: var(--bg-color-6);
-  width: 27%;
+  width: 325px;
+  margin: 20px;
   padding: 20px;
   gap: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, .3);

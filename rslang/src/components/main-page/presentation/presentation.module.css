@@ -16,6 +16,10 @@
   gap: 80px
 }
 
+.title {
+  text-align: center;
+}
+
 .video-container {
   position: relative;
   padding-bottom: 56.25%;

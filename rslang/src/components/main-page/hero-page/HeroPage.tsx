@@ -12,7 +12,8 @@ const HeroPages = () => {
             <h2 className={ styles['title']}>Изучай английский с EasyLang!</h2>
             <p className={ styles['subtitle']}>EasyLang — образовательная платформа для изучения и практики иностранного языка, построенная на игровой механике.</p>
             <button className={ btnStyles['button']}>
-            <span className={ btnStyles['button-title']}>Зарегистрироваться</span></button>
+              <span className={ btnStyles['button-title']}>Зарегистрироваться</span>
+            </button>
           </div>
         </div>        
       </div>

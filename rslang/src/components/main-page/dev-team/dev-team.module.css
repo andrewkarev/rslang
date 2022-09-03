@@ -4,13 +4,15 @@
 }
 
 .title {
-  margin: 120px 0 80px 0;
+  margin-top: 120px;
   text-align: center;
 }
 
 .content {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 80px 0 150px 0;
 }
 
 .wave {
