@@ -15,6 +15,7 @@ const GamesPage = () => {
     best: 0,
     current: 0,
   });
+
   const audioCallLongestSreak = useRef<{ best: number, current: number }>({
     best: 0,
     current: 0,

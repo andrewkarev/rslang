@@ -8,6 +8,7 @@ import Header from './components/header/Header';
 import AuthorisationForm from './components/header/authorisation/AuthorisationForm';
 import GamesPage from './components/games-page/GamesPage';
 import { AuthorisationContext } from './context/AuthorisationContext';
+import Footer from './components/footer/Footer'
 
 function App() {
   const [isModalOpened, setIsModalOpened] = useState(false);
@@ -32,13 +33,14 @@ function App() {
         <Route path="/" element={
           <>
             <MainPage />
-            {/* <Footer /> */}
           </>
         } />
         <Route path="textbook" element={<Textbook />} />
         <Route path="games" element={<GamesPage />} />
         {/* <Route path="statistics" element={< />} /> */}
+        {/* <Route path="sprint" element={<SprintGame words={words} />} /> */}
       </Routes>
+      <Footer />
     </>
   );
 }
