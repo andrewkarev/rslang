@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { AuthorisationContext } from '../../../context/AuthorisationContext';
+import styles from '../../../components/header/header.module.css'
 
 interface RegistrationBtnProps {
   handler: () => void;
@@ -16,10 +17,12 @@ const RegistrationBtn: React.FunctionComponent<RegistrationBtnProps> = ({ handle
 
   return (
     <button
-      className="button"
+      className={ styles['button']}
       type="button"
       onClick={isAuthorised ? logOut : handler}>
-      {isAuthorised ? 'Выйти' : 'Войти'}
+      <span className={ styles['button-title']}>
+        {isAuthorised ? 'Выйти' : 'Войти'}
+      </span>
     </button>
   );
 };

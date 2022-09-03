@@ -1,0 +1,34 @@
+.option-btn-right,
+.option-btn-wrong,
+.option-btn {
+  padding: 10px 15px;
+  border: 2px solid #F8B81F;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+  cursor: pointer;
+  background-color: #fafafa;
+  text-transform: uppercase;
+}
+
+
+.option-btn:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+}
+
+.option-btn-right,
+.option-btn-wrong {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+}
+
+.option-btn-right {
+  border-color: #1ab69d;
+  background-color: #1ab69d;
+}
+
+.option-btn-wrong {
+  border-color: #fe595d;
+  background-color: #fe595d;
+}

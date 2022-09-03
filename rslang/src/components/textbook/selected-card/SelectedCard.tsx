@@ -300,7 +300,7 @@ const SelectedCard: React.FC<Props> = ({
                   </p>
                 </div>
                 <div className={ styles['game'] }>
-                  <h4 className={ styles['game-name'] }>Аулио-вызов</h4>
+                  <h4 className={ styles['game-name'] }>Аудио-вызов</h4>
                   <p className={ styles['result'] }>
                     { 
                       userWord 
