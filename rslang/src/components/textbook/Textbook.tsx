@@ -147,6 +147,7 @@ const Textbook = () => {
                     currentStatus={ currentStatus }
                     audioPlayer={ audioPlayer }
                     setCurrentUserWord={ setCurrentUserWord }
+                    setCurrentStatus={ setCurrentStatus }
                   />
               }
               
