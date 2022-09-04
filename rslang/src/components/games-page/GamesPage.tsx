@@ -16,6 +16,9 @@ const GamesPage = () => {
     current: 0,
   });
 
+  const sprintNewWords = useRef(0);
+  const sprintLearnedWords = useRef(0);
+
   const audioCallLongestSreak = useRef<{ best: number, current: number }>({
     best: 0,
     current: 0,
@@ -25,6 +28,9 @@ const GamesPage = () => {
   const [chosenGameCard, setChosenGameCard] = useState({
     sprint: false, audioCall: false,
   });
+
+  const audioCallNewWords = useRef(0);
+  const audioCallLearnedWords = useRef(0);
 
   const handleGameChoice = (choice: string) => {
     setChoosenGame(choice);
@@ -96,6 +102,8 @@ const GamesPage = () => {
         setLastGameResults={setLastGameResults}
         setIsResultsVisible={setIsResultsVisible}
         longestSreak={sprintlongestSreak}
+        sprintNewWords={sprintNewWords}
+        sprintLearnedWords={sprintLearnedWords}
       />}
       {!isResultsVisible && choosenGame === 'Аудио-вызов' && <AudioCallGame
         words={words.current}
@@ -104,6 +112,8 @@ const GamesPage = () => {
         setLastGameResults={setLastGameResults}
         setIsResultsVisible={setIsResultsVisible}
         longestSreak={audioCallLongestSreak}
+        audioCallNewWords={audioCallNewWords}
+        audioCallLearnedWords={audioCallLearnedWords}
       />
       }
       {isResultsVisible && <GameResults
@@ -113,6 +123,10 @@ const GamesPage = () => {
         handleGameChoice={handleGameChoice}
         sprintlongestSreak={sprintlongestSreak}
         audioCallLongestSreak={audioCallLongestSreak}
+        sprintNewWords={sprintNewWords}
+        sprintLearnedWords={sprintLearnedWords}
+        audioCallNewWords={audioCallNewWords}
+        audioCallLearnedWords={audioCallLearnedWords}
       />}
     </>
   );

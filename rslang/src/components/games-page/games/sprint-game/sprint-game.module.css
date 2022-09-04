@@ -46,7 +46,7 @@
   width: 54px;
   height: 52px;
   background-color: #F8B81F;
-  animation: slide-down 63s linear infinite;
+  animation: slide-down 63s linear forwards;
 }
 
 @keyframes slide-down {

@@ -10,11 +10,13 @@ interface IStatistics {
           newWords: number,
           rightAnswers: number,
           longestStreak: number,
+          allAnswers: number,
         },
         audioCall: {
           newWords: number,
           rightAnswers: number,
           longestStreak: number,
+          allAnswers: number,
         },
       },
     },

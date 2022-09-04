@@ -15,6 +15,8 @@ import OptionButton from './option-button/OptionButton';
 interface AudioCallGameProps {
   words: IWord[],
   choosenGame: string,
+  audioCallNewWords: React.MutableRefObject<number>,
+  audioCallLearnedWords: React.MutableRefObject<number>,
   closeGame: (choice: string) => void,
   setLastGameResults: (value: React.SetStateAction<[] | {
     word: IWord;
@@ -127,14 +129,21 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
     audio.play();
   };
 
-  const updateGameWordStatus = useCallback((newWord: {
+  const updateGameWordStatus = useCallback(async (newWord: {
     word: IWord;
     isCorrect: boolean;
   }) => {
     if (isAuthorised) {
-      updateUsersWords('Аудио-вызов', newWord);
+      const response = await updateUsersWords('Аудио-вызов', newWord);
+
+      if (!response) return;
+
+      const [isNewWord, isLearnedWord] = response;
+
+      if (isNewWord) props.audioCallNewWords.current++;
+      if (isLearnedWord) props.audioCallLearnedWords.current++;
     }
-  }, [isAuthorised]);
+  }, [isAuthorised, props.audioCallNewWords, props.audioCallLearnedWords]);
 
   const updateStreak = useCallback((isAnswerCorrect: boolean) => {
     const streak = props.longestSreak.current;
