@@ -15,6 +15,8 @@ import shuffle from '../../../../services/shuffle';
 interface SprintGameProps {
   words: IWord[],
   choosenGame: string,
+  sprintNewWords: React.MutableRefObject<number>,
+  sprintLearnedWords: React.MutableRefObject<number>,
   closeGame: (choice: string) => void,
   setLastGameResults: (value: React.SetStateAction<[] | {
     word: IWord;
@@ -101,7 +103,7 @@ const SprintGame: React.FunctionComponent<SprintGameProps> = (props) => {
     }
   }, [setPairOfWords, setScoreValue, props]);
 
-  const handleAnswerButtonClick = useCallback((isRightButton: boolean) => {
+  const handleAnswerButtonClick = useCallback(async (isRightButton: boolean) => {
     if (!cardInner?.word) return;
 
     const answerStatus = isRightButton
@@ -127,9 +129,16 @@ const SprintGame: React.FunctionComponent<SprintGameProps> = (props) => {
     updateGameStatus();
 
     if (isAuthorised) {
-      updateUsersWords('Спринт', newWord);
+      const response = await updateUsersWords('Спринт', newWord);
+
+      if (!response) return;
+
+      const [isNewWord, isLearnedWord] = response;
+
+      if (isNewWord) props.sprintNewWords.current++;
+      if (isLearnedWord) props.sprintLearnedWords.current++;
     }
-  }, [cardInner, onFailure, onSuccess, isMuted, updateGameStatus, props.longestSreak, isAuthorised]);
+  }, [cardInner, onFailure, onSuccess, isMuted, updateGameStatus, props.longestSreak, isAuthorised, props.sprintNewWords, props.sprintLearnedWords]);
 
   useEffect(() => {
     if (!seconds) {
