@@ -18,12 +18,20 @@ type Props = {
   words: React.MutableRefObject<[] | IWord[]>;
 };
 
-const Game: React.FC<Props> = (props: Props) => {
+const Game: React.FC<Props> = ({
+  name,
+  description,
+  image,
+  isLearnedPage,
+  currentLevelWords,
+  currentUserWords,
+  currentStatus
+}) => {
 
   const { isAuthorised } = useContext(AuthorisationContext);
 
   const handleGameBtnClick = async () => {
-    const response = await getWords();
+  const response = await getWords();
 
     if (!response) return;
 
@@ -32,7 +40,7 @@ const Game: React.FC<Props> = (props: Props) => {
   }
 
   const getWords = async () => {
-    if (!isAuthorised) return props.currentLevelWords;
+    if (!isAuthorised) return currentLevelWords;
 
     const getNotLearnedWords = (words: IWord[]) => {
       return words.filter((word) =>
@@ -42,7 +50,7 @@ const Game: React.FC<Props> = (props: Props) => {
 
     const gameWords = getNotLearnedWords(props.currentLevelWords);
 
-    let pageForLookup = props.currentStatus.currentPage;
+    let pageForLookup = currentStatus.currentPage;
 
     while (gameWords.length < 20) {
 
@@ -66,9 +74,9 @@ const Game: React.FC<Props> = (props: Props) => {
   }
 
   return (
-    <div
-      className={`${styles['game']} ${props.isLearnedPage ? styles['disabled'] : ''}`}
-      onClick={props.isLearnedPage ? undefined : handleGameBtnClick}
+    <div 
+      className={ `${styles['game']} ${props.isLearnedPage && props.currentStatus.currentLevel !== 6 || !props.currentLevelWords.length ? styles['disabled'] : ''}` }
+      onClick={ props.isLearnedPage && props.currentStatus.currentLevel !== 6 || !props.currentLevelWords.length ?  undefined :  handleGameBtnClick }
     >
       <h3 className={styles['game-name']}>{props.name}</h3>
       <div className={styles['game-description']}>{props.description}</div>
