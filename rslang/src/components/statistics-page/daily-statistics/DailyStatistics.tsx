@@ -7,6 +7,7 @@ import chart from './../../../assets/icons/chart.png';
 import streak from './../../../assets/icons/streak.png';
 import GameStatistic from './game-statistic/GameStatistic';
 import IStatistics from '../../../types/services-interfaces/IStatistics';
+import getCurrentDate from '../../../services/get-current-date';
 
 type Props = {
   stats: IStatistics | null;
@@ -35,11 +36,9 @@ const DailyStatistics: React.FC<Props> = ({ stats }) => {
   } | null = null;
 
   if (stats) {
-    const date = new Date();
-    date.setHours(0, 0, 0, 0);
-    const timeStamp = date.getTime();
+    const timeStamp = getCurrentDate();
     
-    const dayStatEntry = Object.entries(stats.optional).find(([key, value]) => key === String(timeStamp))
+    const dayStatEntry = Object.entries(stats.optional).find(([key, value]) => key === timeStamp)
     if (dayStatEntry) {
       dayStat = dayStatEntry[1];
     }
