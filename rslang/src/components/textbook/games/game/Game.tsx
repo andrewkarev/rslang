@@ -16,31 +16,40 @@ type Props = {
   currentStatus: {currentLevel: number, currentCard: number, currentPage: number};
 };
 
-const Game: React.FC<Props> = (props: Props) => {
+const Game: React.FC<Props> = ({
+  name,
+  description,
+  image,
+  isLearnedPage,
+  currentLevelWords,
+  currentUserWords,
+  currentStatus
+}) => {
 
   const { isAuthorised } = useContext(AuthorisationContext);
 
   const handleGameBtnClick = async () => {
     console.log(await getWords());
+    console.log(currentLevelWords.length)
   }
 
   const getWords = async () => {
-    if (!isAuthorised) return props.currentLevelWords;
+    if (!isAuthorised) return currentLevelWords;
 
     const getNotLearnedWords = (words: IWord[]) => {
       return words.filter((word) => 
-        !props.currentUserWords.find((userWord) => userWord.wordId === word.id && userWord.optional.isLearned)
+        !currentUserWords.find((userWord) => userWord.wordId === word.id && userWord.optional.isLearned)
       );
     }
         
-    const gameWords = getNotLearnedWords(props.currentLevelWords);
+    const gameWords = getNotLearnedWords(currentLevelWords);
 
-    let pageForLookup = props.currentStatus.currentPage;
+    let pageForLookup = currentStatus.currentPage;
 
     while (gameWords.length < 20) {
       
       if (pageForLookup > 0) {
-        const response = await learnWordAPI.getWords(props.currentStatus.currentLevel, --pageForLookup);
+        const response = await learnWordAPI.getWords(currentStatus.currentLevel, --pageForLookup);
         
         if (!response) return;
       
@@ -60,12 +69,12 @@ const Game: React.FC<Props> = (props: Props) => {
 
   return (
     <div 
-      className={ `${styles['game']} ${props.isLearnedPage && props.currentStatus.currentLevel !== 6 ? styles['disabled'] : ''}` }
-      onClick={ !props.isLearnedPage && props.currentStatus.currentLevel !== 6 ? handleGameBtnClick : undefined }
+      className={ `${styles['game']} ${isLearnedPage && currentStatus.currentLevel !== 6 || !currentLevelWords.length ? styles['disabled'] : ''}` }
+      onClick={ isLearnedPage && currentStatus.currentLevel !== 6 || !currentLevelWords.length ?  undefined :  handleGameBtnClick }
     >
-      <h3 className={ styles['game-name'] }>{ props.name }</h3>
-      <div className={ styles['game-description'] }>{ props.description }</div>
-      <img className={ styles['game-img'] } src={ props.image } alt="game img" />
+      <h3 className={ styles['game-name'] }>{ name }</h3>
+      <div className={ styles['game-description'] }>{ description }</div>
+      <img className={ styles['game-img'] } src={ image } alt="game img" />
     </div>
   );
 }
