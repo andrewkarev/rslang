@@ -1,0 +1,23 @@
+
+.chart {
+  display: flex;
+  justify-content: center;
+  max-width: 1000px;
+  padding: 50px;
+  margin: 0 auto;
+  margin-bottom: 70px;
+  background-color: #F3F2F1;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.chart:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+}
+
+.chart-wrapper {
+  max-width: 700px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fff;
+}

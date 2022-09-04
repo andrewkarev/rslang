@@ -1,0 +1,37 @@
+/* temporary styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+
+* {
+	box-sizing: border-box;
+}
+
+h2 {
+	font-weight: 900;
+	font-size: 32px;
+}
+
+.btn {
+	background-color: transparent;
+}
+
+.wrapper {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 20px 30px;
+}
+
+.header {
+	margin-bottom: 30px;
+	box-shadow: 2px 4px black;
+}
+
+/* end temporary styles */
+
+.title {
+	margin-bottom: 15px;
+}
+
+.no-stats-message {
+	font-size: 20px;
+}
