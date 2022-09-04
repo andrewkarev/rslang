@@ -40,7 +40,6 @@ const DailyStatistics: React.FC<Props> = ({ stats }) => {
     date.setHours(0, 0, 0, 0);
     const timeStamp = date.getTime();
     
-    //const dayStatEntry = Object.entries(stat.optional).find(([key, value]) => Date.parse(key) === Number(date))
     const dayStatEntry = Object.entries(stats.optional).find(([key, value]) => key === String(timeStamp))
     if (dayStatEntry) {
       dayStat = dayStatEntry[1];

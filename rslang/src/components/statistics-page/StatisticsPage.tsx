@@ -9,26 +9,7 @@ import styles from './statistics-page.module.css';
 const StatisticsPage = () => {
   const { isAuthorised } = useContext(AuthorisationContext);
   const userId = isAuthorised && localStorage.getItem('id');
-  // type Stat = {
-  //   allAnswers: number,
-  //   rightAnswers: number,
-  //   learnedWords: number,
-  //   newWords: number,
-  //   games: {
-  //     sprint: {
-  //       allAnswers: number,
-  //       newWords: number,
-  //       rightAnswers: number,
-  //       longestStreak: number,
-  //     },
-  //     audioCall: {
-  //       allAnswers: number,
-  //       newWords: number,
-  //       rightAnswers: number,
-  //       longestStreak: number,
-  //     },
-  //   },
-  // } | null;
+  
   const [stats, setStats] = useState<IStatistics | null>(null);
   
   useEffect(() => {
@@ -38,19 +19,7 @@ const StatisticsPage = () => {
         const response = await learnWordAPI.getStatistics(userId);
 
         if (response) {
-          setStats(response);
-          // console.log(response);
-          // const date = new Date();
-          // date.setHours(0, 0, 0, 0);
-
-          // console.log(+date)
-          
-          // const dayStatEntry = Object.entries(response.optional).find(([key, value]) => Date.parse(key) === Number(date))
-          // if (dayStatEntry) {
-          //   setDayStat(dayStatEntry[1]);
-          //   console.log(dayStat);
-          // }
-          
+          setStats(response);          
         }
       } else {
         setStats(null);
@@ -64,6 +33,11 @@ const StatisticsPage = () => {
       <div className={ styles['statistics'] }>
         <div className={ `${styles['wrapper']} ${styles['statistics-wrapper']} ` }>
           <h2 className={ styles['title']}>Статистика</h2>
+          { !isAuthorised &&
+            <p className={ styles['no-stats-message']}>
+              Данные статистики доступны только зарегистрированным пользователям
+            </p>
+          }
           <DailyStatistics stats={ stats }/>
           <LongTermStatistics stats={ stats }/>
         </div>

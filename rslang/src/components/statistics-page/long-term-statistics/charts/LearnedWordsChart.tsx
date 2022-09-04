@@ -45,6 +45,13 @@ const LearnedWordsChart: React.FC<Props> = ({ stats }) => {
         }
       },
     },
+    scales: {
+      xAxis: {
+        ticks: {
+          display: false
+        }
+      }
+    }
   };
 
   const dates: string[] = [];

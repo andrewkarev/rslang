@@ -32,11 +32,6 @@ h2 {
 	margin-bottom: 15px;
 }
 
-.statistics {
-	background-color: #F8B81F;
+.no-stats-message {
+	font-size: 20px;
 }
-
-.statistics-wrapper {
-	background-color: white;
-}
-
