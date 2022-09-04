@@ -13,6 +13,10 @@
   margin-right: 30px;
 }
 
+.nav-item a {
+  padding-bottom: 5px;
+}
+
 .nav-item:focus,
 .nav-item:hover {
   color: #000;
