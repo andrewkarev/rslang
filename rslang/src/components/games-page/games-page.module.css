@@ -1,19 +1,6 @@
 /* temporary styles */
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
-html {
-  font-size: 10px;
-}
-
-body {
-  background-color: #fafafa;
-  font-size: 1.6rem;
-  font-family: 'Roboto', Verdana, sans-serif;
-  color: var(--color-text-1);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 .btn {
   background-color: transparent;
 }
@@ -28,6 +15,7 @@ body {
 /* end temporary styles */
 
 .games-page {
+  flex-grow: 1;
   background: url(../../assets/images/cta.png);
   background-size: cover;
   background-color: #F8B81F;
