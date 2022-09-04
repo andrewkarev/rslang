@@ -9,6 +9,8 @@ const updateUsersWords = async (gameName: string, word: {
   const isSprintGame = gameName === 'Спринт';
   const isAudioCallGame = gameName === 'Аудио-вызов';
 
+  let [isNewWord, isLearnedWord] = [false, false];
+
   if (!userId) return;
 
   const wordId = word.word.id;
@@ -19,7 +21,11 @@ const updateUsersWords = async (gameName: string, word: {
 
     if (!userWord) return;
 
-    const currentStreak = Number(isCorrect) && userWord.optional.correctAnswersStreak++;
+    if (userWord.optional.isNew) isNewWord = !isNewWord;
+
+    const isLearnedInitialValue = userWord.optional.isLearned;
+
+    const currentStreak = isCorrect ? userWord.optional.correctAnswersStreak + 1 : 0;
     const wordLearnedStatus = isCorrect && userWord.optional.isLearned;
     const isLearned = wordLearnedStatus || currentStreak >= 3;
     const isDifficult = isLearned ? !isLearned : userWord.optional.isDifficult;
@@ -31,6 +37,8 @@ const updateUsersWords = async (gameName: string, word: {
       + Number(isAudioCallGame));
     const audioCallCorrectAnswers = (userWord.optional.games.audioCall.correctAnswers
       + Number(isCorrect && isAudioCallGame));
+
+    if (!isLearnedInitialValue && isLearned) isLearnedWord = !isLearnedWord
 
     const body = {
       optional: {
@@ -60,7 +68,7 @@ const updateUsersWords = async (gameName: string, word: {
 
       const body = {
         optional: {
-          isNew: true,
+          isNew: false,
           isDifficult: false,
           isLearned: false,
           correctAnswersStreak: Number(isCorrect),
@@ -78,8 +86,10 @@ const updateUsersWords = async (gameName: string, word: {
       }
 
       learnWordAPI.createUserWord(userId, wordId, body);
+      isNewWord = !isNewWord;
     }
   }
+  return [isNewWord, isLearnedWord];
 };
 
 export default updateUsersWords;

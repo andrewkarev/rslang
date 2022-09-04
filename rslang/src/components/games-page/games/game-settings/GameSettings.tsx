@@ -51,6 +51,10 @@ const GameSettings: React.FunctionComponent<GameSettingsProps> = (props) => {
               : 'fullscreen-mode'}`]}
           ></div>
         </div>
+        <div
+          className={styles['about-game-wrapper']}>
+          <div className={styles['about-game']}></div>
+        </div>
       </div>
     </>
   );
