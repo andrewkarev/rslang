@@ -1,5 +1,6 @@
 .nav {
   margin-left: auto;
+  z-index: 100;
 }
 
 .nav-list {
@@ -31,4 +32,54 @@
 .nav-item:focus:after,
 .nav-item:hover::after {
   width: 100%;
+}
+
+.burger {
+  display: none;
+  margin-left: 20px;
+}
+
+.burger-line {
+  width: 30px;
+  height: 3px;
+  background-color: #000;
+}
+
+@media (max-width: 800px) {
+  .nav {
+    margin-left: 0;
+    order: 1;
+  }
+
+  .nav-list {
+    position: absolute;
+    top: 90px;
+    right: -280px;
+    display: none;
+    width: 280px;
+    padding: 80px 40px;
+    flex-direction: column;
+    gap: 25px;
+    background-color: #18A18B;
+    transition: right 1s;
+  }
+
+  .nav-item {
+    color: #fff;
+  }
+
+  .burger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  .nav-list.active {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    right: 0;
+    z-index: 2;
+  }
 }

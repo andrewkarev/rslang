@@ -1,8 +1,8 @@
 .header {
-  position: relative;
+  /* position: relative; */
   background-color: transparent;
   box-shadow: 0 5px 5px rgb(0 0 0 / 30%);
-  z-index: 1;
+  z-index: 2;
 }
 
 .wrapper {
@@ -56,8 +56,14 @@
   font-family: 'Roboto', Verdana, sans-serif;
 }
 
-@media (max-width: 550px) {
-  .wrapper {
-    padding: 15px 10px;
+.navs-btns {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 500px) {
+  .logo {
+    font-size: 28px;
+    font-weight: 900;
   }
 }
