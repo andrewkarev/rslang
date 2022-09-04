@@ -1,9 +1,17 @@
 /* temporary styles */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
 
-h2	{
-  font-weight: 900;
-  font-size: 32px;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+html {
+  font-size: 10px;
+}
+
+body {
+  background-color: #fafafa;
+  font-size: 1.6rem;
+  font-family: 'Roboto', Verdana, sans-serif;
+  color: var(--color-text-1);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .btn {
@@ -13,23 +21,21 @@ h2	{
 .wrapper {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 20px 0;
+  padding: 20px 40px;
 }
 
-.header {
-  margin-bottom: 30px;
-}
 
 /* end temporary styles */
 
 .games-page {
-  background-image: url(https://edublink.html.devsblink.com/assets/images/cta/cta.svg);
-  background-repeat: no-repeat;
+  background: url(../../assets/images/cta.png);
   background-size: cover;
   background-color: #F8B81F;
 }
 
 .title {
+  font-size: 3.5rem;
+  font-weight: 900;
   margin-bottom: 20px;
 }
 
@@ -78,4 +84,3 @@ h2	{
     transform: rotate(-360deg);
   }
 }
-

@@ -84,7 +84,7 @@ const GameCard = (props: Props) => {
           {levelsElements}
         </div>
         <button
-          className={'btn ' + styles[`${(isButtonActive)
+          className={styles['btn'] +' ' + styles[`${(isButtonActive)
             ? 'start-game-btn'
             : 'start-game-btn-disabled'}`]}
           onClick={clickHandler}
