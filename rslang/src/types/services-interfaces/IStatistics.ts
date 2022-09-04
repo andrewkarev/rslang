@@ -7,11 +7,13 @@ interface IStatistics {
       newWords: number,
       games: {
         sprint: {
+          allAnswers: number,
           newWords: number,
           rightAnswers: number,
           longestStreak: number,
         },
         audioCall: {
+          allAnswers: number,
           newWords: number,
           rightAnswers: number,
           longestStreak: number,

@@ -23,6 +23,7 @@ h2 {
 
 .header {
 	margin-bottom: 30px;
+	box-shadow: 2px 4px black;
 }
 
 /* end temporary styles */
@@ -32,7 +33,10 @@ h2 {
 }
 
 .statistics {
-	
-	/* background-color: aqua; */
+	background-color: #F8B81F;
+}
+
+.statistics-wrapper {
+	background-color: white;
 }
 
