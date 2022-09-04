@@ -7,12 +7,14 @@
 
 .close-game-wrapper,
 .fullscreen-mode-wrapper,
-.volume-controls-wrapper {
+.volume-controls-wrapper,
+.about-game-wrapper {
   width: 20px;
   height: 20px;
 }
 
 .close-game,
+.about-game,
 .volume-controls,
 .fullscreen-mode,
 .volume-controls-muted,
@@ -28,6 +30,10 @@
 
 .close-game {
   background-image: url(../../../../assets/icons/cancel.png);
+}
+
+.about-game {
+  background-image: url(../../../../assets/icons/question-mark.png);
 }
 
 .volume-controls {
