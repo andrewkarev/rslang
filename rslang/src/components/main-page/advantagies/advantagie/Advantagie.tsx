@@ -30,7 +30,7 @@ const Advantagie = (props: Props) => {
         </div>
       </NavLink>
       : <div
-        className={styles['advantagie']}
+        className={styles['advantage-registration']}
         onClick={() => {
           isAuthorised
             ? console.log('Already registred')
@@ -38,6 +38,9 @@ const Advantagie = (props: Props) => {
         }}
       >
         {advantageElement}
+        {isAuthorised && <span className={styles['tooltiptext']}>
+          Здорово, что вы уже с нами !
+        </span>}
       </div>
   );
 }

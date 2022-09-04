@@ -10,7 +10,7 @@ const Presentation = () => {
         </svg>
       </div>
       <div className={styles['wrapper'] + ' ' + styles['presentation__wrapper']}>
-        <h2 className={styles['title']}>Добро пожаловать в RSLanguoLeo</h2>
+        <h2 className={styles['title']}>Добро пожаловать в EasyLang</h2>
         <div className={styles['video-container']}>
           <iframe src="https://www.youtube.com/embed/0AohM_oOjBc"
             title="YouTube video player" allow="accelerometer; autoplay; clipboard-write;

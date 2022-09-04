@@ -53,7 +53,6 @@ const GameSettings: React.FunctionComponent<GameSettingsProps> = (props) => {
         </div>
         <div className={styles['about-game-wrapper']}>
           <div className={styles['about-game']}>
-
             <span className={styles['tooltiptext']}>
               {`${props.choosenGame !== 'Аудио-вызов'
                 ? 'Выбрать правильный ответ можно как с помощью мыши, так и нажатием на клавиши \'ArrowRoght\', \'ArrowLeft\''
