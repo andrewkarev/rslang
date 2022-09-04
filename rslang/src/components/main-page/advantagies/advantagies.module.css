@@ -3,8 +3,9 @@
 }
 
 .wrapper {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
+  padding: 0 40px
 }
 
 .title {
@@ -18,4 +19,11 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 32px;
+}
+
+@media (max-width: 680px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+  }
 }

@@ -4,8 +4,9 @@
 }
 
 .wrapper {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
+  padding: 0 40px
 }
 
 .presentation__wrapper {
@@ -14,6 +15,10 @@
   flex-direction: column;
   align-items: center;
   gap: 80px
+}
+
+.title {
+  text-align: center;
 }
 
 .video-container {

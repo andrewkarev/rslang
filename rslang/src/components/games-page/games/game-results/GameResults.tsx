@@ -181,12 +181,14 @@ const GameResults: React.FunctionComponent<GameResultsProps> = (props) => {
 
         </div>
         <div className={styles['controls-container']}>
-          <button
-            className={styles['to-games-btn']}
-            onClick={handleButtonClick}
-          >
-            К играм
-          </button>
+          <NavLink to='/games'>
+            <button
+              className={styles['to-games-btn']}
+              onClick={handleButtonClick}
+            >
+              К играм
+            </button>
+          </NavLink>
           <NavLink to='/textbook'>
             <button
               className={styles['to-textbook-btn']}

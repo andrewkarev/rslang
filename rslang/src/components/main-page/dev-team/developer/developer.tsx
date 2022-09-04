@@ -19,8 +19,8 @@ const Developer = (props: Props) => {
           <img className={styles['github']} src={props.github} alt="github img" />
         </a>
       </div>
-      <div className={styles['description']}>{props.description}</div>
-    </div>
+      <p className={ styles['description'] }>{ props.description }</p>      
+      </div>
   );
 }
 

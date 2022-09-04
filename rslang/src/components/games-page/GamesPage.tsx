@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import GameCard from './game-card/GameCard';
 import gamesData from '../../data/games-data';
 import styles from './games-page.module.css';
@@ -10,39 +10,51 @@ import GameResults from './games/game-results/GameResults';
 import getRandomPages from '../../services/get-random-pages';
 import AudioCallGame from './games/audiocall-game/AudioCall';
 
-const GamesPage = () => {
-  const sprintlongestSreak = useRef<{ best: number, current: number }>({
-    best: 0,
-    current: 0,
-  });
+type GamesPageProps = {
+  choosenGame: string,
+  isResultsVisible: boolean,
+  handleGameChoice: (choice: string) => void;
+  setIsResultsVisible: (value: React.SetStateAction<boolean>) => void,
+  words: React.MutableRefObject<[] | IWord[]>;
+  sprintlongestSreak: React.MutableRefObject<{
+    best: number;
+    current: number;
+  }>,
+  sprintNewWords: React.MutableRefObject<number>,
+  sprintLearnedWords: React.MutableRefObject<number>,
+  audioCallLongestSreak: React.MutableRefObject<{
+    best: number;
+    current: number;
+  }>,
+  audioCallNewWords: React.MutableRefObject<number>,
+  audioCallLearnedWords: React.MutableRefObject<number>,
+  lastGameResults: { word: IWord, isCorrect: boolean }[] | [],
+  setLastGameResults: React.Dispatch<React.SetStateAction<[] | {
+    word: IWord;
+    isCorrect: boolean;
+  }[]>>
+};
 
-  const sprintNewWords = useRef(0);
-  const sprintLearnedWords = useRef(0);
-
-  const audioCallLongestSreak = useRef<{ best: number, current: number }>({
-    best: 0,
-    current: 0,
-  });
-
-  const [choosenGame, setChoosenGame] = useState('');
+const GamesPage: React.FC<GamesPageProps> = ({
+  choosenGame,
+  isResultsVisible,
+  words,
+  handleGameChoice,
+  setIsResultsVisible,
+  sprintlongestSreak,
+  sprintNewWords,
+  sprintLearnedWords,
+  audioCallLongestSreak,
+  audioCallNewWords,
+  audioCallLearnedWords,
+  lastGameResults,
+  setLastGameResults,
+}) => {
   const [chosenGameCard, setChosenGameCard] = useState({
     sprint: false, audioCall: false,
   });
 
-  const audioCallNewWords = useRef(0);
-  const audioCallLearnedWords = useRef(0);
-
-  const handleGameChoice = (choice: string) => {
-    setChoosenGame(choice);
-  }
-
-  const [isResultsVisible, setIsResultsVisible] = useState(false);
   const [wordsGroup, setWordsGroup] = useState(0);
-  const [lastGameResults, setLastGameResults] = useState<{
-    word: IWord, isCorrect: boolean
-  }[] | []>([]);
-
-  const words = useRef<IWord[] | []>([]);
 
   useEffect(() => {
     const getWords = async () => {
@@ -65,7 +77,7 @@ const GamesPage = () => {
       words.current = shuffle(wordsList);
     }
     getWords();
-  }, [wordsGroup]);
+  }, [wordsGroup, words]);
 
   const gameElements = gamesData.map((game, index) => {
     return (
