@@ -6,7 +6,6 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthorisationState } from './context/AuthorisationContext';
 import LearnWordsApi from './services/learn-words-api';
-import { Console } from 'console';
 
 const learnWordAPI = new LearnWordsApi();
 

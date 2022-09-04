@@ -7,7 +7,6 @@ import chart from './../../../assets/icons/chart.png';
 import streak from './../../../assets/icons/streak.png';
 import GameStatistic from './game-statistic/GameStatistic';
 import IStatistics from '../../../types/services-interfaces/IStatistics';
-import { timeStamp } from 'console';
 
 type Props = {
   stats: IStatistics | null;

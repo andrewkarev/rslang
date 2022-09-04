@@ -1,4 +1,7 @@
 import React from 'react';
+import { Line } from 'react-chartjs-2';
+import IStatistics from '../../../../types/services-interfaces/IStatistics';
+import { formatDate } from '../../../../services/get-current-date';
 import { 
   Chart as ChartJS,
   CategoryScale,
@@ -10,8 +13,6 @@ import {
   Filler,
   Legend,
  } from 'chart.js';
-import { Line } from 'react-chartjs-2';
-import IStatistics from '../../../../types/services-interfaces/IStatistics';
 
 ChartJS.register(
   CategoryScale,
@@ -55,34 +56,26 @@ const LearnedWordsChart: React.FC<Props> = ({ stats }) => {
   };
 
   const dates: string[] = [];
-  const leanedWords: string[] = [];
+  const learnedWords: string[] = [];
 
   if (stats) {
     Object.entries(stats.optional)
       .sort(([key1, value1], [key2, value2]) => Number(key1) - Number(key2))
       .forEach(([key, value]) => {
-        const date = new Date(Number(key));
-
-        const day = '0' + date.getDate();
-        const month = "0" + (date.getMonth() + 1);
-        const year = date.getFullYear();
-
-        const formattedTime = `${day.slice(-2) }.${month.slice(-2)}.${year}`;
+        const formattedDate = formatDate(Number(key));
         
-        dates.push(formattedTime);
-        leanedWords.push(String(value.learnedWords));
+        dates.push(formattedDate);
+        learnedWords.push(String(value.learnedWords));
       });
   }
 
-  const labels = dates;
-
   const data = {
-    labels,
+    labels: dates,
     datasets: [
       {
         fill: true,
         label: 'Изученных слов',
-        data: leanedWords,
+        data: learnedWords,
         backgroundColor: '#FE595D',
       }
     ],

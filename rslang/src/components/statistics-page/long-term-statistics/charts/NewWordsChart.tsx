@@ -1,4 +1,7 @@
 import React from 'react';
+import { Bar } from 'react-chartjs-2';
+import IStatistics from '../../../../types/services-interfaces/IStatistics';
+import { formatDate } from '../../../../services/get-current-date';
 import { 
   Chart as ChartJS,
   CategoryScale,
@@ -8,8 +11,6 @@ import {
   Tooltip,
   Legend,
  } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-import IStatistics from '../../../../types/services-interfaces/IStatistics';
 
 ChartJS.register(
   CategoryScale,
@@ -57,23 +58,15 @@ const NewWordsChart: React.FC<Props> = ({ stats }) => {
     Object.entries(stats.optional)
       .sort(([key1, value1], [key2, value2]) => Number(key1) - Number(key2))
       .forEach(([key, value]) => {
-        const date = new Date(Number(key));
-
-        const day = '0' + date.getDate();
-        const month = "0" + (date.getMonth() + 1);
-        const year = date.getFullYear();
-
-        const formattedTime = `${day.slice(-2) }.${month.slice(-2)}.${year}`;
+        const formattedDate = formatDate(Number(key));
         
-        dates.push(formattedTime);
+        dates.push(formattedDate);
         newWords.push(String(value.newWords));
       });
   }
 
-  const labels = dates;
-
   const data = {
-    labels,
+    labels: dates,
     datasets: [
       {
         label: 'Новых слов',
