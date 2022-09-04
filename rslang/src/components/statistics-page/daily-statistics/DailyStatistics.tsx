@@ -7,12 +7,13 @@ import chart from './../../../assets/icons/chart.png';
 import streak from './../../../assets/icons/streak.png';
 import GameStatistic from './game-statistic/GameStatistic';
 import IStatistics from '../../../types/services-interfaces/IStatistics';
+import { timeStamp } from 'console';
 
 type Props = {
-  stat: IStatistics| null;
+  stats: IStatistics | null;
 }
 
-const DailyStatistics: React.FC<Props> = ({ stat }) => {
+const DailyStatistics: React.FC<Props> = ({ stats }) => {
   let dayStat: {
     allAnswers: number,
     rightAnswers: number,
@@ -34,11 +35,13 @@ const DailyStatistics: React.FC<Props> = ({ stat }) => {
     },
   } | null = null;
 
-  if (stat) {
+  if (stats) {
     const date = new Date();
     date.setHours(0, 0, 0, 0);
+    const timeStamp = date.getTime();
     
-    const dayStatEntry = Object.entries(stat.optional).find(([key, value]) => Date.parse(key) === Number(date))
+    //const dayStatEntry = Object.entries(stat.optional).find(([key, value]) => Date.parse(key) === Number(date))
+    const dayStatEntry = Object.entries(stats.optional).find(([key, value]) => key === String(timeStamp))
     if (dayStatEntry) {
       dayStat = dayStatEntry[1];
     }

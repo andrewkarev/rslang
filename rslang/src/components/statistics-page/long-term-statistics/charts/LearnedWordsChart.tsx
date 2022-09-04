@@ -11,6 +11,7 @@ import {
   Legend,
  } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import IStatistics from '../../../../types/services-interfaces/IStatistics';
 
 ChartJS.register(
   CategoryScale,
@@ -23,7 +24,11 @@ ChartJS.register(
   Legend,
 );
 
-const LearnedWordsChart = () => {
+type Props = {
+  stats: IStatistics | null;
+}
+
+const LearnedWordsChart: React.FC<Props> = ({ stats }) => {
 
   const options = {
     maintainAspectRatio: false,
@@ -42,7 +47,27 @@ const LearnedWordsChart = () => {
     },
   };
 
-  const labels = ['1 сентября', '2 сентября', '3 сентября', '4 сентября', '5 сентября', '6 сентября'];
+  const dates: string[] = [];
+  const leanedWords: string[] = [];
+
+  if (stats) {
+    Object.entries(stats.optional)
+      .sort(([key1, value1], [key2, value2]) => Number(key1) - Number(key2))
+      .forEach(([key, value]) => {
+        const date = new Date(Number(key));
+
+        const day = '0' + date.getDate();
+        const month = "0" + (date.getMonth() + 1);
+        const year = date.getFullYear();
+
+        const formattedTime = `${day.slice(-2) }.${month.slice(-2)}.${year}`;
+        
+        dates.push(formattedTime);
+        leanedWords.push(String(value.learnedWords));
+      });
+  }
+
+  const labels = dates;
 
   const data = {
     labels,
@@ -50,7 +75,7 @@ const LearnedWordsChart = () => {
       {
         fill: true,
         label: 'Изученных слов',
-        data: [10, 20, 35, 40, 50, 70],
+        data: leanedWords,
         backgroundColor: '#FE595D',
       }
     ],

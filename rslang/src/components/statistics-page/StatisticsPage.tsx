@@ -29,7 +29,7 @@ const StatisticsPage = () => {
   //     },
   //   },
   // } | null;
-  const [stat, setStat] = useState<IStatistics | null>(null);
+  const [stats, setStats] = useState<IStatistics | null>(null);
   
   useEffect(() => {
     const asyncFunction = async () => {
@@ -38,7 +38,7 @@ const StatisticsPage = () => {
         const response = await learnWordAPI.getStatistics(userId);
 
         if (response) {
-          setStat(response);
+          setStats(response);
           // console.log(response);
           // const date = new Date();
           // date.setHours(0, 0, 0, 0);
@@ -52,6 +52,8 @@ const StatisticsPage = () => {
           // }
           
         }
+      } else {
+        setStats(null);
       }
     }
     asyncFunction();   
@@ -62,8 +64,8 @@ const StatisticsPage = () => {
       <div className={ styles['statistics'] }>
         <div className={ `${styles['wrapper']} ${styles['statistics-wrapper']} ` }>
           <h2 className={ styles['title']}>Статистика</h2>
-          <DailyStatistics stat={ stat }/>
-          <LongTermStatistics />
+          <DailyStatistics stats={ stats }/>
+          <LongTermStatistics stats={ stats }/>
         </div>
       </div>
     </>

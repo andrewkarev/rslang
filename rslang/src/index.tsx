@@ -9,35 +9,6 @@ import LearnWordsApi from './services/learn-words-api';
 import { Console } from 'console';
 
 const learnWordAPI = new LearnWordsApi();
-const date = new Date();
-date.setHours(0, 0, 0, 0);
-// learnWordAPI.updateStatistics(
-//   '6307b3693799c6001637383d', {
-//     optional: {
-//       [String(date)]: {
-//         allAnswers: 20,
-//         rightAnswers: 18,
-//         learnedWords: 18,
-//         newWords: 16,
-//         games: {
-//           sprint: {
-//             allAnswers: 12,
-//             newWords: 10,
-//             rightAnswers: 10,
-//             longestStreak: 8,
-//           },
-//           audioCall: {
-//             allAnswers: 9,
-//             newWords: 6,
-//             rightAnswers: 8,
-//             longestStreak: 7,
-//           },
-//         }
-//       }
-//     }
-//   }
-// );
-
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

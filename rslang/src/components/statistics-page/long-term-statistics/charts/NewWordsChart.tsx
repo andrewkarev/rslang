@@ -9,6 +9,7 @@ import {
   Legend,
  } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import IStatistics from '../../../../types/services-interfaces/IStatistics';
 
 ChartJS.register(
   CategoryScale,
@@ -19,7 +20,11 @@ ChartJS.register(
   Legend
 );
 
-const NewWordsChart = () => {
+type Props = {
+  stats: IStatistics | null;
+}
+
+const NewWordsChart: React.FC<Props> = ({ stats }) => {
 
   const options = {
     maintainAspectRatio: false,
@@ -38,14 +43,34 @@ const NewWordsChart = () => {
     },
   };
 
-  const labels = ['1 сентября', '2 сентября', '3 сентября', '4 сентября', '5 сентября', '6 сентября'];
+  const dates: string[] = [];
+  const newWords: string[] = [];
+
+  if (stats) {
+    Object.entries(stats.optional)
+      .sort(([key1, value1], [key2, value2]) => Number(key1) - Number(key2))
+      .forEach(([key, value]) => {
+        const date = new Date(Number(key));
+
+        const day = '0' + date.getDate();
+        const month = "0" + (date.getMonth() + 1);
+        const year = date.getFullYear();
+
+        const formattedTime = `${day.slice(-2) }.${month.slice(-2)}.${year}`;
+        
+        dates.push(formattedTime);
+        newWords.push(String(value.newWords));
+      });
+  }
+
+  const labels = dates;
 
   const data = {
     labels,
     datasets: [
       {
         label: 'Новых слов',
-        data: [10, 20, 15, 30, 50, 40],
+        data: newWords,
         backgroundColor: '#F8B81F',
       }
     ],
