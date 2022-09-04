@@ -10,10 +10,18 @@ type Props = {
   currentLevelWords: IWord[];
   currentUserWords: IUserWord[];
   currentStatus: { currentLevel: number, currentCard: number, currentPage: number };
+  handleGameChoice: (choice: string) => void;
+  words: React.MutableRefObject<[] | IWord[]>;
 }
 
-const Games: React.FC<Props> = ({ isLearnedPage, currentLevelWords, currentUserWords, currentStatus }) => {
-
+const Games: React.FC<Props> = ({
+  isLearnedPage,
+  currentLevelWords,
+  currentUserWords,
+  currentStatus,
+  handleGameChoice,
+  words,
+}) => {
   const gameElements = gamesData.map((game, index) => {
     return (
       <Game
@@ -25,6 +33,8 @@ const Games: React.FC<Props> = ({ isLearnedPage, currentLevelWords, currentUserW
         currentLevelWords={currentLevelWords}
         currentUserWords={currentUserWords}
         currentStatus={currentStatus}
+        handleGameChoice={handleGameChoice}
+        words={words}
       />
     )
   });
