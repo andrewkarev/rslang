@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Levels from './levels/Levels';
 import TextbookCards from './textbook-cards/TextbookCards';
 import SelectedCard from './selected-card/SelectedCard';
