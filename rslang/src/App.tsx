@@ -47,7 +47,6 @@ function App() {
         <Route path="textbook" element={<Textbook />} />
         <Route path="games" element={<GamesPage />} />
         <Route path="statistics" element={<StatisticsPage />} />
-        {/* <Route path="statistics" element={< />} /> */}
         {/* <Route path="sprint" element={<SprintGame words={words} />} /> */}
       </Routes>
       <Footer />
