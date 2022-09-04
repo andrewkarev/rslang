@@ -60,8 +60,8 @@ const Game: React.FC<Props> = (props: Props) => {
 
   return (
     <div 
-      className={ `${styles['game']} ${props.isLearnedPage ? styles['disabled'] : ''}` }
-      onClick={ !props.isLearnedPage ? handleGameBtnClick : undefined }
+      className={ `${styles['game']} ${props.isLearnedPage && props.currentStatus.currentLevel !== 6 ? styles['disabled'] : ''}` }
+      onClick={ !props.isLearnedPage && props.currentStatus.currentLevel !== 6 ? handleGameBtnClick : undefined }
     >
       <h3 className={ styles['game-name'] }>{ props.name }</h3>
       <div className={ styles['game-description'] }>{ props.description }</div>
