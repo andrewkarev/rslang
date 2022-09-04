@@ -15,6 +15,7 @@ const HeroPages: React.FC<HeroPagesProps> = ({ toggleModalVisability }) => {
   return (
     <section className={styles['hero-page']}>
       <div className={styles['wrapper']}>
+      <div className={ styles['conteiner']}>
         <div className={styles['content']}>
           <h2 className={styles['title']}>Изучай английский с EasyLang!</h2>
           <p className={styles['subtitle']}>
@@ -31,6 +32,7 @@ const HeroPages: React.FC<HeroPagesProps> = ({ toggleModalVisability }) => {
             : <RegistrationBtn
               toggleModalVisability={toggleModalVisability}
               isHeaderButton={false} />}
+        </div>
         </div>
       </div>
       <div className={styles['wave']}>

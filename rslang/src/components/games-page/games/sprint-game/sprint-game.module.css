@@ -53,7 +53,6 @@
   0% {
     transform: translateY(0%);
   }
-
   100% {
     transform: translateY(100%);
   }
@@ -112,7 +111,6 @@
   text-align: center;
 }
 
-
 .word-translation {
   font-size: 36px;
   font-weight: 500;
@@ -161,4 +159,29 @@
 .right-answer-btn-active {
   transform: translateY(-2px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+}
+
+@media (max-width: 630px) {
+  .container {
+    flex-direction: column-reverse;
+    padding: 0px 0px;
+  }
+  .game-board {
+    padding-right: 0px;
+    margin: 0 auto;
+  }
+  .game-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    /* justify-content: center; */
+    gap: 50px;
+    width: 400px;
+    height: 400px;
+    padding: 20px;
+    background-color: #F3F2F1;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+  }
 }

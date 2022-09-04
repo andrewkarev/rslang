@@ -124,7 +124,6 @@
   .options-btns-container {
     flex-direction: column;
   }
-
   .game-field {
     gap: 25px;
   }
@@ -144,4 +143,21 @@
 
 .next-btn:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+}
+
+@media (max-width: 630px) {
+  .container {
+    flex-direction: column-reverse;
+    padding: 0px 0px;
+  }
+  .game-board {
+    padding-right: 0px;
+    margin: 30px auto;
+  }
+  .game-field {
+    margin: 0px;
+  }
+  .image {
+    width: 320px;
+  }
 }

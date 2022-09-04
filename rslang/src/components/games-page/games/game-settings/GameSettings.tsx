@@ -51,9 +51,12 @@ const GameSettings: React.FunctionComponent<GameSettingsProps> = (props) => {
               : 'fullscreen-mode'}`]}
           ></div>
         </div>
-        <div
-          className={styles['about-game-wrapper']}>
-          <div className={styles['about-game']}></div>
+        <div className={styles['about-game-wrapper']}>
+          <div className={styles['about-game']}>
+            <span className={styles['tooltiptext']}>
+              выбрать правильный ответ можно как с помощью мыши так и нажатием на клавиши ArrowRoght, ArrowLeft
+            </span>
+          </div>
         </div>
       </div>
     </>

@@ -2,15 +2,16 @@
   margin-top: -180px;
   padding-top: 350px;
   background-color: #f8b81f;
-  z-index: 0;
 }
 
 .wrapper {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
+  padding: 0 40px
 }
 
 .content {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,24 +22,24 @@
   z-index: 1;
 }
 
-.content::before,
-.content::after {
+.conteiner::before,
+.conteiner::after {
   content: '';
   position: absolute;
   width: 312px;
   height: 291px;
-  z-index: -1;
+  z-index: 0;
 }
 
-.content::before {
+.conteiner::before {
   left: 100px;
   top: 150px;
   background: url(../../../assets/images/shape-01.png) no-repeat;
   animation: rotate-right 10s linear infinite;
 }
 
-.content::after {
-  bottom: 200px;
+.conteiner::after {
+  top: 450px;
   right: 100px;
   background: url(../../../assets/images/shape-02.png) no-repeat;
   animation: rotate-left 10s linear infinite;
@@ -64,44 +65,10 @@
 
 .title {
   font-size: 4rem;
-  font-weight: 900;
 }
 
 .subtitle {
   font-size: 2rem;
-}
-
-.button {
-  color: #F3F2F1;
-  font-size: 2rem;
-  background: var(--btn-color);
-  padding: 10px 35px;
-  border-radius: 20px;
-  cursor: pointer;
-  position: relative;
-}
-
-.button::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 0%;
-  height: 100%;
-  border-radius: 18px;
-  background: var(--btn-hovered);
-  transition: 0.5s;
-  transform-origin: 0 0;
-  transition-timing-function: cubic-bezier(0.5, 1.7, 0.4, 0.7);
-}
-
-.button:hover::before,
-.button:focus::before {
-  width: 100%;
-}
-
-.button-title {
-  position: relative;
 }
 
 .wave {
