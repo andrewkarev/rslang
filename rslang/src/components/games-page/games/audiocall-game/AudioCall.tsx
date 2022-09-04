@@ -91,6 +91,9 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
 
   const getWordsTranslation = useCallback(() => {
     const ANSWERS_OPTIONS = 5;
+    const relevantAnswerOption = gameWords.current.length >= ANSWERS_OPTIONS
+      ? ANSWERS_OPTIONS
+      : gameWords.current.length;
     const wordsList: string[] = [];
     const correctAnswer = currentWord?.wordTranslate;
 
@@ -98,7 +101,7 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
 
     wordsList.push(correctAnswer);
 
-    while (wordsList.length < ANSWERS_OPTIONS) {
+    while (wordsList.length < relevantAnswerOption) {
       const wordIndex = getRandomIndex(gameWords.current);
       const newTranslation = gameWords.current[wordIndex].wordTranslate;
 
@@ -109,7 +112,7 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
       wordsList.push(newTranslation);
     }
 
-    return wordsList.sort();
+    return wordsList.sort(() => Math.random() - 0.5);
   }, [currentWord?.wordTranslate]);
 
   useEffect(() => {
@@ -243,7 +246,7 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
   }, [handleNextButtonEvent]);
 
   useEffect(() => {
-    if (answersGiven >= 10) {
+    if (answersGiven >= 10 || answersGiven >= gameWords.current.length) {
       props.setLastGameResults(wordsInGame.current);
       props.setIsResultsVisible(true);
     }
