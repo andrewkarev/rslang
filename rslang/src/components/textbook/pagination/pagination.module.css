@@ -1,5 +1,5 @@
 .pagination {
-  margin-bottom: 40px;
+  margin-bottom: 50px;
   display: flex;
   justify-content: center;
 }
@@ -33,7 +33,7 @@
   background-color: #1AB69D;
 }
 
-:global(.level-group-1)  .round-btn.active {
+:global(.level-group-1) .round-btn.active {
   background-color: #189883;
 }
 

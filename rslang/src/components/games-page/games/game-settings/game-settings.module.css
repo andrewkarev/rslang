@@ -59,3 +59,60 @@
 .fullscreen-mode-active:active {
   transform: scale(0.7);
 }
+
+.tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  /* change color #fafafa */
+  background-color: #F3F2F1;
+  /* change color */
+  text-align: center;
+  border-radius: 10px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  top: -40px;
+  left: 150%;
+  opacity: 0;
+  transition: opacity 1s;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
+}
+
+.tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 40%;
+  right: 100%;
+  margin-left: -10px;
+  border-width: 10px;
+  border-style: solid;
+  /* change color #fafafa*/
+  border-color: transparent #F3F2F1 transparent transparent;
+  /* change color */
+}
+
+.about-game:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (max-width: 630px) {
+  .game-settings {
+    margin-top: 150px;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .tooltiptext {
+    left: 50%;
+    margin-top: -80px;
+    margin-left: -100px;
+  }
+  .tooltiptext::after {
+    top: 100%;
+    /* At the bottom of the tooltip */
+    left: 50%;
+    margin-left: -10px;
+    border-width: 10px;
+    border-color: #F3F2F1 transparent transparent transparent;
+  }
+}

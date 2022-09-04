@@ -55,3 +55,9 @@
   font-size: 2rem;
   font-family: 'Roboto', Verdana, sans-serif;
 }
+
+@media (max-width: 550px) {
+  .wrapper {
+    padding: 15px 10px;
+  }
+}

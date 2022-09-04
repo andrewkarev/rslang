@@ -94,9 +94,29 @@
   background-color: #fe1b1e;
 }
 
-.level:hover:nth-child(8) .arrow, 
+.level:hover:nth-child(8) .arrow,
 .level.active:nth-child(8) .arrow {
   background-color: #808080;
 }
 
+@media (max-width: 960px) {
+  .levels {
+    max-height: 270px;
+    grid-template-columns: repeat(2, 210px) 12px;
+    grid-template-rows: repeat(3, 1fr);
+  }
+  .separator {
+    grid-row: span 3;
+  }
+}
 
+@media (max-width: 750px) {
+  .levels {
+    max-height: 400px;
+    grid-template-columns: repeat(2, 210px) 12px;
+    grid-template-rows: repeat(4, 1fr);
+  }
+  .separator {
+    display: none;
+  }
+}

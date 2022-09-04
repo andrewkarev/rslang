@@ -39,3 +39,10 @@
   background-color: #f8b81f;
   z-index: -1;
 }
+
+@media (max-width: 680px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+  }
+}
