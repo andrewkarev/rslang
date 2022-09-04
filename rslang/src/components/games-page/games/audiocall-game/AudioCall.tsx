@@ -224,6 +224,8 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
 
       optionLightning[currentWordIndex] = 'right';
 
+      canGiveAnswer.current = false;
+
       updateGameWordStatus(newWord);
       updateStreak(false);
     }
