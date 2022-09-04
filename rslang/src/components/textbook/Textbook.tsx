@@ -74,8 +74,6 @@ const Textbook: React.FC<TextbookProps> = ({
 
   const [audioPlayer] = useState(new Audio());
 
-  const currentUserWordsStorage = useRef<IUserWord[] | []>([]);
-
   useEffect(() => {
 
     const asyncFunction = async () => {
@@ -84,7 +82,6 @@ const Textbook: React.FC<TextbookProps> = ({
 
         if (data) {
           setCurrentUserWords(data);
-          currentUserWordsStorage.current = data;
         }
       }
 
@@ -106,7 +103,7 @@ const Textbook: React.FC<TextbookProps> = ({
       if (isAuthorised && userId && currentStatus.currentLevel === 6) {
 
         const complicatedUserWords: Promise<IWord | void>[] = [];
-        const complicatedWords = currentUserWordsStorage.current.filter((userWord) => userWord.optional.isDifficult);
+        const complicatedWords = currentUserWords.filter((userWord) => userWord.optional.isDifficult);
 
         for (let userWord of complicatedWords) {
           complicatedUserWords.push(learnWordAPI.getWord(userWord.wordId!));
