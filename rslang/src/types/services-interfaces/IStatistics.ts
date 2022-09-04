@@ -1,25 +1,8 @@
+import IStatisticsValue from './IStatisticsValue';
+
 interface IStatistics {
   optional: {
-    [date: string]: {
-      allAnswers: number,
-      rightAnswers: number,
-      learnedWords: number,
-      newWords: number,
-      games: {
-        sprint: {
-          newWords: number,
-          rightAnswers: number,
-          longestStreak: number,
-          allAnswers: number,
-        },
-        audioCall: {
-          newWords: number,
-          rightAnswers: number,
-          longestStreak: number,
-          allAnswers: number,
-        },
-      },
-    },
+    [date: string]: IStatisticsValue
   }
 };
 

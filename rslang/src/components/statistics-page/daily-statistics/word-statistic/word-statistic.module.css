@@ -1,0 +1,53 @@
+.word-statistic {
+  position: relative;
+	display: flex;
+	width: 200px;
+	height: 200px;
+  padding-top: 50px;
+	flex-direction: column;
+	align-items: center;
+	border: 5px solid #fff;
+  border-radius: 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.word-statistic:nth-child(1) {
+	background-color: #1AB69D;
+}
+
+.word-statistic:nth-child(2) {
+	background-color: #F8B81F;
+}
+
+.word-statistic:nth-child(3) {
+	background-color: #FE595D;
+}
+
+.value {
+  position: absolute;
+  top: -60px;
+	font-size: 86px;
+	font-weight: 900;
+  text-shadow:
+    4px 0 #fff, -4px 0 #fff, 0 4px #fff, 0 -4px #fff,
+    3px 3px #fff, -3px -3px #fff, 3px -3px #fff, -3px 3px #fff,
+    6px 0px rgba(0, 0, 0, 0.1),
+    0px -6px rgba(0, 0, 0, 0.1),
+    -6px 0px rgba(0, 0, 0, 0.1),
+    -6px 0px rgba(0, 0, 0, 0.1),
+    /* 5px 5px rgba(0, 0, 0, 0.1), */
+    -5px -5px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  text-transform: uppercase;
+	text-align: center;
+	color: #fff;
+  color: #333;
+}
+
+.icon {
+  margin-bottom: 20px;
+  width: 50px;
+  filter: opacity(0.8);
+}

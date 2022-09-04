@@ -8,6 +8,7 @@ import Header from './components/header/Header';
 import AuthorisationForm from './components/header/authorisation/AuthorisationForm';
 import GamesPage from './components/games-page/GamesPage';
 import { AuthorisationContext } from './context/AuthorisationContext';
+import StatisticsPage from './components/statistics-page/StatisticsPage';
 import Footer from './components/footer/Footer'
 import IWord from './types/services-interfaces/IWord';
 
@@ -104,7 +105,7 @@ function App() {
           lastGameResults={lastGameResults}
           setLastGameResults={setLastGameResults}
         />} />
-        {/* <Route path="statistics" element={< />} /> */}
+        <Route path="statistics" element={<StatisticsPage />} />
       </Routes>
       <Footer />
     </>

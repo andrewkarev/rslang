@@ -1,0 +1,18 @@
+.daily-statistics {
+	display: flex;
+	padding: 100px 0;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.words-statistics {
+	display: flex;
+	gap: 80px;
+	margin-bottom: 100px;
+}
+
+.games-statistics {
+	display: flex;
+	gap: 30px;
+}
