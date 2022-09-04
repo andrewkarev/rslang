@@ -18,15 +18,7 @@ type Props = {
   words: React.MutableRefObject<[] | IWord[]>;
 };
 
-const Game: React.FC<Props> = ({
-  name,
-  description,
-  image,
-  isLearnedPage,
-  currentLevelWords,
-  currentUserWords,
-  currentStatus
-}) => {
+const Game: React.FC<Props> = (props) => {
 
   const { isAuthorised } = useContext(AuthorisationContext);
 
@@ -40,7 +32,7 @@ const Game: React.FC<Props> = ({
   }
 
   const getWords = async () => {
-    if (!isAuthorised) return currentLevelWords;
+    if (!isAuthorised) return props.currentLevelWords;
 
     const getNotLearnedWords = (words: IWord[]) => {
       return words.filter((word) =>
@@ -50,7 +42,7 @@ const Game: React.FC<Props> = ({
 
     const gameWords = getNotLearnedWords(props.currentLevelWords);
 
-    let pageForLookup = currentStatus.currentPage;
+    let pageForLookup = props.currentStatus.currentPage;
 
     while (gameWords.length < 20) {
 
