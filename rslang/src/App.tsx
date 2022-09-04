@@ -8,6 +8,7 @@ import Header from './components/header/Header';
 import AuthorisationForm from './components/header/authorisation/AuthorisationForm';
 import GamesPage from './components/games-page/GamesPage';
 import { AuthorisationContext } from './context/AuthorisationContext';
+import StatisticsPage from './components/statistics-page/StatisticsPage';
 import Footer from './components/footer/Footer'
 
 function App() {
@@ -45,7 +46,7 @@ function App() {
         } />
         <Route path="textbook" element={<Textbook />} />
         <Route path="games" element={<GamesPage />} />
-        {/* <Route path="statistics" element={< />} /> */}
+        <Route path="statistics" element={<StatisticsPage />} />
         {/* <Route path="sprint" element={<SprintGame words={words} />} /> */}
       </Routes>
       <Footer />
