@@ -1,6 +1,5 @@
-/* temporary styles */
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+
 * {
   box-sizing: border-box;
 }
@@ -27,9 +26,6 @@ h2 {
 .header {
   margin-bottom: 30px;
 }
-
-
-/* end temporary styles */
 
 .textbook {
   font-family: 'Roboto', sans-serif;
@@ -69,6 +65,17 @@ h2 {
   font-size: 22px;
   font-style: italic;
   color: #000;
+}
+
+@media (max-width: 620px) {
+  .book-page-wrapper {
+    margin-top: 50px;
+  }
+
+  :global(.learned) .learned-message {
+    top: -43px;
+    left: 0;
+  }
 }
 
 @media (max-width: 550px) {
