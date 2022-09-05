@@ -15,6 +15,7 @@
 
 .game.disabled {
   color: #D6D3D3;
+  cursor: auto;
 }
 
 .game.disabled:hover {

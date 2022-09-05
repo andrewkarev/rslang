@@ -5,4 +5,14 @@ class RequestError extends Error {
   }
 }
 
+export class AuthorisationError extends RequestError {
+  statusCode: number;
+
+  constructor(message: string) {
+    super(message);
+    this.name = "AuthorisationError";
+    this.statusCode = 401;
+  }
+}
+
 export default RequestError;

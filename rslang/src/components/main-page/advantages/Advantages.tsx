@@ -2,7 +2,7 @@ import React from 'react';
 import { useInView } from 'react-intersection-observer';
 import styles from './advantages.module.css';
 import advantagiesData from '../../../data/advantagies-data'
-import Advantage from './advantagie/Advantage';
+import Advantage from './advantage/Advantage';
 
 interface AdvantagiesProps {
   toggleModalVisability: () => void;

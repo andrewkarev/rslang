@@ -88,7 +88,7 @@
   background-repeat: no-repeat;
   cursor: pointer;
   transform: scale(1);
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease;
 }
 
 .play-btn-alternative {
@@ -140,6 +140,7 @@
   color: #000000;
   cursor: pointer;
   background-color: #F8B81F;
+  transition: all 0.3s ease;
 }
 
 .next-btn:hover {

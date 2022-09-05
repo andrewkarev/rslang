@@ -28,26 +28,16 @@
 
 .button {
   color: #F3F2F1;
-  background: var(--btn-color);
   border-radius: 20px;
   position: relative;
   cursor: pointer;
+  background-color: #1AB69D;
+  transition: all 0.3s ease;
 }
 
-.button:before {
-  content: '';
-  position: absolute;
-  border-radius: 18px;
-  background: var(--btn-hovered);
-  width: 0%;
-  height: 100%;
-  transition: 0.5s cubic-bezier(0.5, 1.7, 0.4, 0.7);
-  transform-origin: 0 0;
-  z-index: 1;
-}
-
-.button:hover:before {
-  width: 100%;
+.button:hover {
+  background-color: #FE595D;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
 }
 
 .button-title {
@@ -57,6 +47,7 @@
   z-index: 2;
   font-size: 2rem;
   font-family: 'Roboto', Verdana, sans-serif;
+  white-space: nowrap;
 }
 
 .nav-container {

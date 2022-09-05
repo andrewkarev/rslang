@@ -10,6 +10,8 @@ import { AuthorisationContext } from './context/AuthorisationContext';
 import StatisticsPage from './components/statistics-page/StatisticsPage';
 import Footer from './components/footer/Footer'
 import IWord from './types/services-interfaces/IWord';
+import { AuthorisationError } from './types/errors/RequestError';
+import { learnWordAPI } from '.';
 
 function App() {
   const [isModalOpened, setIsModalOpened] = useState(false);
@@ -46,9 +48,23 @@ function App() {
   }[] | []>([]);
 
   useEffect(() => {
-    if (localStorage.getItem('id') && !isAuthorised) {
-      changeAuthorisationStatus();
+    const checkUserStatus = async () => {
+      try {
+        const userId = localStorage.getItem('id');
+
+        if (userId && !isAuthorised) {
+          await learnWordAPI.getUserWords(userId);
+          changeAuthorisationStatus();
+        }
+      } catch (error) {
+        if (error instanceof AuthorisationError && isAuthorised) {
+          localStorage.clear();
+          changeAuthorisationStatus();
+        }
+      }
     }
+
+    checkUserStatus();
   }, [changeAuthorisationStatus, isAuthorised]);
 
   const toggleModalVisability = () => {
@@ -108,7 +124,7 @@ function App() {
       </Routes>
       <Footer />
     </>
-  );
+  )
 }
 
 export default App;

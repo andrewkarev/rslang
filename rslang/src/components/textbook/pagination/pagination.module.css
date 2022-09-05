@@ -17,6 +17,7 @@
   overflow: hidden;
   cursor: pointer;
   background-color: #F3F2F1;
+  transition: all 0.3s ease-in-out;
 }
 
 .round-btn:hover {

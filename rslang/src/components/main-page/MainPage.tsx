@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './main-page.module.css';
 import HeroPages from './hero-page/HeroPage';
-import Advantages from './advantagies/Advantages';
+import Advantages from './advantages/Advantages';
 import Presentation from './presentation/Presentation';
 import DevTeam from './dev-team/DevTeam';
 import Scroll from './scroll-up/Scroll'

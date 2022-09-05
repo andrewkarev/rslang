@@ -1,4 +1,4 @@
-import RequestError from '../types/errors/RequestError';
+import RequestError, { AuthorisationError } from '../types/errors/RequestError';
 import IRequestFunctionOptions from '../types/services-interfaces/IRequestFunction';
 import IStatistics from '../types/services-interfaces/IStatistics';
 import IUser from '../types/services-interfaces/IUser';
@@ -138,12 +138,25 @@ class LearnWordsApi {
   }
 
   private async getNewUserTokens(id: string): Promise<IUserToken | void> {
-    const queryURL = `${this.usersPath}/${id}/tokens`;
-    return await this.createRequest(queryURL, {
-      headers: {
-        'Authorization': `Bearer ${this.refreshToken}`,
-      },
-    });
+    try {
+      const queryURL = `${this.usersPath}/${id}/tokens`;
+
+      const response = await fetch(queryURL, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${this.refreshToken}`,
+        },
+      });
+
+      if (response.status === 401) throw new AuthorisationError('Refresh token expired.');
+      console.dir(response)
+
+      return await response.json();
+    } catch (error) {
+      console.dir(error)
+      if (!(error instanceof Error)) return;
+      throw error;
+    }
   }
 
   public async getUserWords(id: string): Promise<IUserWord[] | void> {
@@ -221,7 +234,7 @@ class LearnWordsApi {
     this.setTokensValue(token, refreshToken);
   }
 
-  async getStatistics(id: string): Promise<IStatistics | void> {
+  public async getStatistics(id: string): Promise<IStatistics | void> {
     const queryURL = `${this.usersPath}/${id}/statistics`;
     return await this.createRequest(queryURL, {
       headers: {
@@ -230,7 +243,7 @@ class LearnWordsApi {
     });
   }
 
-  async updateStatistics(id: string, body: IStatistics): Promise<IStatistics | void> {
+  public async updateStatistics(id: string, body: IStatistics): Promise<IStatistics | void> {
     const queryURL = `${this.usersPath}/${id}/statistics`;
     const stringifiedBody = JSON.stringify(body);
     return await this.createRequest(queryURL, {
