@@ -117,6 +117,7 @@
   background-color: #F8B81F;
   color: #fff;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .start-game-btn:hover {

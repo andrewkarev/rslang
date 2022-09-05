@@ -34,6 +34,10 @@
   padding-top: 30px;
   height: 0;
   overflow: hidden;
+  /*  */
+  background-image: url(../../../assets/images/vide-cover.png);
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .video-container {

@@ -20,9 +20,9 @@ const Presentation = () => {
       >
         <h2 className={styles['title']}>Добро пожаловать в EasyLang</h2>
         <div className={styles['video-container']}>
-          <iframe src="https://www.youtube.com/embed/0AohM_oOjBc"
+          {/* <iframe src="https://www.youtube.com/embed/0AohM_oOjBc"
             title="YouTube video player" allow="accelerometer; autoplay; clipboard-write;
-          encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe>
+          encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe> */}
         </div>
       </div>
       <div className={styles['wave'] + ' ' + styles['wave-bottom']}>
