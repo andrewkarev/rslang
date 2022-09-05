@@ -1,42 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styles from './navigation.module.css';
+import NavList from "./navlist/NavList";
 
 const Navigation = () => {
-  const navItems = [
-    {
-      name: 'Главная',
-      url: '/',
-    },
-    {
-      name: 'Учебник',
-      url: '/textbook',
-    },
-    {
-      name: 'Игры',
-      url: '/games',
-    },
-    {
-      name: 'Статистика',
-      url: '/statistics',
-    }
-  ];
-
-  const navElements = navItems.map((item) => {
-    return (
-      <li className={ styles["nav-item"]} key={item.name}>
-        <NavLink to={`${item.url}`}>{item.name}</NavLink>
-      </li>
-    );
-  });
-
+  
+  const [opened, setOpened] = useState(false);
+  
+  const toggleMenu = () => {
+    setOpened(!opened);
+  }
+  
   return (
     <nav className={ styles["nav"] }>
-      <ul className={ styles["nav-list"]}>
-        {navElements}
-      </ul>
+      <NavList isOpened={opened} toggleMenu={toggleMenu}/>
+      <div 
+        className={ styles["burger"] }
+        onClick={ toggleMenu }
+      >
+        <span className={ styles["burger-line"] }></span>
+        <span className={ styles["burger-line"] }></span>
+        <span className={ styles["burger-line"] }></span>
+      </div>
     </nav>
-
   );
 }
 

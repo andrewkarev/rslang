@@ -1,16 +1,17 @@
 .nav {
   margin-left: auto;
+  z-index: 100;
 }
 
-.nav-list {
-  display: flex;
-  flex-wrap: wrap;
+.burger {
+  display: none;
+  margin-left: 20px;
 }
 
-.nav-item {
-  font-size: 1.8rem;
-  color: rgb(71, 71, 71);
-  margin-right: 30px;
+.burger-line {
+  width: 30px;
+  height: 3px;
+  background-color: #000;
 }
 
 .nav-item a {
@@ -32,7 +33,16 @@
   background: #ff4208;
 }
 
-.nav-item:focus:after,
-.nav-item:hover::after {
-  width: 100%;
+@media (max-width: 800px) {
+  .nav {
+    margin-left: 0;
+    order: 1;
+  }
+
+  .burger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+  }
 }
