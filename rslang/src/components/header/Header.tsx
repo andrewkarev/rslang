@@ -15,10 +15,12 @@ const Header: React.FunctionComponent<HeaderProps> = ({ toggleModalVisability })
         <NavLink to={'/'}>
           <h1 className={styles['logo']}>EasyLang</h1>
         </NavLink>
-        <Navigation />
-        <RegistrationBtn
-          toggleModalVisability={toggleModalVisability}
-          isHeaderButton={true} />
+        <div className={styles['nav-container']}>
+          <Navigation />
+          <RegistrationBtn
+            toggleModalVisability={toggleModalVisability}
+            isHeaderButton={true} />
+        </div>
       </div>
     </div>
   );
