@@ -6,7 +6,7 @@ import Developer from './developer/Developer'
 
 const DevTeam = () => {
   const { ref: teamRef, inView: isTeamVisible } = useInView({
-    threshold: 0.4,
+    threshold: 0.2,
     triggerOnce: true,
   });
 

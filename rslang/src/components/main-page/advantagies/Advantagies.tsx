@@ -10,7 +10,7 @@ interface AdvantagiesProps {
 
 const Advantagies: React.FC<AdvantagiesProps> = ({ toggleModalVisability }) => {
   const { ref: advantageousRef, inView: isAdvantageousVisible } = useInView({
-    threshold: 0.4,
+    threshold: 0.3,
     triggerOnce: true,
   });
 

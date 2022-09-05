@@ -4,7 +4,7 @@ import styles from './presentation.module.css'
 
 const Presentation = () => {
   const { ref: presentationRef, inView: isPresentationVisible } = useInView({
-    threshold: 0.4,
+    threshold: 0.2,
     triggerOnce: true,
   });
 
