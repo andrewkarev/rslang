@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import MainPage from './components/main-page/MainPage';
 import Textbook from './components/textbook/Textbook';
