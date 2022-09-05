@@ -124,6 +124,7 @@
   .options-btns-container {
     flex-direction: column;
   }
+
   .game-field {
     gap: 25px;
   }
@@ -150,13 +151,16 @@
     flex-direction: column-reverse;
     padding: 0px 0px;
   }
+
   .game-board {
     padding-right: 0px;
-    margin: 30px auto;
+    margin: 0 auto 30px;
   }
+
   .game-field {
     margin: 0px;
   }
+
   .image {
     width: 320px;
   }

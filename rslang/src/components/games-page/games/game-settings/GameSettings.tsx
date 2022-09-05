@@ -54,7 +54,9 @@ const GameSettings: React.FunctionComponent<GameSettingsProps> = (props) => {
         <div className={styles['about-game-wrapper']}>
           <div className={styles['about-game']}>
             <span className={styles['tooltiptext']}>
-              выбрать правильный ответ можно как с помощью мыши так и нажатием на клавиши ArrowRoght, ArrowLeft
+              {`${props.choosenGame !== 'Аудио-вызов'
+                ? 'Выбрать правильный ответ можно как с помощью мыши, так и нажатием на клавиши \'ArrowRoght\', \'ArrowLeft\''
+                : 'Для выбора ответа можно использовать мышь или \'клавиши 1-5\' Для перехода к следующему слову или просмотра правильного ответа нажмите \'space\''}'`}
             </span>
           </div>
         </div>

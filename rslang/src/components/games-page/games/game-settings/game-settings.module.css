@@ -63,32 +63,31 @@
 .tooltiptext {
   visibility: hidden;
   width: 200px;
-  /* change color #fafafa */
-  background-color: #F3F2F1;
-  /* change color */
+  background-color: #1AB69D;
   text-align: center;
   border-radius: 10px;
   padding: 5px;
   position: absolute;
   z-index: 1;
-  top: -40px;
-  left: 150%;
+  top: -15px;
+  left: 180%;
   opacity: 0;
   transition: opacity 1s;
   box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
+  color: #1c1c1c;
+  color: #fff;
+  font-weight: 500;
 }
 
 .tooltiptext::after {
   content: " ";
   position: absolute;
-  top: 40%;
+  top: 15%;
   right: 100%;
   margin-left: -10px;
   border-width: 10px;
   border-style: solid;
-  /* change color #fafafa*/
-  border-color: transparent #F3F2F1 transparent transparent;
-  /* change color */
+  border-color: transparent #1AB69D transparent transparent;
 }
 
 .about-game:hover .tooltiptext {
@@ -98,21 +97,23 @@
 
 @media (max-width: 630px) {
   .game-settings {
-    margin-top: 150px;
     flex-direction: row;
     justify-content: center;
+    margin-bottom: 30px;
   }
+
   .tooltiptext {
-    left: 50%;
-    margin-top: -80px;
-    margin-left: -100px;
+    width: 350px;
+    margin-top: -55px;
+    margin-left: -235px;
   }
+
   .tooltiptext::after {
     top: 100%;
     /* At the bottom of the tooltip */
-    left: 50%;
+    left: 60%;
     margin-left: -10px;
     border-width: 10px;
-    border-color: #F3F2F1 transparent transparent transparent;
+    border-color: #1AB69D transparent transparent transparent;
   }
 }

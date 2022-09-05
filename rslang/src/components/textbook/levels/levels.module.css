@@ -46,6 +46,8 @@
   font-size: 26px;
   font-weight: 700;
   z-index: 10;
+
+  color: #d8d3d3;
 }
 
 .arrow {
@@ -61,6 +63,13 @@
 .level:hover,
 .level.active {
   border-color: #dcd9d6;
+  color: #292623;
+}
+
+.level:hover .level-shortname,
+.level:hover .level-counter,
+.level.active .level-shortname,
+.level.active .level-counter {
   color: #292623;
 }
 
@@ -105,6 +114,7 @@
     grid-template-columns: repeat(2, 210px) 12px;
     grid-template-rows: repeat(3, 1fr);
   }
+
   .separator {
     grid-row: span 3;
   }
@@ -116,6 +126,7 @@
     grid-template-columns: repeat(2, 210px) 12px;
     grid-template-rows: repeat(4, 1fr);
   }
+
   .separator {
     display: none;
   }

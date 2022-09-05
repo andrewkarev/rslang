@@ -17,29 +17,48 @@
   background: url('./../../../assets/images/sprint.png') no-repeat #F3F2F1;
   background-size: 270px;
   background-position: right;
-  animation: fade-right 0.8s ease-out;
+  animation: fade-right 1.3s ease-out;
 }
 
 .game:last-child {
   background: url('./../../../assets/images/audio-call.png') no-repeat #F3F2F1;
   background-size: 270px;
   background-position: right;
-  animation: fade-left 0.8s ease-out;
+  animation: fade-left 1.3s ease-out;
 }
 
 @keyframes fade-right {
   0% {
     transform: translateX(200%);
   }
+
+  40% {
+    transform: translateX(-20%);
+  }
+
+  70% {
+    transform: translateX(20%);
+  }
+
   100% {
     transform: translateX(0%);
   }
 }
 
+
 @keyframes fade-left {
   0% {
     transform: translateX(-200%);
   }
+
+  40% {
+    transform: translateX(20%);
+  }
+
+  70% {
+    transform: translateX(-20%);
+  }
+
   100% {
     transform: translateX(0%);
   }
@@ -55,9 +74,11 @@
   .game:first-child {
     background: #F3F2F1;
   }
+
   .game:last-child {
     background: #F3F2F1;
   }
+
   .about-game {
     margin-right: 0px;
   }

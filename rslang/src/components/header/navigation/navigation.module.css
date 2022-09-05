@@ -1,6 +1,6 @@
 .nav {
   margin-left: auto;
-  z-index: 100;
+  z-index: 10;
 }
 
 .burger {
@@ -12,6 +12,15 @@
   width: 30px;
   height: 3px;
   background-color: #000;
+}
+
+.nav-item a {
+  padding-bottom: 5px;
+}
+
+.nav-item:focus,
+.nav-item:hover {
+  color: #1c1c1c;
 }
 
 @media (max-width: 800px) {
