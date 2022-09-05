@@ -1,0 +1,73 @@
+.footer {
+  background-color: transparent;
+  font-size: 2rem;
+}
+
+.footer.shadowed {
+  box-shadow: 0px -5px 5px 0px rgb(0 0 0 / 30%);
+}
+
+.wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1px 40px
+}
+
+.content {
+  margin: 15px auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.year {
+  display: flex;
+  width: 33%;
+}
+
+.logo-conteiner {
+  display: flex;
+  justify-content: center;
+  width: 33%
+}
+
+.logo {
+  width: 100px;
+}
+
+.developer {
+  width: 33%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 25px;
+}
+
+.github {
+  max-width: 100%;
+  width: 25px;
+  height: auto;
+}
+
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  left: -75px;
+  top: 0;
+  position: absolute;
+  background: linear-gradient(to left, #189883 0%, #1AB69D 76%);
+  color: #F3F2F1;
+  padding: 5px 10px;
+  border-radius: 18px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: 1s;
+}
+
+[data-tooltip]:hover::after {
+  opacity: 1;
+  top: -2em;
+}

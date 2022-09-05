@@ -1,0 +1,47 @@
+.word-pronunciation-wrapper {
+  width: 20px;
+  height: 20px;
+}
+
+.word-pronunciation,
+.answer-status-correct,
+.answer-status-wrong {
+  width: 20px;
+  height: 20px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.word-pronunciation {
+  background-image: url(../../../../../assets/icons/audio.png);
+  cursor: pointer;
+  transform: scale(1);
+  transition: all 0.3s ease-in-out;
+}
+
+.word-pronunciation:active {
+  transform: scale(0.7);
+}
+
+.answer-status-correct {
+  background-image: url(../../../../../assets/icons/check.png);
+}
+
+.answer-status-wrong {
+  background-image: url(../../../../../assets/icons/cross.png);
+}
+
+.word {
+  flex-basis: fill;
+  text-align: center;
+}
+
+.word-transcription {
+  flex-basis: fill;
+  text-align: center;
+}
+
+.word-translation {
+  flex-basis: fill;
+  text-align: center;
+}

@@ -1,0 +1,89 @@
+.hero-page {
+  margin-top: -180px;
+  padding-top: 350px;
+  background-color: #f8b81f;
+}
+
+.wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px
+}
+
+.content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+  width: 31%;
+  gap: 30px;
+  z-index: 1;
+}
+
+.conteiner::before,
+.conteiner::after {
+  content: '';
+  position: absolute;
+  width: 312px;
+  height: 291px;
+  z-index: 0;
+}
+
+.conteiner::before {
+  left: 100px;
+  top: 150px;
+  background: url(../../../assets/images/shape-01.png) no-repeat;
+  animation: rotate-right 10s linear infinite;
+}
+
+.conteiner::after {
+  top: 450px;
+  right: 100px;
+  background: url(../../../assets/images/shape-02.png) no-repeat;
+  animation: rotate-left 10s linear infinite;
+}
+
+@keyframes rotate-right {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-left {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.title {
+  font-size: 4rem;
+}
+
+.subtitle {
+  font-size: 2rem;
+}
+
+.wave {
+  position: relative;
+  top: 149px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.wave svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 150px;
+  z-index: -2;
+}

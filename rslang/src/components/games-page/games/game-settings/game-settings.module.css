@@ -1,0 +1,119 @@
+.game-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 10px 0;
+}
+
+.close-game-wrapper,
+.fullscreen-mode-wrapper,
+.volume-controls-wrapper,
+.about-game-wrapper {
+  width: 20px;
+  height: 20px;
+}
+
+.close-game,
+.about-game,
+.volume-controls,
+.fullscreen-mode,
+.volume-controls-muted,
+.fullscreen-mode-active {
+  width: 20px;
+  height: 20px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transform: scale(1);
+  transition: all 0.3s ease-in-out;
+}
+
+.close-game {
+  background-image: url(../../../../assets/icons/cancel.png);
+}
+
+.about-game {
+  background-image: url(../../../../assets/icons/question-mark.png);
+}
+
+.volume-controls {
+  background-image: url(../../../../assets/icons/volume.png);
+}
+
+.fullscreen-mode {
+  background-image: url(../../../../assets/icons/expand.png);
+}
+
+.volume-controls-muted {
+  background-image: url(../../../../assets/icons/mute.png);
+}
+
+.fullscreen-mode-active {
+  background-image: url(../../../../assets/icons/full-screen-exit.png);
+}
+
+.close-game:active,
+.volume-controls:active,
+.fullscreen-mode:active,
+.volume-controls-muted:active,
+.fullscreen-mode-active:active {
+  transform: scale(0.7);
+}
+
+.tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: #1AB69D;
+  text-align: center;
+  border-radius: 10px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  top: -15px;
+  left: 180%;
+  opacity: 0;
+  transition: opacity 1s;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
+  color: #1c1c1c;
+  color: #fff;
+  font-weight: 500;
+}
+
+.tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 15%;
+  right: 100%;
+  margin-left: -10px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent #1AB69D transparent transparent;
+}
+
+.about-game:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (max-width: 630px) {
+  .game-settings {
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  .tooltiptext {
+    width: 350px;
+    margin-top: -55px;
+    margin-left: -235px;
+  }
+
+  .tooltiptext::after {
+    top: 100%;
+    /* At the bottom of the tooltip */
+    left: 60%;
+    margin-left: -10px;
+    border-width: 10px;
+    border-color: #1AB69D transparent transparent transparent;
+  }
+}

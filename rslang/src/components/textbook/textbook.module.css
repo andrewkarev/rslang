@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+h2 {
+  font-weight: 900;
+  font-size: 32px;
+}
+
+.textbook {
+  flex-grow: 1;
+}
+
+.btn {
+  background-color: transparent;
+}
+
+.wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 30px 40px;
+}
+
+.header {
+  margin-bottom: 30px;
+}
+
+.textbook {
+  font-family: 'Roboto', sans-serif;
+}
+
+.title {
+  font-size: 3.5rem;
+  margin-bottom: 15px;
+}
+
+.book-page-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  min-height: 800px;
+  border: 2px solid transparent;
+}
+
+.a-level-group {
+  display: block;
+}
+
+:global(.learned) {
+  filter: grayscale() opacity(0.6);
+}
+
+.learned-message {
+  display: none;
+}
+
+:global(.learned) .learned-message {
+  position: absolute;
+  top: -43px;
+  right: 0;
+  display: block;
+  font-size: 22px;
+  font-style: italic;
+  color: #000;
+}
+@media (max-width: 650px) {
+  :global(.learned) .learned-message {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 620px) {
+  .book-page-wrapper {
+    margin-top: 50px;
+  }
+
+  :global(.learned) .learned-message {
+    top: -43px;
+    left: 0;
+  }
+}
+
+@media (max-width: 550px) {
+  .wrapper {
+    padding: 30px 10px;
+  }
+}

@@ -1,0 +1,17 @@
+.scrollTo {
+  color: #F3F2F1;
+  font-size: 1.3rem;
+  background: var(--btn-color);
+  padding: 10px 15px;
+  border-radius: 20px;
+  text-align: center;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.scrollTo:hover {
+  font-size: 1.5rem;
+}

@@ -1,0 +1,31 @@
+.daily-statistics {
+  display: flex;
+  padding: 100px 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.words-statistics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 80px;
+  margin-bottom: 100px;
+}
+
+.games-statistics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+@media (max-width: 857px) {
+  .words-statistics {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .games-statistics {
+    flex-direction: column;
+    justify-content: center;
+  }
+}

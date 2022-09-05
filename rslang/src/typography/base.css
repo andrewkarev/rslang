@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+:root {
+  --btn-color: linear-gradient(to left, #189883 0%, #1AB69D 76%);
+  --btn-hovered: linear-gradient(to left, #FE595D 0%, #fe1b1e 76%);
+  --bg-color-1: rgb(62, 160, 57);
+  --bg-color-6: #F3F2F1;
+  --bg-color-3: #dadada;
+  --bg-color-5: #fcf6ec;
+  --bg-color-4: #f6f6f6;
+  --color-text-1: #1c1c1c;
+  --color-black: #000;
+  --color-white: #fff;
+}
+
+body {
+  font-family: 'Roboto';
+}

@@ -1,0 +1,42 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  font-size: 10px;
+}
+
+body {
+  background-color: #fafafa;
+  height: 100%;
+  font-size: 1.6rem;
+  font-family: 'Roboto', Verdana, sans-serif;
+  color: var(--color-text-1);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  outline: none;
+  border: none;
+}

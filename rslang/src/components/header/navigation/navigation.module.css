@@ -1,0 +1,38 @@
+.nav {
+  margin-left: auto;
+  z-index: 10;
+}
+
+.burger {
+  display: none;
+  margin-left: 20px;
+}
+
+.burger-line {
+  width: 30px;
+  height: 3px;
+  background-color: #000;
+}
+
+.nav-item a {
+  padding-bottom: 5px;
+}
+
+.nav-item:focus,
+.nav-item:hover {
+  color: #1c1c1c;
+}
+
+@media (max-width: 800px) {
+  .nav {
+    margin-left: 0;
+    order: 1;
+  }
+
+  .burger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+  }
+}
