@@ -1,4 +1,5 @@
 import React from 'react';
+import { useInView } from 'react-intersection-observer';
 import styles from './advantagies.module.css';
 import advantagiesData from '../../../data/advantagies-data'
 import Advantagie from './advantagie/Advantagie';
@@ -8,6 +9,11 @@ interface AdvantagiesProps {
 }
 
 const Advantagies: React.FC<AdvantagiesProps> = ({ toggleModalVisability }) => {
+  const { ref: advantageousRef, inView: isAdvantageousVisible } = useInView({
+    threshold: 0.4,
+    triggerOnce: true,
+  });
+
 
   const advantagiesElement = advantagiesData.map((adventagie) => {
     return (
@@ -23,8 +29,10 @@ const Advantagies: React.FC<AdvantagiesProps> = ({ toggleModalVisability }) => {
   });
 
   return (
-    <section className={styles['advantagies']}>
-      <div className={styles['wrapper']}>
+    <section
+      className={styles['advantagies']}
+      ref={advantageousRef}>
+      <div className={`${styles['wrapper']} ${isAdvantageousVisible ? styles['animate'] : ''}`}>
         <h2 className={styles['title']}>Используйте все преимущества приложения</h2>
         <div className={styles['content']}>
           {advantagiesElement}

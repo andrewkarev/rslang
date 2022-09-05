@@ -1,9 +1,14 @@
 import React from 'react';
+import { useInView } from 'react-intersection-observer';
 import styles from './dev-team.module.css';
 import devTeamData from '../../../data/devTeam-data';
 import Developer from './developer/Developer'
 
 const DevTeam = () => {
+  const { ref: teamRef, inView: isTeamVisible } = useInView({
+    threshold: 0.4,
+    triggerOnce: true,
+  });
 
   const cardElements = devTeamData.map((developer) => {
     return (
@@ -18,8 +23,8 @@ const DevTeam = () => {
   });
 
   return (
-    <section className={styles['dev-team']}>
-      <div className={styles['wrapper']}>
+    <section className={styles['dev-team']} ref={teamRef}>
+      <div className={`${styles['wrapper']} ${isTeamVisible ? styles['animate'] : ''}`}>
         <h2 className={styles['title']}>Познакомьтесь с нашей командой</h2>
         <div className={styles['content']}>
           {cardElements}
