@@ -30,6 +30,22 @@ type Props = {
 }
 
 const LearnedWordsChart: React.FC<Props> = ({ stats }) => {
+  const dates: string[] = [];
+  const learnedWords: string[] = [];
+  let maxLearnedWords = 0;
+
+  if (stats) {
+    Object.entries(stats.optional)
+      .sort(([key1, value1], [key2, value2]) => Number(key1) - Number(key2))
+      .forEach(([key, value]) => {
+        const formattedDate = formatDate(Number(key));
+        
+        dates.push(formattedDate);
+        learnedWords.push(String(value.learnedWords));
+
+        if (value.learnedWords > maxLearnedWords) maxLearnedWords = value.learnedWords;
+      });
+  }
 
   const options = {
     maintainAspectRatio: false,
@@ -51,23 +67,13 @@ const LearnedWordsChart: React.FC<Props> = ({ stats }) => {
         ticks: {
           display: false
         }
+      },
+      yAxis: {
+        min: 0,
+        max: maxLearnedWords < 10 ? 10 : Math.round(maxLearnedWords / 10) * 10,
       }
     }
   };
-
-  const dates: string[] = [];
-  const learnedWords: string[] = [];
-
-  if (stats) {
-    Object.entries(stats.optional)
-      .sort(([key1, value1], [key2, value2]) => Number(key1) - Number(key2))
-      .forEach(([key, value]) => {
-        const formattedDate = formatDate(Number(key));
-        
-        dates.push(formattedDate);
-        learnedWords.push(String(value.learnedWords));
-      });
-  }
 
   const data = {
     labels: dates,

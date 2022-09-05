@@ -27,6 +27,25 @@ type Props = {
 
 const NewWordsChart: React.FC<Props> = ({ stats }) => {
 
+
+
+  const dates: string[] = [];
+  const newWords: string[] = [];
+  let maxNewWords = 0;
+
+  if (stats) {
+    Object.entries(stats.optional)
+      .sort(([key1, value1], [key2, value2]) => Number(key1) - Number(key2))
+      .forEach(([key, value]) => {
+        const formattedDate = formatDate(Number(key));
+        
+        dates.push(formattedDate);
+        newWords.push(String(value.newWords));
+
+        if (value.newWords > maxNewWords) maxNewWords = value.newWords;
+      });
+  }
+
   const options = {
     maintainAspectRatio: false,
     responsive: true,
@@ -47,23 +66,13 @@ const NewWordsChart: React.FC<Props> = ({ stats }) => {
         ticks: {
           display: false
         }
+      },
+      yAxis: {
+        min: 0,
+        max: maxNewWords < 10 ? 10 : Math.round(maxNewWords / 10) * 10,
       }
     }
   };
-
-  const dates: string[] = [];
-  const newWords: string[] = [];
-
-  if (stats) {
-    Object.entries(stats.optional)
-      .sort(([key1, value1], [key2, value2]) => Number(key1) - Number(key2))
-      .forEach(([key, value]) => {
-        const formattedDate = formatDate(Number(key));
-        
-        dates.push(formattedDate);
-        newWords.push(String(value.newWords));
-      });
-  }
 
   const data = {
     labels: dates,

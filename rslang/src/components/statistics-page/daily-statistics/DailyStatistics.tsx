@@ -44,6 +44,15 @@ const DailyStatistics: React.FC<Props> = ({ stats }) => {
     }
   }
 
+  const rightAnswersAccuracy = dayStat ? 
+    Math.round(dayStat.rightAnswers / dayStat.allAnswers * 100) : 0;
+  
+  const sprintRightAnswersAccuracy = dayStat ?
+    Math.round(dayStat.games.sprint.rightAnswers / dayStat.games.sprint.allAnswers * 100) : 0;
+  
+  const audioCallRightAnswersAccuracy = dayStat ?
+    Math.round(dayStat.games.audioCall.rightAnswers / dayStat.games.audioCall.allAnswers * 100) : 0;
+
   const wordsStatisticData = [
     { 
       title: 'новых слов за день', 
@@ -57,9 +66,7 @@ const DailyStatistics: React.FC<Props> = ({ stats }) => {
     },
     { 
       title: 'правильных ответов за день', 
-      value: String(dayStat 
-        ? Math.round(dayStat.rightAnswers / dayStat.allAnswers * 100) 
-        : 0) + '%', 
+      value: String(Number.isNaN(rightAnswersAccuracy) ? 0 : rightAnswersAccuracy) + '%', 
       image: chart
     }
   ];
@@ -86,9 +93,7 @@ const DailyStatistics: React.FC<Props> = ({ stats }) => {
         },
         {
           title: 'процент правильных ответов',
-          value: String(dayStat 
-            ? Math.round(dayStat.games.sprint.rightAnswers / dayStat.games.sprint.allAnswers * 100) 
-            : 0) + '%', 
+          value: String(Number.isNaN(sprintRightAnswersAccuracy) ? 0 : sprintRightAnswersAccuracy) + '%', 
           image: chart
         },
         {
@@ -108,9 +113,7 @@ const DailyStatistics: React.FC<Props> = ({ stats }) => {
         },
         {
           title: 'процент правильных ответов',
-          value: String(dayStat 
-            ? Math.round(dayStat.games.audioCall.rightAnswers / dayStat.games.audioCall.allAnswers * 100) 
-            : 0) + '%',
+          value: String(Number.isNaN(audioCallRightAnswersAccuracy) ? 0 : audioCallRightAnswersAccuracy) + '%',
           image: chart
         },
         {
