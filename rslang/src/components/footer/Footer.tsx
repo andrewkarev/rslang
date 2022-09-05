@@ -2,10 +2,15 @@ import React from 'react';
 import styles from './footer.module.css'
 import logo from '../../assets/icons/rs_school_js.svg'
 import github from '../../assets/icons/github.svg';
+import { useLocation } from 'react-router-dom';
 
 const Footer = () => {
+  let location = useLocation();
+
   return(
-    <div className={ styles["footer"]}>
+    <div className={`${styles['footer']} ${(location.pathname !== '/')
+      ? styles['shadowed']
+      : ''}`}>
       <div className={ styles["wrapper"]}>
         <div className={ styles["content"]}>
           <div className={ styles["year"]}>2022</div>
