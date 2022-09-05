@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './main-page.module.css';
 import HeroPages from './hero-page/HeroPage';
-import Advantagies from './advantagies/Advantagies';
+import Advantages from './advantagies/Advantages';
 import Presentation from './presentation/Presentation';
 import DevTeam from './dev-team/DevTeam';
 import Scroll from './scroll-up/Scroll'
@@ -26,7 +26,7 @@ const MainPage: React.FC<MainPageProps> = ({ toggleModalVisability }) => {
   return (
     <div className={styles["main-page"]}>
       <HeroPages toggleModalVisability={toggleModalVisability} />
-      <Advantagies toggleModalVisability={toggleModalVisability} />
+      <Advantages toggleModalVisability={toggleModalVisability} />
       <Presentation />
       <DevTeam />
       {topOffset > offsetLimit && <Scroll />}

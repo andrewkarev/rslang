@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { NavLink } from "react-router-dom";
 import { AuthorisationContext } from '../../../../context/AuthorisationContext';
-import styles from './advantagie.module.css';
+import styles from './advantage.module.css';
 
 type Props = {
   toggleModalVisability: () => void;

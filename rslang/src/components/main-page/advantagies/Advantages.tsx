@@ -1,15 +1,15 @@
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
-import styles from './advantagies.module.css';
+import styles from './advantages.module.css';
 import advantagiesData from '../../../data/advantagies-data'
-import Advantagie from './advantagie/Advantagie';
+import Advantage from './advantagie/Advantage';
 
 interface AdvantagiesProps {
   toggleModalVisability: () => void;
 }
 
-const Advantagies: React.FC<AdvantagiesProps> = ({ toggleModalVisability }) => {
-  const { ref: advantageousRef, inView: isAdvantageousVisible } = useInView({
+const Advantages: React.FC<AdvantagiesProps> = ({ toggleModalVisability }) => {
+  const { ref: advantagesRef, inView: isAdvantagesVisible } = useInView({
     threshold: 0.3,
     triggerOnce: true,
   });
@@ -17,7 +17,7 @@ const Advantagies: React.FC<AdvantagiesProps> = ({ toggleModalVisability }) => {
 
   const advantagiesElement = advantagiesData.map((adventagie) => {
     return (
-      <Advantagie
+      <Advantage
         toggleModalVisability={toggleModalVisability}
         image={adventagie.image}
         name={adventagie.name}
@@ -31,8 +31,8 @@ const Advantagies: React.FC<AdvantagiesProps> = ({ toggleModalVisability }) => {
   return (
     <section
       className={styles['advantagies']}
-      ref={advantageousRef}>
-      <div className={`${styles['wrapper']} ${isAdvantageousVisible ? styles['animate'] : ''}`}>
+      ref={advantagesRef}>
+      <div className={`${styles['wrapper']} ${isAdvantagesVisible ? styles['animate'] : ''}`}>
         <h2 className={styles['title']}>Используйте все преимущества приложения</h2>
         <div className={styles['content']}>
           {advantagiesElement}
@@ -42,4 +42,4 @@ const Advantagies: React.FC<AdvantagiesProps> = ({ toggleModalVisability }) => {
   );
 }
 
-export default Advantagies;
+export default Advantages;
