@@ -15,7 +15,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({ toggleModalVisability })
         <NavLink to={'/'}>
           <h1 className={styles['logo']}>EasyLang</h1>
         </NavLink>
-        <div className={styles['navs-btns']}>
+        <div className={styles['nav-container']}>
           <Navigation />
           <RegistrationBtn
             toggleModalVisability={toggleModalVisability}

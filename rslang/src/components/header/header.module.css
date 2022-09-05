@@ -55,7 +55,7 @@
   font-family: 'Roboto', Verdana, sans-serif;
 }
 
-.navs-btns {
+.nav-container {
   display: flex;
   align-items: center;
 }
