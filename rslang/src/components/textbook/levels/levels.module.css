@@ -23,7 +23,7 @@
   overflow: hidden;
   color: #D6D3D3;
   background-color: #F3F2F1;
-  transition: 0.3s;
+  transition: all 0.3s ease;
   cursor: pointer;
 }
 
@@ -46,8 +46,8 @@
   font-size: 26px;
   font-weight: 700;
   z-index: 10;
-
   color: #d8d3d3;
+  transition: all 0.3s ease;
 }
 
 .arrow {
@@ -58,6 +58,7 @@
   border: 35px solid transparent;
   border-left: 20px solid #F3F2F1;
   background-color: #e8e6e3;
+  transition: all 0.3s ease;
 }
 
 .level:hover,

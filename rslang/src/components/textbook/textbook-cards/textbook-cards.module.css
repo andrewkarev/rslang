@@ -41,11 +41,11 @@
   color: #292623;
   background-color: #F3F2F1;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .card:hover {
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 
 .status {
@@ -102,7 +102,7 @@
 }
 
 :global(.level-group-4) .card.active {
-  background-color: #FE595D;  
+  background-color: #FE595D;
 }
 
 :global(.level-group-5) .card:hover,
@@ -111,7 +111,7 @@
 }
 
 :global(.level-group-5) .card.active {
-  background-color: #fe1b1e;  
+  background-color: #fe1b1e;
 }
 
 :global(.level-group-6) .card:hover,
