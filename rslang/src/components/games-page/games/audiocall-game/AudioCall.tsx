@@ -123,14 +123,14 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
     setTranslations(translation);
   }, [getWordsTranslation]);
 
-  const playAudio = () => {
+  const playAudio = useCallback(() => {
     if (!audio.paused) {
       audio.pause();
       audio.currentTime = 0;
     }
 
     audio.play();
-  };
+  }, [audio]);
 
   const updateGameWordStatus = useCallback(async (newWord: {
     word: IWord;
@@ -215,6 +215,18 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
     document.addEventListener('keyup', listener);
     return () => document.removeEventListener('keyup', listener);
   }, [handleOptionButtonEvent]);
+
+  useEffect(() => {
+    const listener = (e: KeyboardEvent) => {
+      if (e.code === 'KeyC') {
+        e.preventDefault();
+        playAudio();
+      }
+    };
+
+    document.addEventListener('keyup', listener);
+    return () => document.removeEventListener('keyup', listener);
+  }, [playAudio]);
 
   const handleNextButtonEvent = useCallback(() => {
     if (!currentWord) return;
