@@ -44,7 +44,7 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
   const [isMuted, setIsMuted] = useState(true);
 
   const changeSoundState = () => {
-    setIsMuted(true);
+    setIsMuted(!isMuted);
   };
 
   const [onSuccess] = useSound(successSound);
@@ -171,12 +171,12 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
 
     if (isRight) {
       optionLightning[optionIndex] = 'right';
-      onSuccess();
+      !isMuted && onSuccess();
       updateStreak(true);
     } else {
       optionLightning[optionIndex] = 'wrong';
       optionLightning[currentwordIndex] = 'right';
-      onFailure();
+      !isMuted && onFailure();
       updateStreak(false);
     }
 
@@ -185,7 +185,7 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
     setIsOptionLightned(optionLightning);
     setAlternativeMode(false);
     updateGameWordStatus(newWord);
-  }, [currentWord, translations, onFailure, onSuccess, updateGameWordStatus, updateStreak]);
+  }, [currentWord, translations, isMuted, onFailure, onSuccess, updateGameWordStatus, updateStreak]);
 
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {
