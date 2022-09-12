@@ -23,7 +23,7 @@ const Game: React.FC<Props> = (props) => {
   const { isAuthorised } = useContext(AuthorisationContext);
 
   const handleGameBtnClick = async () => {
-  const response = await getWords();
+    const response = await getWords();
 
     if (!response) return;
 
@@ -66,9 +66,9 @@ const Game: React.FC<Props> = (props) => {
   }
 
   return (
-    <div 
-      className={ `${styles['game']} ${props.isLearnedPage && props.currentStatus.currentLevel !== 6 || !props.currentLevelWords.length ? styles['disabled'] : ''}` }
-      onClick={ props.isLearnedPage && props.currentStatus.currentLevel !== 6 || !props.currentLevelWords.length ?  undefined :  handleGameBtnClick }
+    <div
+      className={`${styles['game']} ${(props.isLearnedPage && props.currentStatus.currentLevel !== 6) || !props.currentLevelWords.length ? styles['disabled'] : ''}`}
+      onClick={(props.isLearnedPage && props.currentStatus.currentLevel !== 6) || !props.currentLevelWords.length ? undefined : handleGameBtnClick}
     >
       <h3 className={styles['game-name']}>{props.name}</h3>
       <div className={styles['game-description']}>{props.description}</div>

@@ -189,7 +189,22 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
 
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {
-      if (e.code.match(/(Digit+(1|2|3|4|5))/)) {
+      let regexp: RegExp;
+
+      switch (gameWords.current.length) {
+        case 1: regexp = /(Digit1)/;
+          break;
+        case 2: regexp = /(Digit+(1|2))/;
+          break;
+        case 3: regexp = /(Digit+(1|2|3))/;
+          break;
+        case 4: regexp = /(Digit+(1|2|3|4))/;
+          break;
+        default: regexp = /(Digit+(1|2|3|4|5))/;
+          break;
+      }
+
+      if (e.code.match(regexp)) {
         e.preventDefault();
         const correction = 1;
         const index = Number(e.code.slice(-1)) - correction;
