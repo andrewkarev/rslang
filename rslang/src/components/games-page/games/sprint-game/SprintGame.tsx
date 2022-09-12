@@ -73,9 +73,12 @@ const SprintGame: React.FunctionComponent<SprintGameProps> = (props) => {
     setScoreMultiplier(multiplierValue.current);
   };
 
-  const setScoreValue = useCallback(() => {
+  const setScoreValue = useCallback((isAnswerCorrect: boolean) => {
     setMultiplierValue();
-    setScore(score + multiplierValue.current);
+
+    if (isAnswerCorrect) {
+      setScore(score + multiplierValue.current);
+    }
   }, [score]);
 
   const setPairOfWords = useCallback(() => {
@@ -93,12 +96,12 @@ const SprintGame: React.FunctionComponent<SprintGameProps> = (props) => {
     })
   }, []);
 
-  const updateGameStatus = useCallback(() => {
+  const updateGameStatus = useCallback((isAnswerCorrect: boolean) => {
     if (wordsInGame.current.length >= gameWords.current.length) {
       props.setLastGameResults(wordsInGame.current);
       props.setIsResultsVisible(true);
     } else {
-      setScoreValue();
+      setScoreValue(isAnswerCorrect);
       setPairOfWords();
     }
   }, [setPairOfWords, setScoreValue, props]);
@@ -126,7 +129,7 @@ const SprintGame: React.FunctionComponent<SprintGameProps> = (props) => {
       streak.current = 0;
     }
 
-    updateGameStatus();
+    updateGameStatus(answerStatus);
 
     if (isAuthorised) {
       const response = await updateUsersWords('Спринт', newWord);
