@@ -13,9 +13,8 @@ const RegistrationBtn: React.FunctionComponent<RegistrationBtnProps> = ({
   const { isAuthorised, changeAuthorisationStatus } = useContext(AuthorisationContext)
 
   const logOut = () => {
-    const localStorageItems = ['id', 'name', 'refreshToken', 'token'];
     changeAuthorisationStatus();
-    localStorageItems.forEach((item) => localStorage.removeItem(item));
+    localStorage.clear();
   }
 
   const signInText = isHeaderButton ? 'Войти' : 'Зарегистрироваться';
