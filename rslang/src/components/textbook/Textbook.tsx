@@ -141,9 +141,7 @@ const Textbook: React.FC<TextbookProps> = ({
                 if (userItem.wordId === item.id && userItem.optional.isDifficult) complicatedWordsCount++;
                 
                 return userItem.wordId === item.id && (userItem.optional.isDifficult || userItem.optional.isLearned);
-
-              })
-                
+              })                
             );
 
             if (pageUserData.length === 20 && complicatedWordsCount < 20) {
