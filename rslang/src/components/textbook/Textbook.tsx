@@ -135,12 +135,18 @@ const Textbook: React.FC<TextbookProps> = ({
           changeComplicatedWordsAmount(userData.filter((userWord) => userWord.optional.isDifficult).length);
 
           if (levelWords && currentStatus.currentLevel < 6) {
-            const pageUserData = levelWords.filter((item) =>
-              userData.find((userItem) =>
-                userItem.wordId === item.id && (userItem.optional.isDifficult || userItem.optional.isLearned))
-            )
+            let complicatedWordsCount = 0;
+            const pageUserData = levelWords.filter((item) => 
+              userData.find((userItem) => {
+                if (userItem.wordId === item.id && userItem.optional.isDifficult) complicatedWordsCount++;
+                
+                return userItem.wordId === item.id && (userItem.optional.isDifficult || userItem.optional.isLearned);
 
-            if (pageUserData.length === 20) {
+              })
+                
+            );
+
+            if (pageUserData.length === 20 && complicatedWordsCount < 20) {
               setLearnedPage(true);
             } else {
               setLearnedPage(false);
