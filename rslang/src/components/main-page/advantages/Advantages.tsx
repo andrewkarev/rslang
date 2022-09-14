@@ -1,7 +1,7 @@
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
 import styles from './advantages.module.css';
-import advantagiesData from '../../../data/advantagies-data'
+import advantagesData from '../../../data/advantages-data'
 import Advantage from './advantage/Advantage';
 
 interface AdvantagiesProps {
@@ -15,15 +15,15 @@ const Advantages: React.FC<AdvantagiesProps> = ({ toggleModalVisability }) => {
   });
 
 
-  const advantagiesElement = advantagiesData.map((adventagie) => {
+  const advantagiesElement = advantagesData.map((adventage) => {
     return (
       <Advantage
         toggleModalVisability={toggleModalVisability}
-        image={adventagie.image}
-        name={adventagie.name}
-        description={adventagie.description}
-        key={adventagie.name}
-        url={adventagie.url}
+        image={adventage.image}
+        name={adventage.name}
+        description={adventage.description}
+        key={adventage.name}
+        url={adventage.url}
       />
     )
   });

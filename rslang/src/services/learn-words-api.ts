@@ -149,11 +149,9 @@ class LearnWordsApi {
       });
 
       if (response.status === 401) throw new AuthorisationError('Refresh token expired.');
-      console.dir(response)
 
       return await response.json();
     } catch (error) {
-      console.dir(error)
       if (!(error instanceof Error)) return;
       throw error;
     }

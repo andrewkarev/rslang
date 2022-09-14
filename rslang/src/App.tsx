@@ -57,9 +57,13 @@ function App() {
           changeAuthorisationStatus();
         }
       } catch (error) {
-        if (error instanceof AuthorisationError && isAuthorised) {
+        if (error instanceof AuthorisationError) {
+
+          if (isAuthorised) {
+            changeAuthorisationStatus();
+          }
+
           localStorage.clear();
-          changeAuthorisationStatus();
         }
       }
     }

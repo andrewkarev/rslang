@@ -37,47 +37,47 @@ const DailyStatistics: React.FC<Props> = ({ stats }) => {
 
   if (stats) {
     const timeStamp = getCurrentDate();
-    
+
     const dayStatEntry = Object.entries(stats.optional).find(([key, value]) => key === timeStamp)
     if (dayStatEntry) {
       dayStat = dayStatEntry[1];
     }
   }
 
-  const rightAnswersAccuracy = dayStat ? 
+  const rightAnswersAccuracy = dayStat ?
     Math.round(dayStat.rightAnswers / dayStat.allAnswers * 100) : 0;
-  
+
   const sprintRightAnswersAccuracy = dayStat ?
     Math.round(dayStat.games.sprint.rightAnswers / dayStat.games.sprint.allAnswers * 100) : 0;
-  
+
   const audioCallRightAnswersAccuracy = dayStat ?
     Math.round(dayStat.games.audioCall.rightAnswers / dayStat.games.audioCall.allAnswers * 100) : 0;
 
   const wordsStatisticData = [
-    { 
-      title: 'новых слов за день', 
-      value: String(dayStat ? dayStat.newWords : 0), 
-      image:  idea
+    {
+      title: 'новых слов за день',
+      value: String(dayStat ? dayStat.newWords : 0),
+      image: idea
     },
-    { 
-      title: 'изученных слов за день', 
+    {
+      title: 'изученных слов за день',
       value: String(dayStat ? dayStat.learnedWords : 0),
       image: report
     },
-    { 
-      title: 'правильных ответов за день', 
-      value: String(Number.isNaN(rightAnswersAccuracy) ? 0 : rightAnswersAccuracy) + '%', 
+    {
+      title: 'правильных ответов за день',
+      value: String(Number.isNaN(rightAnswersAccuracy) ? 0 : rightAnswersAccuracy) + '%',
       image: chart
     }
   ];
 
   const wordsStatisticsElements = wordsStatisticData.map((item, index) => {
     return (
-      <WordStatistic 
-        title={ item.title } 
-        value={ item.value }
-        image={ item.image }  
-        key={ `word-stat-${index}` }
+      <WordStatistic
+        title={item.title}
+        value={item.value}
+        image={item.image}
+        key={`word-stat-${index}`}
       />
     )
   });
@@ -93,7 +93,7 @@ const DailyStatistics: React.FC<Props> = ({ stats }) => {
         },
         {
           title: 'процент правильных ответов',
-          value: String(Number.isNaN(sprintRightAnswersAccuracy) ? 0 : sprintRightAnswersAccuracy) + '%', 
+          value: String(Number.isNaN(sprintRightAnswersAccuracy) ? 0 : sprintRightAnswersAccuracy) + '%',
           image: chart
         },
         {
@@ -118,7 +118,7 @@ const DailyStatistics: React.FC<Props> = ({ stats }) => {
         },
         {
           title: 'самая длинная серия правильных ответов',
-          value: String(dayStat ? dayStat.games.audioCall.newWords : 0),
+          value: String(dayStat ? dayStat.games.audioCall.longestStreak : 0),
           image: streak
         }
       ]
@@ -127,21 +127,21 @@ const DailyStatistics: React.FC<Props> = ({ stats }) => {
 
   const gamesStatisticsElements = gamesStatisticsData.map((item, index) => {
     return (
-      <GameStatistic 
-        name={ item.name } 
-        stats={ item.stats } 
-        key={ `game-stat-${index}` }
+      <GameStatistic
+        name={item.name}
+        stats={item.stats}
+        key={`game-stat-${index}`}
       />
     )
   })
 
   return (
-    <div className={ styles['daily-statistics'] }>
-      <div className={ styles['words-statistics'] }>
-        { wordsStatisticsElements }
+    <div className={styles['daily-statistics']}>
+      <div className={styles['words-statistics']}>
+        {wordsStatisticsElements}
       </div>
-      <div className={ styles['games-statistics'] }>
-        { gamesStatisticsElements }
+      <div className={styles['games-statistics']}>
+        {gamesStatisticsElements}
       </div>
     </div>
   )

@@ -31,7 +31,7 @@ const GameSettings: React.FunctionComponent<GameSettingsProps> = (props) => {
           onClick={handleCloseButtonClick}>
           <div className={styles['close-game']}></div>
         </div>
-        {props.choosenGame !== 'Аудио-вызов' && <div
+        <div
           className={styles['volume-controls-wrapper']}
           onClick={handleVolumeButtonClick}>
           <div
@@ -40,7 +40,6 @@ const GameSettings: React.FunctionComponent<GameSettingsProps> = (props) => {
               : 'volume-controls'}`]}
           ></div>
         </div>
-        }
         <div
           className={styles['fullscreen-mode-wrapper']}
           onClick={props.handleFullScreenButtonClick}
@@ -56,7 +55,7 @@ const GameSettings: React.FunctionComponent<GameSettingsProps> = (props) => {
             <span className={styles['tooltiptext']}>
               {`${props.choosenGame !== 'Аудио-вызов'
                 ? 'Выбрать правильный ответ можно как с помощью мыши, так и нажатием на клавиши \'ArrowRoght\', \'ArrowLeft\''
-                : 'Для выбора ответа можно использовать мышь или \'клавиши 1-5\' Для перехода к следующему слову или просмотра правильного ответа нажмите \'space\''}'`}
+                : 'Для выбора ответа можно использовать мышь или \'клавиши 1-5\' Для перехода к следующему слову или просмотра правильного ответа нажмите \'space\' Для того, чтобы прослушать слово нажмите \'C\''}'`}
             </span>
           </div>
         </div>

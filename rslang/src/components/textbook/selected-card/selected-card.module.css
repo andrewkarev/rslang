@@ -1,5 +1,5 @@
 .selected-card {
-  max-width: 380px;
+  width: 380px;
   border-radius: 10px;
   align-self: flex-start;
   flex-shrink: 0;
@@ -140,6 +140,7 @@
   .selected-card {
     max-width: 300px;
   }
+
   .btn-separator {
     display: none;
   }
@@ -149,6 +150,7 @@
   .selected-card {
     max-width: 250px;
   }
+
   .word-wrapper {
     padding: 0 5px;
   }

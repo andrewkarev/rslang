@@ -29,15 +29,7 @@
 
 @keyframes fade-right {
   0% {
-    transform: translateX(200%);
-  }
-
-  40% {
-    transform: translateX(-20%);
-  }
-
-  70% {
-    transform: translateX(20%);
+    transform: translateX(180%);
   }
 
   100% {
@@ -48,15 +40,7 @@
 
 @keyframes fade-left {
   0% {
-    transform: translateX(-200%);
-  }
-
-  40% {
-    transform: translateX(20%);
-  }
-
-  70% {
-    transform: translateX(-20%);
+    transform: translateX(-180%);
   }
 
   100% {

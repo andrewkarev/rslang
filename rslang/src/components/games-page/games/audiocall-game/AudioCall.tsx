@@ -44,7 +44,7 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
   const [isMuted, setIsMuted] = useState(true);
 
   const changeSoundState = () => {
-    setIsMuted(true);
+    setIsMuted(!isMuted);
   };
 
   const [onSuccess] = useSound(successSound);
@@ -123,14 +123,14 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
     setTranslations(translation);
   }, [getWordsTranslation]);
 
-  const playAudio = () => {
+  const playAudio = useCallback(() => {
     if (!audio.paused) {
       audio.pause();
       audio.currentTime = 0;
     }
 
     audio.play();
-  };
+  }, [audio]);
 
   const updateGameWordStatus = useCallback(async (newWord: {
     word: IWord;
@@ -171,12 +171,12 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
 
     if (isRight) {
       optionLightning[optionIndex] = 'right';
-      onSuccess();
+      !isMuted && onSuccess();
       updateStreak(true);
     } else {
       optionLightning[optionIndex] = 'wrong';
       optionLightning[currentwordIndex] = 'right';
-      onFailure();
+      !isMuted && onFailure();
       updateStreak(false);
     }
 
@@ -185,11 +185,26 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
     setIsOptionLightned(optionLightning);
     setAlternativeMode(false);
     updateGameWordStatus(newWord);
-  }, [currentWord, translations, onFailure, onSuccess, updateGameWordStatus, updateStreak]);
+  }, [currentWord, translations, isMuted, onFailure, onSuccess, updateGameWordStatus, updateStreak]);
 
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {
-      if (e.code.match(/(Digit+(1|2|3|4|5))/)) {
+      let regexp: RegExp;
+
+      switch (gameWords.current.length) {
+        case 1: regexp = /(Digit1)/;
+          break;
+        case 2: regexp = /(Digit+(1|2))/;
+          break;
+        case 3: regexp = /(Digit+(1|2|3))/;
+          break;
+        case 4: regexp = /(Digit+(1|2|3|4))/;
+          break;
+        default: regexp = /(Digit+(1|2|3|4|5))/;
+          break;
+      }
+
+      if (e.code.match(regexp)) {
         e.preventDefault();
         const correction = 1;
         const index = Number(e.code.slice(-1)) - correction;
@@ -200,6 +215,18 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
     document.addEventListener('keyup', listener);
     return () => document.removeEventListener('keyup', listener);
   }, [handleOptionButtonEvent]);
+
+  useEffect(() => {
+    const listener = (e: KeyboardEvent) => {
+      if (e.code === 'KeyC') {
+        e.preventDefault();
+        playAudio();
+      }
+    };
+
+    document.addEventListener('keyup', listener);
+    return () => document.removeEventListener('keyup', listener);
+  }, [playAudio]);
 
   const handleNextButtonEvent = useCallback(() => {
     if (!currentWord) return;
