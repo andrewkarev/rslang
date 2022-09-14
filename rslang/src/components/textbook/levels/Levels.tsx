@@ -22,6 +22,8 @@ const Levels: React.FC<Props> = ({ currentStatus, complicatedWordsAmount, setCur
 
   const handleComplicatedLevelClick = (event: MouseEvent) => {
     setCurrentStatus( { currentLevel: 6, currentPage: 0, currentCard: 0} );
+
+    localStorage.setItem('level', String(6));
   }
 
   const levelsElements = levelsData.map((level, index) => {

@@ -32,6 +32,7 @@ type Props = {
 const LearnedWordsChart: React.FC<Props> = ({ stats }) => {
   const dates: string[] = [];
   const learnedWords: string[] = [];
+  let currentDayAllLearnedWords = 0;
   let maxLearnedWords = 0;
 
   if (stats) {
@@ -39,9 +40,10 @@ const LearnedWordsChart: React.FC<Props> = ({ stats }) => {
       .sort(([key1, value1], [key2, value2]) => Number(key1) - Number(key2))
       .forEach(([key, value]) => {
         const formattedDate = formatDate(Number(key));
-        
         dates.push(formattedDate);
-        learnedWords.push(String(value.learnedWords));
+
+        currentDayAllLearnedWords += value.learnedWords;
+        learnedWords.push(String(currentDayAllLearnedWords));
 
         if (value.learnedWords > maxLearnedWords) maxLearnedWords = value.learnedWords;
       });
