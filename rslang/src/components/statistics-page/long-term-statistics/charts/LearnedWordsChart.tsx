@@ -45,7 +45,7 @@ const LearnedWordsChart: React.FC<Props> = ({ stats }) => {
         currentDayAllLearnedWords += value.learnedWords;
         learnedWords.push(String(currentDayAllLearnedWords));
 
-        if (value.learnedWords > maxLearnedWords) maxLearnedWords = value.learnedWords;
+        if (currentDayAllLearnedWords > maxLearnedWords) maxLearnedWords = currentDayAllLearnedWords;
       });
   }
 
@@ -72,7 +72,7 @@ const LearnedWordsChart: React.FC<Props> = ({ stats }) => {
       },
       yAxis: {
         min: 0,
-        max: maxLearnedWords < 10 ? 10 : Math.round(maxLearnedWords / 10) * 10,
+        max: maxLearnedWords < 10 ? 10 : Math.ceil(maxLearnedWords / 10) * 10,
       }
     }
   };
