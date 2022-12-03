@@ -1,38 +1,49 @@
-import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
-import { FullScreen, useFullScreenHandle } from 'react-full-screen';
-import getRandomIndex from '../../../../services/get-random-index';
-import IWord from '../../../../types/services-interfaces/IWord';
-import GameSettings from '../game-settings/GameSettings';
-import styles from './audio-call.module.css';
-import successSound from '../../../../assets/sounds/sound-of-success.ogg';
-import failureSound from '../../../../assets/sounds/sound-of-failure.ogg';
-import useSound from 'use-sound';
-import shuffle from '../../../../services/shuffle';
-import updateUsersWords from '../../../../services/update-user-words';
-import { AuthorisationContext } from '../../../../context/AuthorisationContext';
-import OptionButton from './option-button/OptionButton';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
+import getRandomIndex from "../../../../services/get-random-index";
+import IWord from "../../../../types/services-interfaces/IWord";
+import GameSettings from "../game-settings/GameSettings";
+import styles from "./audio-call.module.css";
+import successSound from "../../../../assets/sounds/sound-of-success.ogg";
+import failureSound from "../../../../assets/sounds/sound-of-failure.ogg";
+import useSound from "use-sound";
+import shuffle from "../../../../services/shuffle";
+import updateUsersWords from "../../../../services/update-user-words";
+import { AuthorisationContext } from "../../../../context/AuthorisationContext";
+import OptionButton from "./option-button/OptionButton";
 
 interface AudioCallGameProps {
-  words: IWord[],
-  choosenGame: string,
-  audioCallNewWords: React.MutableRefObject<number>,
-  audioCallLearnedWords: React.MutableRefObject<number>,
-  closeGame: (choice: string) => void,
-  setLastGameResults: (value: React.SetStateAction<[] | {
-    word: IWord;
-    isCorrect: boolean;
-  }[]>) => void,
-  setIsResultsVisible: (value: React.SetStateAction<boolean>) => void,
+  words: IWord[];
+  choosenGame: string;
+  audioCallNewWords: React.MutableRefObject<number>;
+  audioCallLearnedWords: React.MutableRefObject<number>;
+  closeGame: (choice: string) => void;
+  setLastGameResults: (
+    value: React.SetStateAction<
+      | []
+      | {
+          word: IWord;
+          isCorrect: boolean;
+        }[]
+    >
+  ) => void;
+  setIsResultsVisible: (value: React.SetStateAction<boolean>) => void;
   longestSreak: React.MutableRefObject<{
     best: number;
     current: number;
-  }>,
+  }>;
 }
 
 const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
   const { isAuthorised } = useContext(AuthorisationContext);
 
-  const BASE_URL = 'https://rslangappteam102.herokuapp.com';
+  const BASE_URL = "https://rslang-project-2022.adaptable.app";
 
   const gameWords = useRef(shuffle(props.words));
 
@@ -50,7 +61,7 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
   const [onSuccess] = useSound(successSound);
   const [onFailure] = useSound(failureSound);
 
-  const wordsInGame = useRef<{ word: IWord, isCorrect: boolean }[]>([]);
+  const wordsInGame = useRef<{ word: IWord; isCorrect: boolean }[]>([]);
 
   const wordIndex = useRef(0);
 
@@ -65,7 +76,9 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
 
   const canGiveAnswer = useRef(false);
 
-  const [isOptionLightned, setIsOptionLightned] = useState<('base' | 'right' | 'wrong')[]>([])
+  const [isOptionLightned, setIsOptionLightned] = useState<
+    ("base" | "right" | "wrong")[]
+  >([]);
 
   useEffect(() => {
     setCurrentWord(gameWords.current[wordIndex.current]);
@@ -83,17 +96,18 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
 
     const canPlay = () => {
       audio.play();
-      audio.removeEventListener('canplay', canPlay);
-    }
+      audio.removeEventListener("canplay", canPlay);
+    };
 
-    audio.addEventListener('canplay', canPlay);
+    audio.addEventListener("canplay", canPlay);
   }, [audio, currentWord?.audio, answersGiven]);
 
   const getWordsTranslation = useCallback(() => {
     const ANSWERS_OPTIONS = 5;
-    const relevantAnswerOption = gameWords.current.length >= ANSWERS_OPTIONS
-      ? ANSWERS_OPTIONS
-      : gameWords.current.length;
+    const relevantAnswerOption =
+      gameWords.current.length >= ANSWERS_OPTIONS
+        ? ANSWERS_OPTIONS
+        : gameWords.current.length;
     const wordsList: string[] = [];
     const correctAnswer = currentWord?.wordTranslate;
 
@@ -132,75 +146,96 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
     audio.play();
   }, [audio]);
 
-  const updateGameWordStatus = useCallback(async (newWord: {
-    word: IWord;
-    isCorrect: boolean;
-  }) => {
-    if (isAuthorised) {
-      const response = await updateUsersWords('Аудио-вызов', newWord);
+  const updateGameWordStatus = useCallback(
+    async (newWord: { word: IWord; isCorrect: boolean }) => {
+      if (isAuthorised) {
+        const response = await updateUsersWords("Аудио-вызов", newWord);
 
-      if (!response) return;
+        if (!response) return;
 
-      const [isNewWord, isLearnedWord] = response;
+        const [isNewWord, isLearnedWord] = response;
 
-      if (isNewWord) props.audioCallNewWords.current++;
-      if (isLearnedWord) props.audioCallLearnedWords.current++;
-    }
-  }, [isAuthorised, props.audioCallNewWords, props.audioCallLearnedWords]);
+        if (isNewWord) props.audioCallNewWords.current++;
+        if (isLearnedWord) props.audioCallLearnedWords.current++;
+      }
+    },
+    [isAuthorised, props.audioCallNewWords, props.audioCallLearnedWords]
+  );
 
-  const updateStreak = useCallback((isAnswerCorrect: boolean) => {
-    const streak = props.longestSreak.current;
+  const updateStreak = useCallback(
+    (isAnswerCorrect: boolean) => {
+      const streak = props.longestSreak.current;
 
-    if (isAnswerCorrect) {
-      streak.current++;
-    } else {
-      props.longestSreak.current.best = Math.max(streak.best, streak.current);
-      streak.current = 0;
-    }
-  }, [props.longestSreak]);
+      if (isAnswerCorrect) {
+        streak.current++;
+      } else {
+        props.longestSreak.current.best = Math.max(streak.best, streak.current);
+        streak.current = 0;
+      }
+    },
+    [props.longestSreak]
+  );
 
-  const handleOptionButtonEvent = useCallback((optionIndex: number) => {
-    if (!canGiveAnswer.current || !currentWord) return;
-    const currentWordTranslation = currentWord?.wordTranslate || '';
-    const currentwordIndex = translations.indexOf(currentWordTranslation);
-    const optionLightning: ('base' | 'right' | 'wrong')[] = new Array(5).fill('base');
-    const isRight = optionIndex === currentwordIndex;
+  const handleOptionButtonEvent = useCallback(
+    (optionIndex: number) => {
+      if (!canGiveAnswer.current || !currentWord) return;
+      const currentWordTranslation = currentWord?.wordTranslate || "";
+      const currentwordIndex = translations.indexOf(currentWordTranslation);
+      const optionLightning: ("base" | "right" | "wrong")[] = new Array(5).fill(
+        "base"
+      );
+      const isRight = optionIndex === currentwordIndex;
 
-    const newWord = { word: currentWord, isCorrect: isRight };
-    wordsInGame.current.push(newWord);
+      const newWord = { word: currentWord, isCorrect: isRight };
+      wordsInGame.current.push(newWord);
 
-    if (isRight) {
-      optionLightning[optionIndex] = 'right';
-      !isMuted && onSuccess();
-      updateStreak(true);
-    } else {
-      optionLightning[optionIndex] = 'wrong';
-      optionLightning[currentwordIndex] = 'right';
-      !isMuted && onFailure();
-      updateStreak(false);
-    }
+      if (isRight) {
+        optionLightning[optionIndex] = "right";
+        !isMuted && onSuccess();
+        updateStreak(true);
+      } else {
+        optionLightning[optionIndex] = "wrong";
+        optionLightning[currentwordIndex] = "right";
+        !isMuted && onFailure();
+        updateStreak(false);
+      }
 
-    canGiveAnswer.current = false;
+      canGiveAnswer.current = false;
 
-    setIsOptionLightned(optionLightning);
-    setAlternativeMode(false);
-    updateGameWordStatus(newWord);
-  }, [currentWord, translations, isMuted, onFailure, onSuccess, updateGameWordStatus, updateStreak]);
+      setIsOptionLightned(optionLightning);
+      setAlternativeMode(false);
+      updateGameWordStatus(newWord);
+    },
+    [
+      currentWord,
+      translations,
+      isMuted,
+      onFailure,
+      onSuccess,
+      updateGameWordStatus,
+      updateStreak,
+    ]
+  );
 
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {
       let regexp: RegExp;
 
       switch (gameWords.current.length) {
-        case 1: regexp = /(Digit1)/;
+        case 1:
+          regexp = /(Digit1)/;
           break;
-        case 2: regexp = /(Digit+(1|2))/;
+        case 2:
+          regexp = /(Digit+(1|2))/;
           break;
-        case 3: regexp = /(Digit+(1|2|3))/;
+        case 3:
+          regexp = /(Digit+(1|2|3))/;
           break;
-        case 4: regexp = /(Digit+(1|2|3|4))/;
+        case 4:
+          regexp = /(Digit+(1|2|3|4))/;
           break;
-        default: regexp = /(Digit+(1|2|3|4|5))/;
+        default:
+          regexp = /(Digit+(1|2|3|4|5))/;
           break;
       }
 
@@ -212,26 +247,28 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
       }
     };
 
-    document.addEventListener('keyup', listener);
-    return () => document.removeEventListener('keyup', listener);
+    document.addEventListener("keyup", listener);
+    return () => document.removeEventListener("keyup", listener);
   }, [handleOptionButtonEvent]);
 
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {
-      if (e.code === 'KeyC') {
+      if (e.code === "KeyC") {
         e.preventDefault();
         playAudio();
       }
     };
 
-    document.addEventListener('keyup', listener);
-    return () => document.removeEventListener('keyup', listener);
+    document.addEventListener("keyup", listener);
+    return () => document.removeEventListener("keyup", listener);
   }, [playAudio]);
 
   const handleNextButtonEvent = useCallback(() => {
     if (!currentWord) return;
 
-    const optionLightning: ('base' | 'right' | 'wrong')[] = new Array(5).fill('base');
+    const optionLightning: ("base" | "right" | "wrong")[] = new Array(5).fill(
+      "base"
+    );
 
     if (!alternativeMode) {
       wordIndex.current++;
@@ -243,13 +280,13 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
       setTranslations(nextWordsOptions);
       canGiveAnswer.current = true;
     } else {
-      const currentWordTranslation = currentWord?.wordTranslate || '';
+      const currentWordTranslation = currentWord?.wordTranslate || "";
       const currentWordIndex = translations.indexOf(currentWordTranslation);
 
       const newWord = { word: currentWord, isCorrect: false };
       wordsInGame.current.push(newWord);
 
-      optionLightning[currentWordIndex] = 'right';
+      optionLightning[currentWordIndex] = "right";
 
       canGiveAnswer.current = false;
 
@@ -260,18 +297,25 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
     setAnswersGiven(wordIndex.current);
     setIsOptionLightned(optionLightning);
     setAlternativeMode(!alternativeMode);
-  }, [alternativeMode, currentWord, translations, getWordsTranslation, updateGameWordStatus, updateStreak]);
+  }, [
+    alternativeMode,
+    currentWord,
+    translations,
+    getWordsTranslation,
+    updateGameWordStatus,
+    updateStreak,
+  ]);
 
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {
-      if (e.code === 'Space') {
+      if (e.code === "Space") {
         e.preventDefault();
         handleNextButtonEvent();
       }
     };
 
-    document.addEventListener('keyup', listener);
-    return () => document.removeEventListener('keyup', listener);
+    document.addEventListener("keyup", listener);
+    return () => document.removeEventListener("keyup", listener);
   }, [handleNextButtonEvent]);
 
   useEffect(() => {
@@ -295,7 +339,7 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
 
   return (
     <FullScreen handle={handle}>
-      <div className={styles['container']}>
+      <div className={styles["container"]}>
         <GameSettings
           handle={handle}
           handleFullScreenButtonClick={handleFullScreenButtonClick}
@@ -304,47 +348,56 @@ const AudioCallGame: React.FC<AudioCallGameProps> = (props) => {
           isMuted={isMuted}
           choosenGame={props.choosenGame}
         />
-        <div className={styles['game-board']}>
-          <div className={styles['game-field']}>
-            <div className={styles['game-info']}>
-              {!alternativeMode &&
+        <div className={styles["game-board"]}>
+          <div className={styles["game-field"]}>
+            <div className={styles["game-info"]}>
+              {!alternativeMode && (
                 <img
-                  className={styles['image']}
+                  className={styles["image"]}
                   src={imageUrl}
-                  alt={currentWord?.word} />}
-              <div className={styles['word-components']}>
+                  alt={currentWord?.word}
+                />
+              )}
+              <div className={styles["word-components"]}>
                 <div
-                  className={styles[`${alternativeMode
-                    ? 'play-btn-wrapper-alternative'
-                    : 'play-btn-wrapper'}`]}
-                  onClick={playAudio}>
-                  <div className={styles['play-btn-container']}>
+                  className={
+                    styles[
+                      `${
+                        alternativeMode
+                          ? "play-btn-wrapper-alternative"
+                          : "play-btn-wrapper"
+                      }`
+                    ]
+                  }
+                  onClick={playAudio}
+                >
+                  <div className={styles["play-btn-container"]}>
                     <button
-                      className={styles[`${alternativeMode
-                        ? 'play-btn-alternative'
-                        : 'play-btn'}`]}
+                      className={
+                        styles[
+                          `${
+                            alternativeMode
+                              ? "play-btn-alternative"
+                              : "play-btn"
+                          }`
+                        ]
+                      }
                       type="button"
-                    >
-                    </button>
+                    ></button>
                   </div>
                 </div>
-                {!alternativeMode &&
-                  <div className={styles['word']}>
-                    {currentWord?.word}
-                  </div>}
+                {!alternativeMode && (
+                  <div className={styles["word"]}>{currentWord?.word}</div>
+                )}
               </div>
             </div>
-            <div className={styles['options-btns-container']}>
-              {options}
-            </div>
+            <div className={styles["options-btns-container"]}>{options}</div>
             <button
-              className={styles['next-btn']}
+              className={styles["next-btn"]}
               type="button"
               onClick={handleNextButtonEvent}
             >
-              {alternativeMode
-                ? 'Не знаю'
-                : 'Далее'}
+              {alternativeMode ? "Не знаю" : "Далее"}
             </button>
           </div>
         </div>
